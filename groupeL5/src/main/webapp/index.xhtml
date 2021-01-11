@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
 
 <title>Start Page</title>
@@ -8,7 +12,56 @@
 	Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Hello World!</h1>
+	
 
+	<h2>Section a deliberer</h2>
+	<select name="section" >
+	    <option value="">--Merci de choisir une option--</option>
+	    <option value="AD">AD</option>
+	    <option value="IG">IG</option>
+	    <option value="CT">CT</option>
+	</select>
+
+	<h2>Bloc a deliberer</h2>
+	<select name="bloc" >
+	    <option value="">--Merci de choisir une option--</option>
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	</select>
+	
+	<h2>Liste des etudiants</h2>
+	
+	<h:dataTable border="1" value = "#{EtudiantControl.doSelectAll()}" var = "etudiant">
+       
+       <h:column>                    
+          <f:facet name = "header">Id</f:facet>                    
+         <h:commandLink value=" #{etudiant.id}" > </h:commandLink>
+       </h:column>
+       
+       <h:column>
+       <h:form>
+          <f:facet name = "header">Nom</f:facet>
+        <a href="#" jsf:action ="#{EtudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+		</h:form>
+       </h:column>
+       <h:column>
+       <f:facet name="header">Matricule</f:facet>
+      <a href="#" jsf:action ="#{EtudiantControl.doGetDetails(etudiant)}">#{etudiant.matricule}</a>
+       </h:column>
+       <h:column>
+       <f:facet name="header">Classe</f:facet>
+      <a href="#" jsf:action ="#{EtudiantControl.doGetDetails(etudiant)}">#{etudiant.classe}</a>
+       </h:column>
+       <h:column>
+       <f:facet name="header">Credits valides</f:facet>
+      <a href="#" jsf:action ="#{EtudiantControl.doGetDetails(etudiant)}">#{etudiant.creditsValides}</a>
+       </h:column>
+       <h:column>
+       <f:facet name="header">Credits totaux</f:facet>
+      <a href="#" jsf:action ="#{EtudiantControl.doGetDetails(etudiant)}">#{etudiant.creditTot}</a>
+       </h:column>
+      
+    </h:dataTable>
 </body>
 </html>
