@@ -1,6 +1,10 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> branch 'main' of https://github.com/HackathonJAVAEETEAM/WebApplicationJAVAEE.git
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +18,7 @@ public class Etudiant implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6960303104532622578L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
