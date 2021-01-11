@@ -1,5 +1,7 @@
 package be.helha.aemt.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import be.helha.aemt.dao.EtudiantDAO;
@@ -14,6 +16,11 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 	@Override
 	public Etudiant add(Etudiant etudiant) {
 		return etudiantDao.add(etudiant);
+	}
+
+	@Override
+	public List<Etudiant> findAll() {
+		return etudiantDao.findAll();
 	}
 
 }
