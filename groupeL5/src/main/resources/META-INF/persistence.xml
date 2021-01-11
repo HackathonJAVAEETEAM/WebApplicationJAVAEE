@@ -6,14 +6,32 @@
 	
 	
 	<persistence-unit name="groupeA5JTA" transaction-type="JTA">		
-		<jta-data-source>jdbc/groupeA5</jta-data-source>				
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>	
-		<properties></properties>		
+		
+		<jta-data-source>jdbc/groupeA5</jta-data-source>
+		
+		<class>be.helha.aemt.entities.Etudiant</class>
+				
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+			
+		<properties></properties>
+				
 	</persistence-unit>
 	
-	<persistence-unit name="groupeA5" transaction-type="RESOURCE_LOCAL">				
+	<persistence-unit name="groupeA5" transaction-type="RESOURCE_LOCAL">
+	  
+		<class>be.helha.aemt.entities.Etudiant</class>
+				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<properties></properties>	
-	</persistence-unit>	
+	
+		<properties>
+		    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://54.246.66.228:3306/dba5"/> 
+		    <property name="javax.persistence.schema-generation.database.action" value="create"/>
+		  
+		    <property name="javax.persistence.jdbc.user" value="ga5"/>
+			<property name="javax.persistence.jdbc.password" value="8732"/> 
+	
+		</properties>
+	</persistence-unit>
 	
 </persistence>
