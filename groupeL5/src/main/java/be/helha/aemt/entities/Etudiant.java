@@ -1,10 +1,7 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> branch 'main' of https://github.com/HackathonJAVAEETEAM/WebApplicationJAVAEE.git
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +11,7 @@ import javax.persistence.Id;
 @Entity
 public class Etudiant implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 6960303104532622578L;
 
 	@Id
@@ -34,7 +29,6 @@ public class Etudiant implements Serializable{
 	}
 	
 	public Etudiant(String nom, String matricule, String classe, int creditsValides, int creditTot) {
-		super();
 		this.nom = nom;
 		this.matricule = matricule;
 		this.classe = classe;
