@@ -53,4 +53,52 @@ public class ParsedEtudiant {
 		return "Nom:" + this.nom + "\n" + str;
 	}
 
+	public List<ParsedAssociationUE> getListeUE() {
+		return listeUE;
+	}
+
+	public void setListeUE(List<ParsedAssociationUE> listeUE) {
+		this.listeUE = listeUE;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
+	}
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+
+	public int getCreditsReussi() {
+		return creditsReussi;
+	}
+
+	public void setCreditsReussi(int creditsReussi) {
+		this.creditsReussi = creditsReussi;
+	}
+
+	public int getCreditsTotaux() {
+		return creditsTotaux;
+	}
+
+	public void setCreditsTotaux(int creditsTotaux) {
+		this.creditsTotaux = creditsTotaux;
+	}
+
 }

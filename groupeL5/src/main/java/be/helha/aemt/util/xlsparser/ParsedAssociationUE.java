@@ -31,6 +31,38 @@ public class ParsedAssociationUE {
 		return str;
 	}
 
+	public ParsedUE getUe() {
+		return ue;
+	}
+
+	public void setUe(ParsedUE ue) {
+		this.ue = ue;
+	}
+
+	public String getPoints() {
+		return points;
+	}
+
+	public void setPoints(String points) {
+		this.points = points;
+	}
+
+	public boolean isReussi() {
+		return reussi;
+	}
+
+	public void setReussi(boolean reussi) {
+		this.reussi = reussi;
+	}
+
+	public List<ParsedAssociationAA> getAa() {
+		return aa;
+	}
+
+	public void setAa(List<ParsedAssociationAA> aa) {
+		this.aa = aa;
+	}
+
 	private static List<ParsedAssociationAA> FetchAA(Row row, ParsedUE ue) {
 		List<ParsedAssociationAA> list = new ArrayList<ParsedAssociationAA>();
 		for(ParsedAA p : ue.getListAA()) {
