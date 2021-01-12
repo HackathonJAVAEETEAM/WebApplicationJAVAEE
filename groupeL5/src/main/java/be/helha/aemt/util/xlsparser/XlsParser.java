@@ -88,5 +88,25 @@ public class XlsParser {
 		list.add(lastParsedUE);
 		return list;
 	}
+
+
+	public void setSheet(Sheet sheet) {
+		this.sheet = sheet;
+	}
+
+
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
+	}
+
+
+	public void setEtudiants(List<ParsedEtudiant> etudiants) {
+		this.etudiants = etudiants;
+	}
+
+
+	public void setUe(List<ParsedUE> ue) {
+		this.ue = ue;
+	}
 	
 }

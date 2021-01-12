@@ -13,6 +13,15 @@ public class ParsedAA {
 			this.credits = (int) sheet.getRow(2).getCell(index).getNumericCellValue(); //On a modifié l'EpIn en AD pour faire fonctionner ?
 		this.index = index;
 	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public void setCredits(int credits) {
+		this.credits = credits;
+	}
+	public void setIndex(int index) {
+		this.index = index;
+	}
 	public String getNom() {
 		return nom;
 	}

@@ -12,6 +12,33 @@ public class ParsedUE {
 	}
 	private String annee;
 	private int credits;
+	public String getAnnee() {
+		return annee;
+	}
+	public void setAnnee(String annee) {
+		this.annee = annee;
+	}
+	public int getCredits() {
+		return credits;
+	}
+	public void setCredits(int credits) {
+		this.credits = credits;
+	}
+	public int getColEndIndex() {
+		return colEndIndex;
+	}
+	public void setColEndIndex(int colEndIndex) {
+		this.colEndIndex = colEndIndex;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public void setColStartIndex(int colStartIndex) {
+		this.colStartIndex = colStartIndex;
+	}
+	public void setListAA(List<ParsedAA> listAA) {
+		this.listAA = listAA;
+	}
 	private int colStartIndex;
 	public List<ParsedAA> getListAA() {
 		return listAA;

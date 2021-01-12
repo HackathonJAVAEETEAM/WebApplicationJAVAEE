@@ -17,4 +17,16 @@ public class ParsedAssociationAA {
 	public String toString() {
 		return this.aa.getNom() + " " +this.points +"/20" ;
 	}
+	public ParsedAA getAa() {
+		return aa;
+	}
+	public void setAa(ParsedAA aa) {
+		this.aa = aa;
+	}
+	public String getPoints() {
+		return points;
+	}
+	public void setPoints(String points) {
+		this.points = points;
+	}
 }
