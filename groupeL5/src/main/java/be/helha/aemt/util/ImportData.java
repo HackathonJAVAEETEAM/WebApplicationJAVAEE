@@ -2,6 +2,8 @@ package be.helha.aemt.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,12 +43,13 @@ public class ImportData {
 				Section s = new Section(pars);	
 				tx.begin();
 				em.persist(s);
-				System.out.println("testbefore");
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+				LocalDateTime now = LocalDateTime.now();  
+				System.out.println("testbefore : "+dtf.format(now));
 				tx.commit();
-				System.out.println("testAfter");
-				break;
+				LocalDateTime now2 = LocalDateTime.now();  
+				System.out.println("testafter : "+dtf.format(now2));
 			}
-
 		}catch(IOException e) {
 			e.printStackTrace();
 		}finally {
