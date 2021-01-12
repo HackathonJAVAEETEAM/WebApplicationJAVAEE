@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-
+import be.helha.aemt.entities.Section;
 import be.helha.aemt.util.xlsparser.XlsParser;
 
 
@@ -26,7 +26,12 @@ public class ImportData {
 			while(sit.hasNext()) {
 				sheet = sit.next();
 				XlsParser pars = new XlsParser(sheet);	
-				System.out.println(pars.getEtudiants());
+				Section s = new Section(pars);
+				System.out.println(s.getListeUE());
+				System.out.println("SECTION "+s.getNom());
+				System.out.println("UE "+s.getListeUE().size());
+				System.out.println("ETU "+s.getListeEtudiant().size());
+				System.out.println(s.getListeEtudiant().get(0).getUE().get(0).getAA().get(0));
 			}						
 			
 		}catch(IOException e) {

@@ -32,7 +32,7 @@ public class AssociationAA implements Serializable {
 	}
 
 	public AssociationAA(ParsedAssociationAA pars, List<ActiviteApprentissage> aa) {
-		//this.UE = new UniteEnseignement(p.getUe()); NE PAS CREER UNE NEW, UTILISER CELLE DEJA CREEE
+		this.AA= aa.stream().filter(aca -> pars.getAa().getNom().equals(aca.getNom())).findAny().orElse(null);
 		this.points = pars.getPoints();
 	}
 

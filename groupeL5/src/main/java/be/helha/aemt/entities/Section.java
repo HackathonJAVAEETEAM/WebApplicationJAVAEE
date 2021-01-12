@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
+import be.helha.aemt.util.xlsparser.ParsedUE;
 import be.helha.aemt.util.xlsparser.XlsParser;
 
 @Entity
@@ -43,8 +43,12 @@ public class Section implements Serializable {
 		super();
 		this.nom = parser.getSectionName();
 		this.listeEtudiant = new ArrayList<Etudiant>();
+		this.listeUE = new ArrayList<UniteEnseignement>();
 		
-		//remplir la liste des UE
+		for(ParsedUE p: parser.getUe()) {
+			this.listeUE.add(new UniteEnseignement(p));
+		}
+		
 		for(ParsedEtudiant p : parser.getEtudiants()) {
 			this.listeEtudiant.add(new Etudiant(p,this.listeUE));
 		}
