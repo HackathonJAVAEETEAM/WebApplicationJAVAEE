@@ -9,13 +9,13 @@ import javax.inject.Named;
 import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.Etudiant;
 
-
-
 @Named
 @SessionScoped
 public class EtudiantControl implements Serializable {
 	
-private Etudiant etudiant;
+	private static final long serialVersionUID = 1L;
+
+	private Etudiant etudiant;
 	
 	@Inject
 	private GestionEtudiantEJB gestionEtudiant;
@@ -49,6 +49,7 @@ private Etudiant etudiant;
     public void setEtudiant(Etudiant v) {
     	etudiant = v;
     }
+    
 	/*public String doAdd() {
 		System.out.println(etudiant);
 		gestionEtudiant.add(etudiant);

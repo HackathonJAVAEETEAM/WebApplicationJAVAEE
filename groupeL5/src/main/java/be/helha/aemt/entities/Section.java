@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +27,11 @@ public class Section implements Serializable {
 	
 	private String nom_section;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Etudiant> listeEtudiant;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private ArrayList<Etudiant> listeEtudiant;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<UniteEnseignement> listeUE;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private ArrayList<UniteEnseignement> listeUE;
 	
 	public Section() {
 		
@@ -57,7 +58,7 @@ public class Section implements Serializable {
 		}
 	}
 
-	public void setListeEtudiant(List<Etudiant> listeEtudiant) {
+	public void setListeEtudiant(ArrayList<Etudiant> listeEtudiant) {
 		this.listeEtudiant = listeEtudiant;
 	}
 

@@ -25,14 +25,13 @@ public class Etudiant implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom_etudiant;
-	
 	private String matricule;
 	private String classe;
 	private int creditsValides;
 	private int creditTot;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<AssociationUE> UE;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private ArrayList<AssociationUE> UE;
 	
 	public Etudiant() {
 		

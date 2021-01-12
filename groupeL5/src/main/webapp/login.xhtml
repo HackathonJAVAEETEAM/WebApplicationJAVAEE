@@ -3,16 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login Form</title>
-    </h:head>
+     <h:head>
+	  <title>Login Form</title>
+	  <meta charset="utf-8"></meta>
+	  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</h:head>
     <h:body>
         <p:panel header="Login From">
             <form method="POST" action="j_security_check">
                 Username: <input type="text" name="j_username" />
                 Password: <input type="password" name="j_password" />
                 <br />
-                <input type="submit" value="Login" />
+                <input type="submit" value="Login" action="liste?faces-redirect=true" />
                 <input type="reset" value="Reset" />
             </form>
         </p:panel>

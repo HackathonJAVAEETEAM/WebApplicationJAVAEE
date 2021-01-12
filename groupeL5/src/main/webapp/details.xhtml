@@ -3,15 +3,17 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
-<title>Details</title>
-<meta http-equiv="
-	Content-Type" content="text/html; charset=UTF-8" />
+  <title>Details</title>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<h1>Details de l'etudiant </h1>
 	
-
-	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" border="2" var = "etudiant"
+	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" var = "etudiant"
 		styleClass = "etudiantTable2"
 		headerClass = "etudiantTableHeader2"
 		rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"> 

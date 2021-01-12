@@ -1,54 +1,84 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html     xmlns = "http://www.w3.org/1999/xhtml" 
-        xmlns:h = "http://java.sun.com/jsf/html"
-        xmlns:jsf="http://xmlns.jcp.org/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-          xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      
 
-<h:head>
-	<h:outputStylesheet library="ressources/css" name="style.css" target="body" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</h:head>
-
+<head>
+  <title>Liste</title>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <body>
 
-	<h2>Section a deliberer</h2>
-	<select id="section" >
-	    <option value="">--Merci de choisir une option--</option>
-	    <option value="AD">AD</option>
-	    <option value="IG">IG</option>
-	    <option value="CT">CT</option>
-	</select>
+<div class="container">
+  <h2>Liste des étudiants</h2>
 
-	<h2>Bloc a deliberer</h2>
-	<select id="bloc" >
-	    <option value="">--Merci de choisir une option--</option>
-	    <option value="1B">1B</option>
-	    <option value="2B">2B</option>
-	    <option value="3B">3B</option>
-	</select>
-	<br/><br/>
-	<div style = "border-width:2px; border-color:green; border-style:solid;">
-		<h:panelGroup style="display:block; text-align:center">
-			<h2>Liste des etudiants</h2>
-		</h:panelGroup>
-	</div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Informatique de gestion</a></li>
+    <li><a data-toggle="tab" href="#menu1">Assitante de direction</a></li>
+    <li><a data-toggle="tab" href="#menu2">Comptabilité</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    	<br></br>
+      		<form>
+				<div class="form-group">
+					<input id="igInput" class="form-control" type="text" placeholder="Rechercher.."/>
+				</div>
+			</form>
+	      <h:dataTable border="1" value = "#{sectionControl.getIgList()}" var = "etudiant"
+			styleClass = "table table-responsive w-100 d-block d-md-table"
+			id= "igTable"
+			tableStyle="table-layout: auto;"
+			headerClass = "etudiantTableHeader"
+			rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
 	
-
-
-<input id="myInput" type="text" placeholder="Search.."/>
-	<h:dataTable  style="width:30%" border="1" value = "#{etudiantControl.doSelectAll()}" var = "etudiant"
-		styleClass = "etudiantTable"
-		id= "myTable"
+			<h:column>
+		    	<f:facet name = "header">Matricule</f:facet>
+		    	#{etudiant.getMatricule()}
+		    </h:column>
+		    <h:column>
+		    <f:facet name = "header">Nom des eleves</f:facet>
+		    	<h:form>
+				    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+			    </h:form>
+		     </h:column>
+		     <h:column>
+	       <f:facet name="header" class="myClasse">Classe</f:facet>
+	      #{etudiant.classe}
+	       </h:column>
+	    </h:dataTable>
+	    	<script>
+			 $(document).ready(function(){
+				  $("#igInput").on("keyup", function() {
+				    var value = $(this).val().toLowerCase();
+				    $("#igTable tbody tr").filter(function() {
+				      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				    });
+				  });
+				});
+			</script>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+    	<br></br>
+    	<form>
+			<div class="form-group">
+				<input id="adInput" class="form-control" type="text" placeholder="Rechercher.."/>
+			</div>
+		</form>
+      <h:dataTable border="1" value = "#{sectionControl.getAdList()}" var = "etudiant"
+		styleClass = "table"
+		id= "adTable"
 		headerClass = "etudiantTableHeader"
 		rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
-		
-		
-		<h:column>                    
-	    	<f:facet name = "header">Id</f:facet>                    
-	    	#{etudiant.getId()}
+
+
+		<h:column>
+	    	<f:facet name = "header">Matricule</f:facet>
+	    	#{etudiant.getMatricule()}
 	    </h:column>
 	    <h:column>
 	    <f:facet name = "header">Nom des eleves</f:facet>
@@ -57,98 +87,62 @@
 		    </h:form>
 	     </h:column>
 	     <h:column>
-       <f:facet name="header">Classe</f:facet>
+       <f:facet name="header" class="myClasse">Classe</f:facet>
       #{etudiant.classe}
        </h:column>
-       <h:column>
-       <f:facet name="header">Section </f:facet>
-       #{etudiant.section}
-       </h:column>
     </h:dataTable>
-    <script>
-$(document).ready(function(){
-  $("#bloc").on("change", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-  $("#section").on("change", function() {
-	    var value = $(this).val().toLowerCase();
-	    $("#myTable tr").filter(function() {
-	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	    });
-	  });
-});
-</script>
-</body>
-</html>
-=======
-<!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf" 
-	  xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
-<head>
-
-<title>Start Page</title>
-<meta http-equiv="
-	Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-
-	<h2>Section a deliberer</h2>
-	<select name="section" >
-	    <option value="">--Merci de choisir une option--</option>
-	    <option value="AD">AD</option>
-	    <option value="IG">IG</option>
-	    <option value="CT">CT</option>
-	</select>
-
-	<h2>Bloc a deliberer</h2>
-	<select name="bloc" >
-	    <option value="">--Merci de choisir une option--</option>
-	    <option value="1">1</option>
-	    <option value="2">2</option>
-	    <option value="3">3</option>
-	</select>
-	
-	<h2>Liste des etudiants</h2>
-	
-	<h:dataTable border="1" value = "#{etudiantControl.doSelectWithParam('')}" var = "etudiant"
-		styleClass = "etudiantTable"
-		headerClass = "etudiantTable"
+    	    <script>
+			 $(document).ready(function(){
+				  $("#adInput").on("keyup", function() {
+				    var value = $(this).val().toLowerCase();
+				    $("#adTable tbody tr").filter(function() {
+				      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				    });
+				  });
+				});
+			</script>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+    	<br></br>
+         <form>
+			<div class="form-group">
+				<input id="ctInput" class="form-control" type="text" placeholder="Rechercher.."/>
+			</div>
+		</form>
+      <h:dataTable border="1" value = "#{sectionControl.getCtList()}" var = "etudiant"
+		styleClass = "table"
+		id= "ctTable"
+		headerClass = "etudiantTableHeader"
 		rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
-		
-		<h:column>                    
-	    	<f:facet name = "header">Id</f:facet>                    
-	    	#{etudiant.getId()}
+
+
+		<h:column>
+	    	<f:facet name = "header">Matricule</f:facet>
+	    	#{etudiant.getMatricule()}
 	    </h:column>
 	    <h:column>
-		    <f:facet name = "header">Nom</f:facet>
-		    <a href="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getNom()}</a>
+	    <f:facet name = "header">Nom des eleves</f:facet>
+	    	<h:form>
+			    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+		    </h:form>
 	     </h:column>
 	     <h:column>
-		    <f:facet name="header">Matricule</f:facet>
-		    <a href="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getMatricule()}</a>
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Classe</f:facet>
-	    	<a href="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getClasse()}</a>
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Credits valides</f:facet>
-	    	<a href="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getCreditsValides()}</a>
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Credits totaux</f:facet>
-	    	<a href="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getCreditTot()}</a>
-	     </h:column>
-	     
+       <f:facet name="header" class="myClasse">Classe</f:facet>
+      #{etudiant.classe}
+       </h:column>
     </h:dataTable>
-    
+        <script>
+			 $(document).ready(function(){
+				  $("#ctInput").on("keyup", function() {
+				    var value = $(this).val().toLowerCase();
+				    $("#ctTable tbody tr").filter(function() {
+				      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				    });
+				  });
+				});
+			</script>
+    </div>
+  </div>
+</div>
 </body>
 </html>
->>>>>>> branch 'main' of https://github.com/HackathonJAVAEETEAM/WebApplicationJAVAEE.git

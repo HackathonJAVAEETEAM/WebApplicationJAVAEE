@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,13 +24,13 @@ public class AssociationUE implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private UniteEnseignement UE;
 	private String points;
 	private boolean reussi;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<AssociationAA> AA;
+	private ArrayList<AssociationAA> AA;
 	
 	public AssociationUE() {
 	}
