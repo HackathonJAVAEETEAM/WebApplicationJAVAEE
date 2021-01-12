@@ -2,7 +2,6 @@ package be.helha.aemt.control;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,16 +17,23 @@ public class EtudiantControl implements Serializable {
 private Etudiant etudiant;
 	
 	@Inject
-	private GestionEtudiantEJB bean;
+	private GestionEtudiantEJB gestionEtudiant;
 	
+	public EtudiantControl() {
+		etudiant = new Etudiant();
+	}
 	
 	public List<Etudiant> doSelectAll(){
-		return bean.findAll();
+		return gestionEtudiant.findAll();
 	}
-	public String doGetDetails(Etudiant u) {
-		etudiant = u;
-		return "index.xhtml?faces-redirect=true";
+	
+	public List<Etudiant> doSelectWithParam(String classe){
+		if(classe.isEmpty())
+			return doSelectAll();
+		else
+			return gestionEtudiant.findWithParam(classe);
 	}
+	
 	 public Etudiant getEtudiant() {
 	        return etudiant;
 	}
@@ -35,11 +41,5 @@ private Etudiant etudiant;
     public void setEtudiant(Etudiant v) {
     	etudiant = v;
     }
-	public String doAdd() {
-		System.out.println(etudiant);
-		bean.add(etudiant);
-		return "index.xhtml?faces-redirect=true";
-	}
 	
-
 }

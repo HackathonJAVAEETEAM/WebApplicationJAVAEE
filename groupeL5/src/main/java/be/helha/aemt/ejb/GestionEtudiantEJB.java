@@ -3,11 +3,13 @@ package be.helha.aemt.ejb;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import be.helha.aemt.dao.EtudiantDAO;
 import be.helha.aemt.entities.Etudiant;
 
 @Stateless
+@LocalBean
 public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 
 	@EJB
@@ -21,6 +23,11 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 	@Override
 	public List<Etudiant> findAll() {
 		return etudiantDao.findAll();
+	}
+
+	@Override
+	public List<Etudiant> findWithParam(String classe) {
+		return etudiantDao.findWithParam(classe);
 	}
 
 }

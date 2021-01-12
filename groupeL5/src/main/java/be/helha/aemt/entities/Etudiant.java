@@ -35,6 +35,10 @@ public class Etudiant implements Serializable{
 		this.creditsValides = creditsValides;
 		this.creditTot = creditTot;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
 
 	public String getNom() {
 		return nom;

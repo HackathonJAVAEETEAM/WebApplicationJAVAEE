@@ -14,7 +14,7 @@ public class MainData {
 			EntityManager em = emf.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			
-			Etudiant e1 = new Etudiant("Compas Jordan", "LA188735", "3A", 54, 60);
+			Etudiant e1 = new Etudiant("Dieu Alexis", "LA188756", "2A", 54, 60);
 			
 			tx.begin();
 			em.persist(e1);

@@ -23,6 +23,11 @@ public class EtudiantDAO {
 		return em.createQuery("SELECT etudiant FROM Etudiant etudiant").getResultList();
 	}
 	
+	public List<Etudiant> findWithParam(String classe)
+	{
+		return em.createQuery("SELECT etudiant FROM Etudiant etudiant WHERE etudiant.classe='"+classe+"'").getResultList();
+	}
+	
 	public Etudiant add(Etudiant etudiant) {
 		em.persist(etudiant);
 		return etudiant;

@@ -12,4 +12,6 @@ public interface IGestionEtudiantRemote {
 	public Etudiant add(Etudiant etudiant);
 	
 	public List<Etudiant> findAll();
+	
+	public List<Etudiant> findWithParam(String classe);
 }
