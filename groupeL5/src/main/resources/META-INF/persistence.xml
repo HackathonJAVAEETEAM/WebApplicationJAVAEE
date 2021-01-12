@@ -10,6 +10,11 @@
 		<jta-data-source>jdbc/groupeA5</jta-data-source>
 		
 		<class>be.helha.aemt.entities.Etudiant</class>
+		<class>be.helha.aemt.entities.UniteEnseignement</class>
+		<class>be.helha.aemt.entities.ActiviteApprentissage</class>
+		<class>be.helha.aemt.entities.Section</class>
+		<class>be.helha.aemt.entities.AssociationUE</class>
+		<class>be.helha.aemt.entities.AssociationAA</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 			
@@ -22,6 +27,9 @@
 		<class>be.helha.aemt.entities.Etudiant</class>
 		<class>be.helha.aemt.entities.UniteEnseignement</class>
 		<class>be.helha.aemt.entities.ActiviteApprentissage</class>
+		<class>be.helha.aemt.entities.Section</class>
+		<class>be.helha.aemt.entities.AssociationUE</class>
+		<class>be.helha.aemt.entities.AssociationAA</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	

@@ -19,14 +19,14 @@ public class ActiviteApprentissage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nom;
+	private String nom_aa;
 	private int creditAA;
 	
 	public ActiviteApprentissage() {
 	}
 
 	public ActiviteApprentissage(String nom, int creditAA) {
-		this.nom = nom;
+		this.nom_aa = nom;
 		this.creditAA = creditAA;
 	}
 
@@ -35,11 +35,11 @@ public class ActiviteApprentissage implements Serializable {
 	}
 
 	public String getNom() {
-		return nom;
+		return nom_aa;
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		this.nom_aa = nom;
 	}
 
 
@@ -53,7 +53,7 @@ public class ActiviteApprentissage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ActiviteApprentissage [nom=" + nom + ", creditAA=" + creditAA + "]";
+		return "ActiviteApprentissage [nom=" + nom_aa + ", creditAA=" + creditAA + "]";
 	}
 		
 }

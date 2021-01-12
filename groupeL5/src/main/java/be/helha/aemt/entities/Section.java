@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,12 +22,12 @@ public class Section implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String nom;
+	private String nom_section;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Etudiant> listeEtudiant;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<UniteEnseignement> listeUE;
 	
 	public Section() {
@@ -35,13 +36,13 @@ public class Section implements Serializable {
 	
 	public Section(String nom) {
 		super();
-		this.nom = nom;
+		this.nom_section = nom;
 		this.listeEtudiant = new ArrayList<Etudiant>();
 		this.listeUE = new ArrayList<UniteEnseignement>();
 	}
 	public Section(XlsParser parser) {
 		super();
-		this.nom = parser.getSectionName();
+		this.nom_section = parser.getSectionName();
 		this.listeEtudiant = new ArrayList<Etudiant>();
 		this.listeUE = new ArrayList<UniteEnseignement>();
 		
@@ -55,11 +56,11 @@ public class Section implements Serializable {
 	}
 
 	public String getNom() {
-		return nom;
+		return nom_section;
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		this.nom_section = nom;
 	}
 
 	public List<Etudiant> getListeEtudiant() {
@@ -80,7 +81,7 @@ public class Section implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Section [nom=" + nom + ", listeEtudiant=" + listeEtudiant + ", listeUE=" + listeUE + "]";
+		return "Section [nom=" + nom_section + ", listeEtudiant=" + listeEtudiant + ", listeUE=" + listeUE + "]";
 	}	
 
 }

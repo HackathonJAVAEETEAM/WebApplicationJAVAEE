@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
@@ -23,6 +25,8 @@ public class AssociationUE implements Serializable {
 	private UniteEnseignement UE;
 	private String points;
 	private boolean reussi;
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<AssociationAA> AA;
 	
 	public AssociationUE() {

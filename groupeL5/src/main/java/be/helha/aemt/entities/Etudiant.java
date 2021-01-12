@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
@@ -20,11 +23,13 @@ public class Etudiant implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nom;
+	private String nom_etudiant;
 	private String matricule;
 	private String classe;
 	private int creditsValides;
 	private int creditTot;
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<AssociationUE> UE;
 	
 	public Etudiant() {
@@ -33,7 +38,7 @@ public class Etudiant implements Serializable{
 	
 	public Etudiant(String nom, String matricule, String classe, int creditsValides, int creditTot) {
 		super();
-		this.nom = nom;
+		this.nom_etudiant = nom;
 		this.matricule = matricule;
 		this.classe = classe;
 		this.creditsValides = creditsValides;
@@ -53,11 +58,11 @@ public class Etudiant implements Serializable{
 	}
 
 	public String getNom() {
-		return nom;
+		return nom_etudiant;
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		this.nom_etudiant = nom;
 	}
 
 	public String getMatricule() {
@@ -102,7 +107,7 @@ public class Etudiant implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Etudiant [nom=" + nom + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
+		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
 				+ creditsValides + ", creditTot=" + creditTot + "]";
 	}
 	

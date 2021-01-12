@@ -16,12 +16,17 @@ public class MainData {
 			EntityManager em = emf.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			
-			//Etudiant e1 = new Etudiant("Dieu Alexis", "LA188756", "2A", 54, 60);
+			//Etudiant e1 = new Etudiant("Dieu Alexis", "LA188324", "3A", 56, 60);
+			//Etudiant e2 = new Etudiant("Leveau Nathan", "LA187965", "3A", 12, 60);
+			//Etudiant e3 = new Etudiant("Lopez Lucas", "LA188754", "2A", 44, 60);
 			UniteEnseignement ue1 = new UniteEnseignement("Gestion","code", 15);
 			ActiviteApprentissage aa = new ActiviteApprentissage("Comptabilité", 15);
 			ue1.addToAAList(aa);
 			
 			tx.begin();
+			//em.persist(e1);
+			//em.persist(e2);
+			//em.persist(e3);
 			em.persist(ue1);
 			tx.commit();
 			
