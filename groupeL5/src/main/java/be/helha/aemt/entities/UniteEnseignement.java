@@ -4,10 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class UniteEnseignement implements Serializable {
@@ -20,12 +27,14 @@ public class UniteEnseignement implements Serializable {
 	private String nom;
 	private String code;
 	private int totalCredit;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ActiviteApprentissage> AAList;
 	
 	public UniteEnseignement() {
 	}
 
-	public UniteEnseignement(String nom, String code, int totalCredit, List<ActiviteApprentissage> aAList) {
+	public UniteEnseignement(String nom, String code, int totalCredit) {
 		this.nom = nom;
 		this.code = code;
 		this.totalCredit = totalCredit;

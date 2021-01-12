@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Section implements Serializable {
@@ -17,7 +19,11 @@ public class Section implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String nom;
+	
+	@OneToMany
 	private List<Etudiant> listeEtudiant;
+	
+	@OneToMany
 	private List<UniteEnseignement> listeUE;
 	
 	public Section(String nom, List<Etudiant> listeEtudiant, List<UniteEnseignement> listeUE) {
