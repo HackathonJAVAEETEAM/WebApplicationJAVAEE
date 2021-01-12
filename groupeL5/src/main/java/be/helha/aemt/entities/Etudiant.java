@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
+import be.helha.aemt.util.xlsparser.ParsedEtudiant;
+
 @Entity
 public class Etudiant implements Serializable{
 
@@ -29,12 +32,20 @@ public class Etudiant implements Serializable{
 	}
 	
 	public Etudiant(String nom, String matricule, String classe, int creditsValides, int creditTot) {
+		super();
 		this.nom = nom;
 		this.matricule = matricule;
 		this.classe = classe;
 		this.creditsValides = creditsValides;
 		this.creditTot = creditTot;
 		this.UE = new ArrayList<AssociationUE>();
+	}
+	
+	public Etudiant(ParsedEtudiant etud, List<UniteEnseignement> ue) {
+		this(etud.getNom(),etud.getMatricule(),etud.getClasse(),etud.getCreditsReussi(),etud.getCreditsTotaux());
+		for(ParsedAssociationUE p: etud.getListeUE()) {
+			this.UE.add(new AssociationUE(p,ue));
+		}
 	}
 	
 	public Integer getId() {

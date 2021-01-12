@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import be.helha.aemt.util.xlsparser.ParsedAA;
+import be.helha.aemt.util.xlsparser.ParsedUE;
+
 @Entity
 public class UniteEnseignement implements Serializable {
 	
@@ -18,18 +21,25 @@ public class UniteEnseignement implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom;
-	private String code;
+	private String annee;
 	private int totalCredit;
 	private List<ActiviteApprentissage> AAList;
 	
 	public UniteEnseignement() {
 	}
 
-	public UniteEnseignement(String nom, String code, int totalCredit, List<ActiviteApprentissage> aAList) {
+	public UniteEnseignement(String nom, String annee, int totalCredit) {
 		this.nom = nom;
-		this.code = code;
+		this.annee = annee;
 		this.totalCredit = totalCredit;
 		AAList = new ArrayList<ActiviteApprentissage>();
+	}
+
+	public UniteEnseignement(ParsedUE ue) {
+		this(ue.getNom(),ue.getAnnee(),ue.getCredits());
+		for(ParsedAA p : ue.getListAA()) {
+			this.AAList.add(new ActiviteApprentissage(p));
+		}
 	}
 
 	public String getNom() {
@@ -40,12 +50,12 @@ public class UniteEnseignement implements Serializable {
 		this.nom = nom;
 	}
 
-	public String getCode() {
-		return code;
+	public String getAnnee() {
+		return annee;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setAnnee(String annee) {
+		this.annee = annee;
 	}
 
 	public int getTotalCredit() {
@@ -66,7 +76,7 @@ public class UniteEnseignement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UniteEnseignement [nom=" + nom + ", code=" + code + ", totalCredit=" + totalCredit + ", AAList="
+		return "UniteEnseignement [nom=" + nom + ", annee=" + annee + ", totalCredit=" + totalCredit + ", AAList="
 				+ AAList + "]";
 	}
 }

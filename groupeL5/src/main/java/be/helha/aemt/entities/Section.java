@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import be.helha.aemt.util.xlsparser.ParsedEtudiant;
+import be.helha.aemt.util.xlsparser.XlsParser;
+
 @Entity
 public class Section implements Serializable {
 	
@@ -20,10 +23,25 @@ public class Section implements Serializable {
 	private List<Etudiant> listeEtudiant;
 	private List<UniteEnseignement> listeUE;
 	
-	public Section(String nom, List<Etudiant> listeEtudiant, List<UniteEnseignement> listeUE) {
+	public Section() {
+		
+	}
+	
+	public Section(String nom) {
+		super();
 		this.nom = nom;
 		this.listeEtudiant = new ArrayList<Etudiant>();
 		this.listeUE = new ArrayList<UniteEnseignement>();
+	}
+	public Section(XlsParser parser) {
+		super();
+		this.nom = parser.getSectionName();
+		this.listeEtudiant = new ArrayList<Etudiant>();
+		
+		//remplir la liste des UE
+		for(ParsedEtudiant p : parser.getEtudiants()) {
+			this.listeEtudiant.add(new Etudiant(p,this.listeUE));
+		}
 	}
 
 	public String getNom() {

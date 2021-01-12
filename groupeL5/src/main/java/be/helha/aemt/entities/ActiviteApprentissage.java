@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import be.helha.aemt.util.xlsparser.ParsedAA;
+
 @Entity
 public class ActiviteApprentissage implements Serializable {
 	
@@ -16,16 +18,18 @@ public class ActiviteApprentissage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom;
-	private String code;
 	private int creditAA;
 	
 	public ActiviteApprentissage() {
 	}
 
-	public ActiviteApprentissage(String nom, String code, int creditAA) {
+	public ActiviteApprentissage(String nom, int creditAA) {
 		this.nom = nom;
-		this.code = code;
 		this.creditAA = creditAA;
+	}
+
+	public ActiviteApprentissage(ParsedAA p) {
+		this(p.getNom(),p.getCredits());
 	}
 
 	public String getNom() {
@@ -36,13 +40,6 @@ public class ActiviteApprentissage implements Serializable {
 		this.nom = nom;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
 
 	public int getCreditAA() {
 		return creditAA;
@@ -54,7 +51,7 @@ public class ActiviteApprentissage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ActiviteApprentissage [nom=" + nom + ", code=" + code + ", creditAA=" + creditAA + "]";
+		return "ActiviteApprentissage [nom=" + nom + ", creditAA=" + creditAA + "]";
 	}
 		
 }

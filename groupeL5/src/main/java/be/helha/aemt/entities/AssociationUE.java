@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
+import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
+
 @Entity
 public class AssociationUE implements Serializable {
 
@@ -30,6 +33,16 @@ public class AssociationUE implements Serializable {
 		this.points = points;
 		this.reussi = reussi;
 		this.AA = new ArrayList<AssociationAA>();
+	}
+
+	public AssociationUE(ParsedAssociationUE pars, List<UniteEnseignement> ue2) {
+		this.UE = ue2.stream().filter(ue -> pars.getUe().getNom().equals(ue.getNom())).findAny().orElse(null); //on cherche dans la liste des UE déjà créées 
+		this.points = pars.getPoints();
+		this.reussi = pars.isReussi();
+		this.AA = new ArrayList<AssociationAA>();
+		for(ParsedAssociationAA p : pars.getAa()) {
+			this.AA.add(new AssociationAA(p,this.UE.getAAList()));
+		}
 	}
 
 	public UniteEnseignement getUE() {

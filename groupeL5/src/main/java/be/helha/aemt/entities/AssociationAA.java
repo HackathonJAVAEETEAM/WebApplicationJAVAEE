@@ -1,10 +1,15 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
 
 @Entity
 public class AssociationAA implements Serializable {
@@ -24,6 +29,11 @@ public class AssociationAA implements Serializable {
 		super();
 		AA = aA;
 		this.points = points;
+	}
+
+	public AssociationAA(ParsedAssociationAA pars, List<ActiviteApprentissage> aa) {
+		//this.UE = new UniteEnseignement(p.getUe()); NE PAS CREER UNE NEW, UTILISER CELLE DEJA CREEE
+		this.points = pars.getPoints();
 	}
 
 	public ActiviteApprentissage getAA() {
