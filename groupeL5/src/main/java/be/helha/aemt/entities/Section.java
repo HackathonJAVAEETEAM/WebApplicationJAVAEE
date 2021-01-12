@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
 import be.helha.aemt.util.xlsparser.XlsParser;
@@ -20,7 +22,11 @@ public class Section implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String nom;
+	
+	@OneToMany
 	private List<Etudiant> listeEtudiant;
+	
+	@OneToMany
 	private List<UniteEnseignement> listeUE;
 	
 	public Section() {

@@ -4,10 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedAA;
 import be.helha.aemt.util.xlsparser.ParsedUE;
@@ -23,10 +30,13 @@ public class UniteEnseignement implements Serializable {
 	private String nom;
 	private String annee;
 	private int totalCredit;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ActiviteApprentissage> AAList;
 	
 	public UniteEnseignement() {
 	}
+
 
 	public UniteEnseignement(String nom, String annee, int totalCredit) {
 		this.nom = nom;

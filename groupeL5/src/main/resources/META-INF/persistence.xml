@@ -20,6 +20,8 @@
 	<persistence-unit name="groupeA5" transaction-type="RESOURCE_LOCAL">
 	  
 		<class>be.helha.aemt.entities.Etudiant</class>
+		<class>be.helha.aemt.entities.UniteEnseignement</class>
+		<class>be.helha.aemt.entities.ActiviteApprentissage</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	
