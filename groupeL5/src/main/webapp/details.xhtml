@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>Details</title>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Details de l'etudiant </h1>
+	
+
+	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" border="2" var = "etudiant"
+		styleClass = "etudiantTable2"
+		headerClass = "etudiantTableHeader2"
+		rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"> 
+		
+		<h:column>                    
+	    	<f:facet name = "header">Id</f:facet>                    
+	    	#{etudiantControl.getEtudiant().getId()}
+	    </h:column>
+	    <h:column>
+	    	<f:facet name = "header">Nom des eleves</f:facet>
+	    	#{etudiantControl.getEtudiant().getNom()}
+		 </h:column>
+	       <h:column>
+		    <f:facet name="header">Matricule</f:facet>
+		    #{etudiantControl.getEtudiant().getMatricule()}
+	     </h:column>
+	     <h:column>
+	     	<f:facet name="header">Classe</f:facet>
+	    	#{etudiantControl.getEtudiant().getClasse()}
+	     </h:column>
+	     <h:column>
+	     	<f:facet name="header">Credits valides</f:facet>
+	    	#{etudiantControl.getEtudiant().getCreditsValides()}
+	     </h:column>
+	     <h:column>
+	     	<f:facet name="header">Credits totaux</f:facet>
+	    	#{etudiantControl.getEtudiant().getCreditTot()}
+	     </h:column>
+	     
+ </h:dataTable> 
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h:form>
+<h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
+</h:form>
+</body>
+</html>

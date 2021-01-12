@@ -10,6 +10,7 @@ import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.Etudiant;
 
 
+
 @Named
 @SessionScoped
 public class EtudiantControl implements Serializable {
@@ -25,7 +26,13 @@ private Etudiant etudiant;
 	
 	public List<Etudiant> doSelectAll(){
 		return gestionEtudiant.findAll();
+		
 	}
+	public String doGetDetails(Etudiant u) {
+		etudiant = u;
+		return "details.xhtml";
+	}
+	
 	
 	public List<Etudiant> doSelectWithParam(String classe){
 		if(classe.isEmpty())
@@ -37,9 +44,15 @@ private Etudiant etudiant;
 	 public Etudiant getEtudiant() {
 	        return etudiant;
 	}
+	
 	    
     public void setEtudiant(Etudiant v) {
     	etudiant = v;
     }
+	/*public String doAdd() {
+		System.out.println(etudiant);
+		gestionEtudiant.add(etudiant);
+		return "liste.xhtml?faces-redirect=true";
+	}*/
 	
 }

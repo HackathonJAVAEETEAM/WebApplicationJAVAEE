@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html     xmlns = "http://www.w3.org/1999/xhtml" 
+        xmlns:h = "http://java.sun.com/jsf/html"
+        xmlns:jsf="http://xmlns.jcp.org/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="ressources/css" name="style.css" target="body" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</h:head>
+
+<body>
+
+	<h2>Section a deliberer</h2>
+	<select id="section" >
+	    <option value="">--Merci de choisir une option--</option>
+	    <option value="AD">AD</option>
+	    <option value="IG">IG</option>
+	    <option value="CT">CT</option>
+	</select>
+
+	<h2>Bloc a deliberer</h2>
+	<select id="bloc" >
+	    <option value="">--Merci de choisir une option--</option>
+	    <option value="1B">1B</option>
+	    <option value="2B">2B</option>
+	    <option value="3B">3B</option>
+	</select>
+	<br/><br/>
+	<div style = "border-width:2px; border-color:green; border-style:solid;">
+		<h:panelGroup style="display:block; text-align:center">
+			<h2>Liste des etudiants</h2>
+		</h:panelGroup>
+	</div>
+	
+
+
+<input id="myInput" type="text" placeholder="Search.."/>
+	<h:dataTable  style="width:30%" border="1" value = "#{etudiantControl.doSelectAll()}" var = "etudiant"
+		styleClass = "etudiantTable"
+		id= "myTable"
+		headerClass = "etudiantTableHeader"
+		rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
+		
+		
+		<h:column>                    
+	    	<f:facet name = "header">Id</f:facet>                    
+	    	#{etudiant.getId()}
+	    </h:column>
+	    <h:column>
+	    <f:facet name = "header">Nom des eleves</f:facet>
+	    	<h:form>
+			    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+		    </h:form>
+	     </h:column>
+	     <h:column>
+       <f:facet name="header">Classe</f:facet>
+      #{etudiant.classe}
+       </h:column>
+       <h:column>
+       <f:facet name="header">Section </f:facet>
+       #{etudiant.section}
+       </h:column>
+    </h:dataTable>
+    <script>
+$(document).ready(function(){
+  $("#bloc").on("change", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  $("#section").on("change", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+});
+</script>
+</body>
+</html>
