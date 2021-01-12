@@ -22,6 +22,8 @@ public class Section implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String nom_section;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -53,6 +55,10 @@ public class Section implements Serializable {
 		for(ParsedEtudiant p : parser.getEtudiants()) {
 			this.listeEtudiant.add(new Etudiant(p,this.listeUE));
 		}
+	}
+
+	public void setListeEtudiant(List<Etudiant> listeEtudiant) {
+		this.listeEtudiant = listeEtudiant;
 	}
 
 	public String getNom() {

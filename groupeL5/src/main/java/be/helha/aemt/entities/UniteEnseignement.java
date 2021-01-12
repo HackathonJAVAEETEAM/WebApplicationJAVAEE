@@ -30,7 +30,7 @@ public class UniteEnseignement implements Serializable {
 	private String annee;
 	private int totalCredit;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ActiviteApprentissage> AAList;
 	
 	public UniteEnseignement() {

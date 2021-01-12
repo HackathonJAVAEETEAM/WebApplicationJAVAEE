@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
@@ -22,6 +23,7 @@ public class AssociationUE implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UniteEnseignement UE;
 	private String points;
 	private boolean reussi;
