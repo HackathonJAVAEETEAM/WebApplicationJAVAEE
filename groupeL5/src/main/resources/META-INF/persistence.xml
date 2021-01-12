@@ -30,6 +30,7 @@
 		<class>be.helha.aemt.entities.Section</class>
 		<class>be.helha.aemt.entities.AssociationUE</class>
 		<class>be.helha.aemt.entities.AssociationAA</class>
+		<class>be.helha.aemt.entities.Utilisateur</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	
