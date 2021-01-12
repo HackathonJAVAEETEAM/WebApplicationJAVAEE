@@ -1,6 +1,7 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,8 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class Etudiant implements Serializable{
 
-
-	private static final long serialVersionUID = 6960303104532622578L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Etudiant implements Serializable{
 	private String classe;
 	private int creditsValides;
 	private int creditTot;
-	//private List UE;
+	private List<AssociationUE> UE;
 	
 	public Etudiant() {
 		
@@ -34,6 +34,7 @@ public class Etudiant implements Serializable{
 		this.classe = classe;
 		this.creditsValides = creditsValides;
 		this.creditTot = creditTot;
+		this.UE = new ArrayList<AssociationUE>();
 	}
 	
 	public Integer getId() {
@@ -78,6 +79,14 @@ public class Etudiant implements Serializable{
 
 	public void setCreditTot(int creditTot) {
 		this.creditTot = creditTot;
+	}	
+
+	public List<AssociationUE> getUE() {
+		return UE;
+	}
+
+	public boolean addUE(AssociationUE ue) {
+		return this.UE.add(ue);
 	}
 
 	@Override

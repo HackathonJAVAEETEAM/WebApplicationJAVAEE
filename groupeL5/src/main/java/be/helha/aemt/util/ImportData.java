@@ -17,6 +17,7 @@ public class ImportData {
 	public static void main(String[] args) {
 		String fileName = "src/main/resources/files/listes.xlsx";
 		final File file = new File(fileName);
+		
 		try {
 			final Workbook workbook = WorkbookFactory.create(file);
 			Sheet sheet;
@@ -24,9 +25,9 @@ public class ImportData {
 			Iterator<Sheet> sit = workbook.sheetIterator();
 			while(sit.hasNext()) {
 				sheet = sit.next();
-				XlsParser pars = new XlsParser(sheet);			
-			}
-			
+				XlsParser pars = new XlsParser(sheet);	
+				System.out.println(pars.getEtudiants());
+			}						
 			
 		}catch(IOException e) {
 			e.printStackTrace();
