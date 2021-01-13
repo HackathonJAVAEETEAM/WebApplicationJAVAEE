@@ -21,24 +21,23 @@ import be.helha.aemt.entities.Utilisateur;
 public class MainUser {
 	public static void main(String[] args) {
 		
-		/*EntityManagerFactory emf = Persistence.createEntityManagerFactory("groupeA5");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("groupeA5");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
-		Utilisateur u1 = new Utilisateur("u", "C/6TXnDDIcfKOvx1zg0MovmLVCLgCLsxwAxtfx8cCtY=","ADMIN");
-		
-		tx.begin();
-		em.persist(u1);
-		tx.commit();
-		
-		em.close();
-		emf.close();*/
-		
+		Utilisateur u1;
 		try {
-			System.out.println(digestSomething("u"));
+			u1 = new Utilisateur("admin", digestSomething("helha"),"ADMIN");
+			tx.begin();
+			em.persist(u1);
+			tx.commit();
 		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		em.close();
+		emf.close();
 		
 		
 	}

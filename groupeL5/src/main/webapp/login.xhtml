@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
      <h:head>
 	  <title>Login Form</title>
 	  <meta charset="utf-8"></meta>
@@ -12,14 +13,44 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	</h:head>
     <h:body>
-        <p:panel header="Login From">
-            <form method="POST" action="j_security_check">
-                Username: <input type="text" name="j_username" />
-                Password: <input type="password" name="j_password" />
+    <div class="container">
+    	<form method="POST" action="j_security_check">
+	        <p:panel id="pnl" header="Login From">
+	        	<div class="form-group">
+                	Username: <input type="text" class="form-control" name="j_username" />
+                </div>
+                <div class="form-group">
+                	Password: <input type="password" class="form-control" name="j_password" />
+                </div>
                 <br />
-                <input type="submit" value="Login" action="liste?faces-redirect=true" />
-                <input type="reset" value="Reset" />
-            </form>
-        </p:panel>
+                <input type="submit" id="saveBtn" value="Login" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />
+                <input type="reset" value="Reset" class="btn btn-info btn-lg" />
+	    	</p:panel>
+	    </form>
+	</div>
+		<!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Chargement des données serveur en cours...</h4>
+	        </div>
+	        <div class="modal-body">
+	          <div class="progress">
+				  <div class="progress-bar progress-bar-striped active" role="progressbar"
+				  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+			  </div>
+		</div>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
     </h:body>
 </html>

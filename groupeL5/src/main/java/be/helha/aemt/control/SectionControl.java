@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,13 +17,24 @@ public class SectionControl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Section section;
+	private Section sectionIG;
+	private Section sectionAD;
+	private Section sectionCT;
 	
 	@Inject
 	private GestionSectionEJB gestionSection;
 	
 	public SectionControl() {
-		section = new Section();	
+		sectionIG = new Section();
+		sectionAD = new Section();
+		sectionCT = new Section();
+	}
+	
+	@PostConstruct
+	public void init() {
+		sectionIG = doSelectAll().get(0);
+		sectionAD = doSelectAll().get(1);
+		sectionCT = doSelectAll().get(2);
 	}
 	
 	public List<Section> doSelectAll(){
@@ -31,17 +43,17 @@ public class SectionControl implements Serializable {
 	
 	public List<Etudiant> getIgList()
 	{
-		return doSelectAll().get(0).getListeEtudiant();
+		return sectionIG.getListeEtudiant();
 	}
 	
 	public List<Etudiant> getAdList()
 	{
-		return doSelectAll().get(1).getListeEtudiant();
+		return sectionAD.getListeEtudiant();
 	}
 	
 	public List<Etudiant> getCtList()
 	{
-		return doSelectAll().get(2).getListeEtudiant();
+		return sectionCT.getListeEtudiant();
 	}	
 
 }

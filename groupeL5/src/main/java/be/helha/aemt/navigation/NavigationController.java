@@ -29,13 +29,13 @@ public class NavigationController implements Serializable {
 	public String etudiantSuivant() {
 		return"details.xhtml" +"?faces-redirect=true";
 	}*/
-	
-	
+		
 	public String goToHome() {
-//		return "next.xhtml";
 		return "liste.xhtml" + "?faces-redirect=true";
 	}
 	
+	public String goToGeneralPAE() {
+		return "pae.xhtml" + "?faces-redirect=true";
+	}
 	
-
 }
