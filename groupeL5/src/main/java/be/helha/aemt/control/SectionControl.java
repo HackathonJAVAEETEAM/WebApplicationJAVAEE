@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import be.helha.aemt.ejb.GestionSectionEJB;
 import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.Section;
 
+@ManagedBean
 @Named
 @SessionScoped
 public class SectionControl implements Serializable {

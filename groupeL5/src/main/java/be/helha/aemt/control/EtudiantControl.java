@@ -2,6 +2,8 @@ package be.helha.aemt.control;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -9,6 +11,7 @@ import javax.inject.Named;
 import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.Etudiant;
 
+@ManagedBean
 @Named
 @SessionScoped
 public class EtudiantControl implements Serializable {

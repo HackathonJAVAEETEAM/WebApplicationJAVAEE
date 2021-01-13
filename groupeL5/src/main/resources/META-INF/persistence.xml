@@ -36,11 +36,11 @@
 	
 		<properties>
 		    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-		    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://54.246.66.228:3306/dba5"/> 
+		    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dba5"/> 
 		    <property name="javax.persistence.schema-generation.database.action" value="create"/>
 		  
-		    <property name="javax.persistence.jdbc.user" value="ga5"/>
-			<property name="javax.persistence.jdbc.password" value="8732"/> 
+		    <property name="javax.persistence.jdbc.user" value="test"/>
+			<property name="javax.persistence.jdbc.password" value="test"/> 
 	
 		</properties>
 	</persistence-unit>
