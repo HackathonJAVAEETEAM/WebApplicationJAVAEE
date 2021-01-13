@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
   <title>Details</title>
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link> -->
+  <link rel="stylesheet" href="ressources/css/style.css" />
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-	<h1>Details de l'etudiant </h1>
+	<center><u><h1 style="color:#069">Details de l'etudiant </h1></u></center>
 	
 	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" var = "etudiant"
 		styleClass = "etudiantTable2"
@@ -42,12 +46,34 @@
 	     	<f:facet name="header">Credits totaux</f:facet>
 	    	#{etudiantControl.getEtudiant().getCreditTot()}
 	     </h:column>
-	     
  </h:dataTable> 
 <br/>
 <br/>
 <br/>
 <br/>
+<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+	<ul>
+	  <li>
+	    
+	   	<p>#{ue.getUE().getNom()} 
+	   	#{ue.getUE().getTotalCredit()} Crédits 
+		 #{ue.getPoints()}/20</p>
+	</li>
+	
+	 <ui:repeat value="#{ue.getAA()}" var="aa">
+	 	<ul>
+      	 	<li>
+	           	
+				<p>#{aa.getAA().getNom()}  
+				#{aa.getAA().getCreditAA()} Crédit(s)  
+				#{aa.getPoints()}/20
+				</p>
+       		</li>
+       	</ul>
+       </ui:repeat>
+       
+   </ul>
+</ui:repeat>
 
 <h:form>
 <h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
