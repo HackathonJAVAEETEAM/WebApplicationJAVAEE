@@ -26,7 +26,16 @@ public class ParsedEtudiant {
 		if(row.getCell(rowLastIndex-1)!=null)
 			creditsReussi = (int) row.getCell(rowLastIndex-1).getNumericCellValue();
 		creditsTotaux = (int) row.getCell(rowLastIndex).getNumericCellValue();
-		moyenne = row.getCell(rowLastIndex-2).getStringCellValue();
+		if(row.getCell(rowLastIndex-2)!=null) {
+			if(row.getCell(rowLastIndex-2).getCellType().equals(CellType.NUMERIC)) {
+				moyenne = row.getCell(rowLastIndex-2).getNumericCellValue()+"";
+			} else {
+				moyenne = row.getCell(rowLastIndex-2).getStringCellValue();
+			}
+		} else {
+			moyenne="";
+		}
+		
 		listeUE = FetchAssociationUE(ue, row);
 
 	}
