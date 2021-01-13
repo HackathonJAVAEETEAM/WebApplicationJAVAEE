@@ -32,15 +32,15 @@ public class EtudiantDAO {
 		em.persist(etudiant);
 		return etudiant;
 	}
-	public static Etudiant rowToEtudiant(Row row) {
-		String nom;
-		String matricule;
-		String classe;
-		nom = row.getCell(1).getStringCellValue();
-		matricule = row.getCell(2).getStringCellValue();
-		classe = row.getCell(3).getStringCellValue();
-
-		return new Etudiant(nom,matricule,classe,0,0);
-		
-	}
+//	public static Etudiant rowToEtudiant(Row row) {
+//		String nom;
+//		String matricule;
+//		String classe;
+//		nom = row.getCell(1).getStringCellValue();
+//		matricule = row.getCell(2).getStringCellValue();
+//		classe = row.getCell(3).getStringCellValue();
+//
+//		return new Etudiant(nom,matricule,classe,0,0,"0");
+//		
+//	}
 }

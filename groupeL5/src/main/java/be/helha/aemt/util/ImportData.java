@@ -40,7 +40,9 @@ public class ImportData {
 			while(sit.hasNext()) {
 				sheet = sit.next();
 				XlsParser pars = new XlsParser(sheet);	
-				Section s = new Section(pars);	
+				Section s = new Section(pars);
+				s.setListeEtudiant(new ArrayList<Etudiant>(s.getListeEtudiant().subList(0,9)));
+				
 				tx.begin();
 				em.persist(s);
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  

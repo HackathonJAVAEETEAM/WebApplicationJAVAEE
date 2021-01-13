@@ -16,6 +16,7 @@ public class ParsedEtudiant {
 	private String classe;
 	private int creditsReussi;
 	private int creditsTotaux;
+	private String moyenne;
 	public ParsedEtudiant(Row row, List<ParsedUE> ue, int rowLastIndex) {
 
 		nom = row.getCell(1).getStringCellValue();
@@ -25,6 +26,16 @@ public class ParsedEtudiant {
 		if(row.getCell(rowLastIndex-1)!=null)
 			creditsReussi = (int) row.getCell(rowLastIndex-1).getNumericCellValue();
 		creditsTotaux = (int) row.getCell(rowLastIndex).getNumericCellValue();
+		if(row.getCell(rowLastIndex-2)!=null) {
+			if(row.getCell(rowLastIndex-2).getCellType().equals(CellType.NUMERIC)) {
+				moyenne = row.getCell(rowLastIndex-2).getNumericCellValue()+"";
+			} else {
+				moyenne = row.getCell(rowLastIndex-2).getStringCellValue();
+			}
+		} else {
+			moyenne="";
+		}
+		
 		listeUE = FetchAssociationUE(ue, row);
 
 	}
@@ -99,6 +110,10 @@ public class ParsedEtudiant {
 
 	public void setCreditsTotaux(int creditsTotaux) {
 		this.creditsTotaux = creditsTotaux;
+	}
+
+	public String getMoyenne() {
+		return this.moyenne;
 	}
 
 }

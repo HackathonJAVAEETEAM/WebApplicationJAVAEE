@@ -10,16 +10,16 @@ import javax.servlet.http.HttpSession;
 @Named
 @SessionScoped
 public class SessionControl implements Serializable {
-	
+
 	public SessionControl(){
-		
+
 	}
-	
-	public String doLogin() 
+
+	public String doLogin()
 	{
 		return "liste.xhtml" + "?faces-redirect=true";
 	}
-	
+
 	public String logOut() {
 		((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).invalidate();
 		return "liste.xhtml" + "?faces-redirect=true";
