@@ -5,7 +5,7 @@
     version="4.0">
     <display-name>Mon premier projet WEB</display-name>
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>liste.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
