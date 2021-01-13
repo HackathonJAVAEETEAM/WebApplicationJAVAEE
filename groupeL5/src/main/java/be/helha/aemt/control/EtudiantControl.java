@@ -11,7 +11,6 @@ import javax.inject.Named;
 import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.Etudiant;
 
-@ManagedBean
 @Named
 @SessionScoped
 public class EtudiantControl implements Serializable {

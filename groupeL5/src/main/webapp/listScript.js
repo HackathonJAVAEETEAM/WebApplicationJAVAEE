@@ -21,4 +21,14 @@
 	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     	});
   	});
+  	
+  	$(function() {
+	  $("#igTable").tablesorter();
+	});
+	$(function() {
+	  $("#adTable").tablesorter();
+	});
+	$(function() {
+	  $("#ctTable").tablesorter();
+	});
 });

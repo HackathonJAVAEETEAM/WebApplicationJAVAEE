@@ -1,131 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" 
+xmlns:h="http://xmlns.jcp.org/jsf/html" 
+xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:p="http://primefaces.org/ui">     
 
 <head>
-<title>Liste</title>
-<meta charset="utf-8"></meta>
-<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="listScript.js"></script>
+  <title>Liste</title>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="listScript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+
+	
 </head>
 <h:body>
 	<h:form>
-		<h:commandLink value="LogOut" action="#{sessionControl.logOut()}"></h:commandLink>
+		<h:commandLink value = "LogOut" action = "#{sessionControl.logOut()}"></h:commandLink>
 	</h:form>
-
+	
 	<div class="container">
-		<h2>Liste des étudiants</h2>
-
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#home">Informatique
-					de gestion</a></li>
-			<li><a data-toggle="tab" href="#menu1">Assitante de
-					direction</a></li>
-			<li><a data-toggle="tab" href="#menu2">Comptabilité</a></li>
-		</ul>
-
-		<div class="tab-content">
-
-			<div id="home" class="tab-pane fade in active">
-				<br></br>
-				<h:form>
+	  <h2>Liste des étudiants</h2>
+	
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a data-toggle="tab" href="#home">Informatique de gestion</a></li>
+	    <li><a data-toggle="tab" href="#menu1">Assitante de direction</a></li>
+	    <li><a data-toggle="tab" href="#menu2">Comptabilité</a></li>
+	  </ul>
+	
+	  <div class="tab-content">
+	    
+	    <div id="home" class="tab-pane fade in active">
+	    	<br></br>
+	      		<form>
 					<div class="form-group">
-						<input id="igInput" class="form-control" type="text"
-							placeholder="Rechercher.." />
-					</div>
-				</h:form>
-				
-				<p:dataTable id="igTable" value="#{sectionControl.getIgList()}" var="etudiant" sortBy="#{etudiant.nom}" sortOrder="DESCENDING">
-
-				 <p:column sortBy="#{etudiant.getMatricule()}" id="marticuleColumn" headerText="Matricule">
-				   	<h:outputText id="matriculeId" value="#{etudiant.getMatricule()}" />
-				 </p:column>
-				 <p:column sortBy="#{etudiant.getNom()}" id="nomColumn" headerText="Nom">
-				   	<h:outputText id="nomId" value="#{etudiant.getNom()}" />
-				 </p:column>
-				 <p:column sortBy="#{etudiant.getClasse()}" id="classeColumn" headertext="Classe">
-				 	<h:outputText id="classeId" value="#{etudiant.getClasse()}" />
-			     </p:column>
-				</p:dataTable>
-				
-			</div>
-
-			<div id="menu1" class="tab-pane fade">
-				<br></br>
-				<form>
-					<div class="form-group">
-						<input id="adInput" class="form-control" type="text"
-							placeholder="Rechercher.." />
+						<input id="igInput" class="form-control" type="text" placeholder="Rechercher.."/>
 					</div>
 				</form>
-				<h:dataTable border="1" value="#{sectionControl.getAdList()}"
-					var="etudiant" styleClass="table" id="adTable"
-					headerClass="etudiantTableHeader"
-					rowClasses="etudiantTableOddRow,etudiantTableEvenRow">
-
-
-					<h:column>
-						<f:facet name="header">Matricule</f:facet>
+		      <h:dataTable border="1" value = "#{sectionControl.getIgList()}" var = "etudiant"
+				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
+				id= "igTable"
+				tableStyle="table-layout: auto;"
+				headerClass = "etudiantTableHeader"
+				rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
+		
+				<h:column>
+			    	<f:facet name = "header">Matricule ⇅</f:facet>
+			    	#{etudiant.getMatricule()}
+			    </h:column>
+			    <h:column styleClass ="nomClass">
+			    <f:facet name = "header">Nom des eleves ⇅</f:facet>
+			    	<h:form>
+					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getNom()}</a>
+				    </h:form>
+			     </h:column>
+			     <h:column>
+		       		<f:facet name="header" class="myClasse">Classe ⇅</f:facet>
+		      		#{etudiant.classe}
+		       </h:column>
+		    </h:dataTable>
+	    </div>
+	    
+	    <div id="menu1" class="tab-pane fade">
+	    	<br></br>
+	    	<form>
+				<div class="form-group">
+					<input id="adInput" class="form-control" type="text" placeholder="Rechercher.."/>
+				</div>
+			</form>
+	      <h:dataTable border="1" value = "#{sectionControl.getAdList()}" var = "etudiant"
+			styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
+			id= "adTable"
+			headerClass = "etudiantTableHeader"
+			rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
+	
+	
+			<h:column>
+		    	<f:facet name = "header">Matricule ⇅</f:facet>
 		    	#{etudiant.getMatricule()}
 		    </h:column>
-					<h:column>
-						<f:facet name="header">Nom des eleves</f:facet>
-						<h:form>
-							<a href="#"
-								jsf:action="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
-						</h:form>
-					</h:column>
-					<h:column>
-						<f:facet name="header" class="myClasse">Classe</f:facet>
+		    <h:column>
+		    <f:facet name = "header">Nom des eleves ⇅</f:facet>
+		    	<h:form>
+				    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+			    </h:form>
+		     </h:column>
+		     <h:column>
+	       <f:facet name="header" class="myClasse">Classe ⇅</f:facet>
 	      #{etudiant.classe}
 	       </h:column>
-				</h:dataTable>
+	    </h:dataTable>
 
-			</div>
-
-			<div id="menu2" class="tab-pane fade">
-				<br></br>
-				<form>
-					<div class="form-group">
-						<input id="ctInput" class="form-control" type="text"
-							placeholder="Rechercher.." />
-					</div>
-				</form>
-				<h:dataTable border="1" value="#{sectionControl.getCtList()}"
-					var="etudiant" styleClass="table" id="ctTable"
-					headerClass="etudiantTableHeader"
-					rowClasses="etudiantTableOddRow,etudiantTableEvenRow">
-
-
-					<h:column>
-						<f:facet name="header">Matricule</f:facet>
+	    </div>
+	    
+	    <div id="menu2" class="tab-pane fade">
+	    	<br></br>
+	         <form>
+				<div class="form-group">
+					<input id="ctInput" class="form-control" type="text" placeholder="Rechercher.."/>
+				</div>
+			</form>
+	      <h:dataTable border="1" value = "#{sectionControl.getCtList()}" var = "etudiant"
+			styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
+			id= "ctTable"
+			headerClass = "etudiantTableHeader"
+			rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
+	
+	
+			<h:column>
+		    	<f:facet name = "header">Matricule ⇅</f:facet>
 		    	#{etudiant.getMatricule()}
 		    </h:column>
-					<h:column>
-						<f:facet name="header">Nom des eleves</f:facet>
-						<h:form>
-							<a href="#"
-								jsf:action="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
-						</h:form>
-					</h:column>
-					<h:column>
-						<f:facet name="header" class="myClasse">Classe</f:facet>
+		    <h:column>
+		    <f:facet name = "header">Nom des eleves ⇅</f:facet>
+		    	<h:form>
+				    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+			    </h:form>
+		     </h:column>
+		     <h:column>
+	       <f:facet name="header" class="myClasse">Classe ⇅</f:facet>
 	      #{etudiant.classe}
 	       </h:column>
-				</h:dataTable>
-			</div>
-
-		</div>
+	    </h:dataTable>
+	    </div>
+	    
+	  </div>
 	</div>
 </h:body>
 </html>

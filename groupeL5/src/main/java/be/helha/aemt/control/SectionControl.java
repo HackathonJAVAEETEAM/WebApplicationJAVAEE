@@ -12,7 +12,6 @@ import be.helha.aemt.ejb.GestionSectionEJB;
 import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.Section;
 
-@ManagedBean
 @Named
 @SessionScoped
 public class SectionControl implements Serializable {
