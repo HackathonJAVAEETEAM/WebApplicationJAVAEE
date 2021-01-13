@@ -3,7 +3,9 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a4j="http://richfaces.org/a4j">
 <head>
   <title>Details</title>
   <meta charset="utf-8"></meta>
@@ -15,7 +17,7 @@
   <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-	<center><u><h1 style="color:#069">Details de l'etudiant </h1></u></center>
+	<center><u><h1 style="color:#069">Details de l'étudiant </h1></u></center>
 	
 	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" var = "etudiant"
 		styleClass = "etudiantTable2"
@@ -57,16 +59,24 @@
 	    
 	   	<p>#{ue.getUE().getNom()} 
 	   	#{ue.getUE().getTotalCredit()} Crédits 
-		 #{ue.getPoints()}/20</p>
+		 #{ue.getPoints()}/20  
+		 <h:selectBooleanCheckbox  value= "#{ue.isReussi()}" id="yolo">
+		 	 <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 
+		 			 
+		 </h:selectBooleanCheckbox></p>
+		 
 	</li>
 	
 	 <ui:repeat value="#{ue.getAA()}" var="aa">
 	 	<ul>
-      	 	<li>
-	           	
+      	 	<li>  	
 				<p>#{aa.getAA().getNom()}  
 				#{aa.getAA().getCreditAA()} Crédit(s)  
-				#{aa.getPoints()}/20
+				#{aa.getPoints()}
+				<h:selectBooleanCheckbox value= "#{aa.reussi}" id="yolo22">
+					<a4j:support event="onclick" reRender="#{aa.setReussi(!aa.isReussi())}"/> 
+				</h:selectBooleanCheckbox>
+				
 				</p>
        		</li>
        	</ul>
@@ -75,6 +85,19 @@
    </ul>
 </ui:repeat>
 
+<script>
+
+function checkUE() {
+	if()
+    document.getElementById("ueValid").checked = true;
+}
+</script>
+<script>
+
+function uncheck() {
+    document.getElementById("ueValid").checked = false;
+}
+</script>
 <h:form>
 <h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
 </h:form>
