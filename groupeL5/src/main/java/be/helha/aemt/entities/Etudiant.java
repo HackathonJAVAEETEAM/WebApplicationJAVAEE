@@ -27,8 +27,10 @@ public class Etudiant implements Serializable{
 	private String nom_etudiant;
 	private String matricule;
 	private String classe;
+	private String moyenne;
 	private int creditsValides;
 	private int creditTot;
+	private boolean delibere;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<AssociationUE> UE;
@@ -37,18 +39,20 @@ public class Etudiant implements Serializable{
 		
 	}
 	
-	public Etudiant(String nom, String matricule, String classe, int creditsValides, int creditTot) {
+	public Etudiant(String nom, String matricule, String classe, int creditsValides, int creditTot, String moyenne) {
 		super();
 		this.nom_etudiant = nom;
 		this.matricule = matricule;
 		this.classe = classe;
 		this.creditsValides = creditsValides;
 		this.creditTot = creditTot;
+		this.setMoyenne(moyenne);
+		this.setDelibere(false);
 		this.UE = new ArrayList<AssociationUE>();
 	}
 	
 	public Etudiant(ParsedEtudiant etud, List<UniteEnseignement> ue) {
-		this(etud.getNom(),etud.getMatricule(),etud.getClasse(),etud.getCreditsReussi(),etud.getCreditsTotaux());
+		this(etud.getNom(),etud.getMatricule(),etud.getClasse(),etud.getCreditsReussi(),etud.getCreditsTotaux(), etud.getMoyenne());
 		for(ParsedAssociationUE p: etud.getListeUE()) {
 			this.UE.add(new AssociationUE(p,ue));
 		}
@@ -110,6 +114,22 @@ public class Etudiant implements Serializable{
 	public String toString() {
 		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
 				+ creditsValides + ", creditTot=" + creditTot + "]";
+	}
+
+	public boolean isDelibere() {
+		return delibere;
+	}
+
+	public void setDelibere(boolean delibere) {
+		this.delibere = delibere;
+	}
+
+	public String getMoyenne() {
+		return moyenne;
+	}
+
+	public void setMoyenne(String moyenne) {
+		this.moyenne = moyenne;
 	}
 	
 }
