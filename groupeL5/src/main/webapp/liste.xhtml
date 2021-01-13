@@ -45,14 +45,8 @@
 					</div>
 				</h:form>
 				
-				<p:dataTable id="igTable"
-					value="#{sectionControl.getIgList()}" var="etudiant"
-<<<<<<< Updated upstream
-					sortBy="#{etudiant.nom}" sortOrder="DESCENDING">
-=======
-					sortBy="#{etudiant.nom}" sortOrder="ASCENDING" border="1"
-					styleClass="table table-responsive w-100 d-block d-md-table">
->>>>>>> Stashed changes
+				<p:dataTable id="igTable" value="#{sectionControl.getIgList()}" var="etudiant" sortBy="#{etudiant.nom}" sortOrder="DESCENDING">
+
 				 <p:column sortBy="#{etudiant.getMatricule()}" id="marticuleColumn" headerText="Matricule">
 				   	<h:outputText id="matriculeId" value="#{etudiant.getMatricule()}" />
 				 </p:column>
