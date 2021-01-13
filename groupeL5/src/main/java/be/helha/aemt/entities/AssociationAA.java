@@ -29,7 +29,8 @@ public class AssociationAA implements Serializable {
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ActiviteApprentissage AA;
-	private String points;	
+	private String points;
+	private boolean reussi;
 	
 	public AssociationAA() {
 	}
@@ -43,6 +44,12 @@ public class AssociationAA implements Serializable {
 	public AssociationAA(ParsedAssociationAA pars, List<ActiviteApprentissage> aa) {
 		this.AA= aa.stream().filter(aca -> pars.getAa().getNom().equals(aca.getNom())).findAny().orElse(null);
 		this.points = pars.getPoints();
+		this.reussi = false;
+		if(NumberUtils.isCreatable(this.points)) {
+			if(Double.parseDouble(this.points)>=10) {
+				this.reussi = true;
+			}
+		}
 	}
 
 	public ActiviteApprentissage getAA() {
@@ -67,6 +74,14 @@ public class AssociationAA implements Serializable {
 	@Override
 	public String toString() {
 		return "AssociationAA [id=" + id + ", AA=" + AA + ", points=" + points + "]";
+	}
+
+	public boolean isReussi() {
+		return reussi;
+	}
+
+	public void setReussi(boolean reussi) {
+		this.reussi = reussi;
 	}		
 
 }
