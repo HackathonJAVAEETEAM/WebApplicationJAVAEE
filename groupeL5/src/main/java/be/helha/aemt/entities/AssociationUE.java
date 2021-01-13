@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 
@@ -61,6 +63,9 @@ public class AssociationUE implements Serializable {
 	}
 
 	public String getPoints() {
+		if(NumberUtils.isCreatable(points)) {
+			return points+"/20";
+		}
 		return points;
 	}
 
