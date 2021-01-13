@@ -22,6 +22,6 @@ public class SessionControl implements Serializable {
 	
 	public String logOut() {
 		((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).invalidate();
-		return "index.xhtml" + "?faces-redirect=true";
+		return "login.xhtml" + "?faces-redirect=true";
 	}
 }
