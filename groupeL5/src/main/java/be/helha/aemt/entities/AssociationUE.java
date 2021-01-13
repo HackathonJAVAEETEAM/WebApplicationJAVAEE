@@ -31,7 +31,7 @@ public class AssociationUE implements Serializable {
 	private String points;
 	private boolean reussi;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<AssociationAA> AA;
 	
 	public AssociationUE() {

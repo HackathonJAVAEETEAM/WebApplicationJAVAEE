@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" 
+xmlns:h="http://xmlns.jcp.org/jsf/html" 
+xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:p="http://primefaces.org/ui">     
 
 <head>
   <title>Liste</title>
@@ -9,11 +13,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="listScript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+
+	
 </head>
-<body>
+<h:body>
 	<h:form>
 		<h:commandLink value = "LogOut" action = "#{sessionControl.logOut()}"></h:commandLink>
-		<h:commandLink value = "PAE" action = "#{navigationController.goToGeneralPAE()}"></h:commandLink>
 	</h:form>
 	
 	<div class="container">
@@ -26,6 +33,7 @@
 	  </ul>
 	
 	  <div class="tab-content">
+	    
 	    <div id="home" class="tab-pane fade in active">
 	    	<br></br>
 	      		<form>
@@ -34,38 +42,29 @@
 					</div>
 				</form>
 		      <h:dataTable border="1" value = "#{sectionControl.getIgList()}" var = "etudiant"
-				styleClass = "table table-responsive w-100 d-block d-md-table"
+				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
 				id= "igTable"
 				tableStyle="table-layout: auto;"
 				headerClass = "etudiantTableHeader"
 				rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
 		
 				<h:column>
-			    	<f:facet name = "header">Matricule</f:facet>
+			    	<f:facet name = "header">Matricule ⇅</f:facet>
 			    	#{etudiant.getMatricule()}
 			    </h:column>
-			    <h:column>
-			    <f:facet name = "header">Nom des eleves</f:facet>
+			    <h:column styleClass ="nomClass">
+			    <f:facet name = "header">Nom des eleves ⇅</f:facet>
 			    	<h:form>
-					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
+					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getNom()}</a>
 				    </h:form>
 			     </h:column>
 			     <h:column>
-		       <f:facet name="header" class="myClasse">Classe</f:facet>
-		      #{etudiant.classe}
+		       		<f:facet name="header" class="myClasse">Classe ⇅</f:facet>
+		      		#{etudiant.classe}
 		       </h:column>
 		    </h:dataTable>
-		    	<script>
-				 $(document).ready(function(){
-					  $("#igInput").on("keyup", function() {
-					    var value = $(this).val().toLowerCase();
-					    $("#igTable tbody tr").filter(function() {
-					      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					    });
-					  });
-					});
-				</script>
 	    </div>
+	    
 	    <div id="menu1" class="tab-pane fade">
 	    	<br></br>
 	    	<form>
@@ -74,38 +73,30 @@
 				</div>
 			</form>
 	      <h:dataTable border="1" value = "#{sectionControl.getAdList()}" var = "etudiant"
-			styleClass = "table"
+			styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
 			id= "adTable"
 			headerClass = "etudiantTableHeader"
 			rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
 	
 	
 			<h:column>
-		    	<f:facet name = "header">Matricule</f:facet>
+		    	<f:facet name = "header">Matricule ⇅</f:facet>
 		    	#{etudiant.getMatricule()}
 		    </h:column>
 		    <h:column>
-		    <f:facet name = "header">Nom des eleves</f:facet>
+		    <f:facet name = "header">Nom des eleves ⇅</f:facet>
 		    	<h:form>
 				    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
 			    </h:form>
 		     </h:column>
 		     <h:column>
-	       <f:facet name="header" class="myClasse">Classe</f:facet>
+	       <f:facet name="header" class="myClasse">Classe ⇅</f:facet>
 	      #{etudiant.classe}
 	       </h:column>
 	    </h:dataTable>
-	    	    <script>
-				 $(document).ready(function(){
-					  $("#adInput").on("keyup", function() {
-					    var value = $(this).val().toLowerCase();
-					    $("#adTable tbody tr").filter(function() {
-					      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					    });
-					  });
-					});
-				</script>
+
 	    </div>
+	    
 	    <div id="menu2" class="tab-pane fade">
 	    	<br></br>
 	         <form>
@@ -114,39 +105,30 @@
 				</div>
 			</form>
 	      <h:dataTable border="1" value = "#{sectionControl.getCtList()}" var = "etudiant"
-			styleClass = "table"
+			styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
 			id= "ctTable"
 			headerClass = "etudiantTableHeader"
 			rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
 	
 	
 			<h:column>
-		    	<f:facet name = "header">Matricule</f:facet>
+		    	<f:facet name = "header">Matricule ⇅</f:facet>
 		    	#{etudiant.getMatricule()}
 		    </h:column>
 		    <h:column>
-		    <f:facet name = "header">Nom des eleves</f:facet>
+		    <f:facet name = "header">Nom des eleves ⇅</f:facet>
 		    	<h:form>
 				    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.nom}</a>
 			    </h:form>
 		     </h:column>
 		     <h:column>
-	       <f:facet name="header" class="myClasse">Classe</f:facet>
+	       <f:facet name="header" class="myClasse">Classe ⇅</f:facet>
 	      #{etudiant.classe}
 	       </h:column>
 	    </h:dataTable>
-	        <script>
-				 $(document).ready(function(){
-					  $("#ctInput").on("keyup", function() {
-					    var value = $(this).val().toLowerCase();
-					    $("#ctTable tbody tr").filter(function() {
-					      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					    });
-					  });
-					});
-				</script>
 	    </div>
+	    
 	  </div>
 	</div>
-</body>
+</h:body>
 </html>

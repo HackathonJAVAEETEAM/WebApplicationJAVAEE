@@ -1,41 +1,59 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html"
+<!DOCTYPE html>
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" 
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-     <h:head>
-	  <title>Login Form</title>
-	  <meta charset="utf-8"></meta>
-	  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	</h:head>
-    <h:body>
-    <div class="container">
-    	<form method="POST" action="j_security_check">
-	        <p:panel id="pnl" header="Login From">
-	        	<div class="form-group">
-                	Username: <input type="text" class="form-control" name="j_username" />
-                </div>
-                <div class="form-group">
-                	Password: <input type="password" class="form-control" name="j_password" />
-                </div>
-                <br />
-                <input type="submit" id="saveBtn" value="Login" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />
-                <input type="reset" value="Reset" class="btn btn-info btn-lg" />
-	    	</p:panel>
+      
+<h:head>
+
+	<title>Login Page</title>
+		<meta http-equiv="
+		Content-Type" content="text/html; charset=UTF-8" />
+	<link type = "text/css" rel="stylesheet" href="resources/css/login.css" > </link>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> </link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> </link>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"> </script>
+	
+	
+</h:head>
+<body id="body">
+
+
+<div id="logodiv">
+<h:graphicImage class="mx-auto d-block" id="logo" url="resources/images/LOGO_HELHa.png" alt="Image not supported" > </h:graphicImage>
+</div>
+
+<br></br> 
+<div id="log"  >
+	<div class="login-form ">
+	    <form  method="post" action="j_security_check">
+	        <h2 class="text-center" >Authentification</h2>       
+	        <div class="form-group">
+	            <input type="text" class="form-control" placeholder="Identifiant" required="required" name="j_username"> </input>
+	        </div>
+	        <div class="form-group">
+	            <input type="password" class="form-control" placeholder="Mot de passe" required="required" name="j_password"> </input>
+	        </div>
+	        <div class="form-group">
+	            <button type="submit" class="btn btn-info btn-block" style="background-color: #00A99D;">Connexion</button>
+	        </div>
+	           
 	    </form>
+	   
 	</div>
-		<!-- Modal -->
+</div>
+
+	<!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <button type="button" class="close" data-dismiss="modal"></button>
 	          <h4 class="modal-title">Chargement des données serveur en cours...</h4>
 	        </div>
 	        <div class="modal-body">
@@ -52,5 +70,6 @@
 	      
 	    </div>
 	  </div>
-    </h:body>
+</body>
+      
 </html>
