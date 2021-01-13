@@ -1,6 +1,7 @@
 package be.helha.aemt.control;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
@@ -18,43 +19,38 @@ public class SectionControl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Section sectionIG;
-	private Section sectionAD;
-	private Section sectionCT;
 	
 	@Inject
 	private GestionSectionEJB gestionSection;
 	
-	public SectionControl() {
-		sectionIG = new Section();
-		sectionAD = new Section();
-		sectionCT = new Section();
-	}
-	
-	@PostConstruct
-	public void init() {
-		sectionIG = doSelectAll().get(0);
-		sectionAD = doSelectAll().get(1);
-		sectionCT = doSelectAll().get(2);
-	}
+
 	
 	public List<Section> doSelectAll(){
 		return gestionSection.findAll();
 	}
 	
-	public List<Etudiant> getIgList()
+	public ArrayList<Etudiant> getIgList()
 	{
-		return sectionIG.getListeEtudiant();
+		if(!doSelectAll().isEmpty())
+			return (ArrayList<Etudiant>) doSelectAll().get(0).getListeEtudiant();
+		else
+			return null;
 	}
 	
-	public List<Etudiant> getAdList()
+	public ArrayList<Etudiant> getAdList()
 	{
-		return sectionAD.getListeEtudiant();
+		if(!doSelectAll().isEmpty())
+			return (ArrayList<Etudiant>) doSelectAll().get(1).getListeEtudiant();
+		else
+			return null;
 	}
 	
-	public List<Etudiant> getCtList()
+	public ArrayList<Etudiant> getCtList()
 	{
-		return sectionCT.getListeEtudiant();
+		if(!doSelectAll().isEmpty())
+			return (ArrayList<Etudiant>) doSelectAll().get(2).getListeEtudiant();
+		else
+			return null;
 	}	
 
 }

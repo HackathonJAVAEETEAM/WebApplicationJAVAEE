@@ -41,7 +41,7 @@ public class ImportData {
 				sheet = sit.next();
 				XlsParser pars = new XlsParser(sheet);	
 				Section s = new Section(pars);
-				s.setListeEtudiant(new ArrayList<Etudiant>(s.getListeEtudiant().subList(0,9)));
+				s.setListeEtudiant(new ArrayList<Etudiant>(s.getListeEtudiant().subList(0,5)));
 				
 				tx.begin();
 				em.persist(s);
@@ -51,6 +51,7 @@ public class ImportData {
 				tx.commit();
 				LocalDateTime now2 = LocalDateTime.now();  
 				System.out.println("testafter : "+dtf.format(now2));
+				break;
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
