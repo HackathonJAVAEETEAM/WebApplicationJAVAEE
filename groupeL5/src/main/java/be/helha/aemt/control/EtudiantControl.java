@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.helha.aemt.ejb.GestionEtudiantEJB;
+import be.helha.aemt.entities.AssociationAA;
+import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
 
 @Named
@@ -53,14 +55,9 @@ public class EtudiantControl implements Serializable {
     }
     
     public void persist() {
-    	if(etudiant != null && etudiant.getId() != null)
-    		gestionEtudiant.add(etudiant);
+    	System.out.println("CHECK PERSIST AA EE AA EE AA EE AA EE");
+    	gestionEtudiant.updateUeEtudiant(etudiant);
     }
     
-	/*public String doAdd() {
-		System.out.println(etudiant);
-		gestionEtudiant.add(etudiant);
-		return "liste.xhtml?faces-redirect=true";
-	}*/
 	
 }

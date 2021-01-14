@@ -88,6 +88,10 @@ public class AssociationUE implements Serializable {
 	public boolean addToAA(AssociationAA aa) {
 		return AA.add(aa);
 	}
+	
+	public Integer getId() {
+		return id;
+	}
 
 	@Override
 	public String toString() {

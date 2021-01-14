@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import be.helha.aemt.entities.AssociationAA;
+import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
 
 @Remote
@@ -14,4 +16,6 @@ public interface IGestionEtudiantRemote {
 	public List<Etudiant> findAll();
 	
 	public List<Etudiant> findWithParam(String classe);
+
+	void updateUeEtudiant(Etudiant etudiant);
 }

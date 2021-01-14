@@ -113,61 +113,34 @@ nav > ul li:hover .sous{
 <br/>
 <br/>
 
-<div class="left-half">
-	<nav>
-		<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-			<ul>
-			  <li class="deroulant">
-			    
-			   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits <span style="float:right;">#{ue.getPoints()}</span> </b>
-					 <h:selectBooleanCheckbox  value= "#{ue.reussi}" valueChangeListener="#{etudiantControl.persist()}" id="yolo22">
-					 	<!--   <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 		-->	 
-					 </h:selectBooleanCheckbox>
-				 </p>
-				 <ui:repeat value="#{ue.getAA()}" var="aa">
-				 	<ul class="sous">
-			      	 	<li>  	
-							<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) <span style="float:right;">#{aa.getPoints()}</span>
-								<h:selectBooleanCheckbox value= "#{aa.reussi}" valueChangeListener="#{etudiantControl.persist()}" id="yolo">
-									<!--  <a4j:support event="onclick" reRender="#{aa.setReussi(!aa.reussi)}"/> -->
-								</h:selectBooleanCheckbox>
-							</p>
-			       		</li>
-			       	</ul>
-		       </ui:repeat>
-			  </li>
-		   </ul>
-		</ui:repeat>
-	</nav>
-</div>
-<div class="right-half">
-	<nav>
-		<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-			<ul>
-			  <li class="deroulant">
-			    
-			   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits <span style="float:right;">#{ue.getPoints()}</span> </b>
-					 <h:selectBooleanCheckbox  value= "#{ue.reussi}" id="yolo22">
-					 	<!--   <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 		-->	 
-					 </h:selectBooleanCheckbox>
-				 </p>
-				 <ui:repeat value="#{ue.getAA()}" var="aa">
-				 	<ul class="sous">
-			      	 	<li>  	
-							<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) <span style="float:right;">#{aa.getPoints()}</span>
-							<h:selectBooleanCheckbox value= "#{aa.reussi}" valueChangeListener="#{etudiantControl.persist(aa)}" id="yolo">
-								<!--  <a4j:support event="onclick" reRender="#{aa.setReussi(!aa.reussi)}"/> -->
-							</h:selectBooleanCheckbox>
-							
-							</p>
-			       		</li>
-			       	</ul>
-		       </ui:repeat>
-			  </li>
-		   </ul>
-		</ui:repeat>
-	</nav>
-</div>
+<h:form>
+	<div class="left-half">
+		<nav>
+			<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+				<ul>
+				  <li class="deroulant">
+				    
+				   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits <span style="float:right;">#{ue.getPoints()}</span> </b>
+						 <h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
+						 </h:selectBooleanCheckbox>
+					 </p>
+					 <ui:repeat value="#{ue.getAA()}" var="aa">
+					 	<ul class="sous">
+				      	 	<li>  	
+								<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) <span style="float:right;">#{aa.getPoints()}</span>
+									<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
+									</h:selectBooleanCheckbox>
+								</p>
+				       		</li>
+				       	</ul>
+			       </ui:repeat>
+				  </li>
+			   </ul>
+			</ui:repeat>
+		</nav>
+	</div>
+	<h:commandButton action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+</h:form>
 
 <h:form>
 <h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
