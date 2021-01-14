@@ -87,7 +87,13 @@ public class Etudiant implements Serializable{
 	}
 
 	public int getCreditsValides() {
-		return creditsValides;
+		int res = 0;
+		for(AssociationUE aue: this.UE) {
+			if(aue.isReussi()) {
+				res+=aue.getUE().getTotalCredit();
+			}
+		}
+		return res;
 	}
 
 	public void setCreditsValides(int creditsValides) {
