@@ -11,7 +11,11 @@
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link> -->
-  <link rel="stylesheet" href="ressources/css/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="ressources/css/style.css"></link>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
@@ -53,49 +57,50 @@
 <br/>
 <br/>
 <br/>
-<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-	<ul>
-	  <li>
-	    
-	   	<p>#{ue.getUE().getNom()} 
-	   	#{ue.getUE().getTotalCredit()} Crédits 
-		 #{ue.getPoints()}/20  
-		 <h:selectBooleanCheckbox  value= "#{ue.isReussi()}" id="yolo">
-		 	 <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 
-		 			 
-		 </h:selectBooleanCheckbox></p>
-		 
-	</li>
+<div class="left-half">
 	
-	 <ui:repeat value="#{ue.getAA()}" var="aa">
-	 	<ul>
-      	 	<li>  	
-				<p>#{aa.getAA().getNom()}  
-				#{aa.getAA().getCreditAA()} Crédit(s)  
-				#{aa.getPoints()}
-				<h:selectBooleanCheckbox value= "#{aa.reussi}" id="yolo22">
-					<a4j:support event="onclick" reRender="#{aa.setReussi(!aa.isReussi())}"/> 
-				</h:selectBooleanCheckbox>
-				
-				</p>
-       		</li>
-       	</ul>
-       </ui:repeat>
-       
-   </ul>
-</ui:repeat>
-
+	
+		<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+			<ul>
+			  <li class="list-group">
+			    
+			   	<p>#{ue.getUE().getNom()} 
+			   	#{ue.getUE().getTotalCredit()} Crédits 
+				 #{ue.getPoints()} 
+				 
+				 <h:selectBooleanCheckbox  value= "#{ue.reussi}" id="yolo22">
+				 	<!--   <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 		-->	 
+				 </h:selectBooleanCheckbox>
+				 </p>
+			</li>
+			
+			 <ui:repeat value="#{ue.getAA()}" var="aa">
+			 	<ul>
+		      	 	<li class="list-inline">  	
+						<p>#{aa.getAA().getNom()}  
+						#{aa.getAA().getCreditAA()} Crédit(s)  
+						#{aa.getPoints()}
+						<h:selectBooleanCheckbox value= "#{aa.reussi}" id="yolo">
+							<!--  <a4j:support event="onclick" reRender="#{aa.setReussi(!aa.reussi)}"/> -->
+						</h:selectBooleanCheckbox>
+						
+						</p>
+		       		</li>
+		       	</ul>
+		       </ui:repeat>
+		       
+		   </ul>
+		</ui:repeat>
+	
+</div>
 <script>
-
-function checkUE() {
-	if()
-    document.getElementById("ueValid").checked = true;
+function check() {
+    document.getElementById("yolo").checked = true;
 }
 </script>
 <script>
-
 function uncheck() {
-    document.getElementById("ueValid").checked = false;
+    document.getElementById("yolo").checked = false;
 }
 </script>
 <h:form>
