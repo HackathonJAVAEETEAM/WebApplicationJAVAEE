@@ -1,0 +1,62 @@
+html { overflow-y: hidden; }
+
+#body{
+	background:url("../images/school.jpg") no-repeat center center fixed;
+	 -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+ 	 background-size: cover;
+ 	 font-family: "Poppins", sans-serif;
+ 	 height: 100vh;
+}
+
+#h1{
+	width: 100%;
+	 text-align: center;
+	 font-family: MICROSOFT YAHEI UI;
+	 padding-top: 3%;
+	 text-decoration: underline overline;
+	 
+}
+
+#lateam{
+	background-color: rgb(253, 194, 23, 0.7);
+	width:55%;
+	height:55%;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 10%;
+	
+	
+}
+
+#imageteam{
+	width: 85%;
+	height: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	
+}
+
+
+#containt{
+	width: 65%;
+	padding:3px;
+	border:5px double #ff6b00;
+	background-color:#ffdbc1;
+	text-align: justify;
+	margin-right: auto;
+	margin-left: auto;
+	
+	
+}
+
+#pcontaint{
+	width: 85%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 2%;
+	padding-bottom: 1%;
+}
