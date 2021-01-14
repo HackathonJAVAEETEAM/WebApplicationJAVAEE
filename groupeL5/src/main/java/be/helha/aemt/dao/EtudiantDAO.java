@@ -35,13 +35,12 @@ public class EtudiantDAO {
 	}
 	
 	public void updateUeEtudiant(Etudiant etudiant) {
-		//Etudiant varEtudiant = em.find(Etudiant.class, etudiant);
-		//varEtudiant.setUE((ArrayList<AssociationUE>) etudiant.getUE());
+		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
+		varEtudiant.setUE((ArrayList<AssociationUE>) etudiant.getUE());
 		System.out.println(etudiant);
-		//System.out.println(varEtudiant);
-		//em.persist(varEtudiant);
-		em.persist(etudiant);
-		
+		System.out.println(varEtudiant);
+		em.merge(varEtudiant);
+		//em.persist(etudiant);
 	}
 
 }
