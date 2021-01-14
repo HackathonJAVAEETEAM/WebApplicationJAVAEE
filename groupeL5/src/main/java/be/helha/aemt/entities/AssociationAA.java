@@ -82,6 +82,10 @@ public class AssociationAA implements Serializable {
 
 	public void setReussi(boolean reussi) {
 		this.reussi = reussi;
-	}		
+	}
+
+	public Integer getId() {
+		return id;
+	}	
 
 }

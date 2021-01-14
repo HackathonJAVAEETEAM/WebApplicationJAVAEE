@@ -27,7 +27,7 @@ public class MainUser {
 		
 		Utilisateur u1;
 		try {
-			u1 = new Utilisateur("lucas", digestSomething("lucas"),"ADMIN");
+			u1 = new Utilisateur("admin", digestSomething("helha"),"ADMIN");
 			tx.begin();
 			em.persist(u1);
 			tx.commit();

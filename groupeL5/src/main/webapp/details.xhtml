@@ -19,6 +19,61 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <style>
+
+nav ul{
+    list-style-type: none;
+}
+
+nav ul li{
+    width: 40%;
+}
+
+nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    border-top: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    padding: 20px 0px;
+}
+
+nav a:hover{
+    color: orange;
+    border-bottom: 2px solid gold;
+}
+
+.sous{
+    display: block;
+    box-shadow: 1px 1px 2px #CCC;
+    background-color: white;
+}
+nav > ul li:hover .sous{
+    display: block;
+}
+.sous li{
+    width: 100%;
+}
+.sous a{
+    padding: 10px;
+    border-bottom: none;
+}
+.sous a:hover{
+    border-bottom: none;
+    background-color: RGBa(200,200,200,0.1);
+}
+.deroulant > a::after{
+    content:" ▼";
+    font-size: 12px;
+}
+  </style>
+  
 </head>
 <body>
 	<center><u><h1 style="color:#069">Details de l'étudiant </h1></u></center>
@@ -57,52 +112,36 @@
 <br/>
 <br/>
 <br/>
-<div class="left-half">
-	
-	
-		<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-			<ul>
-			  <li class="list-group">
-			    
-			   	<p>#{ue.getUE().getNom()} 
-			   	#{ue.getUE().getTotalCredit()} Crédits 
-				 #{ue.getPoints()} 
-				 
-				 <h:selectBooleanCheckbox  value= "#{ue.reussi}" id="yolo22">
-				 	<!--   <a4j:support event="onclick" reRender="#{ue.setReussi(!ue.isReussi())}"/> 		-->	 
-				 </h:selectBooleanCheckbox>
-				 </p>
-			</li>
-			
-			 <ui:repeat value="#{ue.getAA()}" var="aa">
-			 	<ul>
-		      	 	<li class="list-inline">  	
-						<p>#{aa.getAA().getNom()}  
-						#{aa.getAA().getCreditAA()} Crédit(s)  
-						#{aa.getPoints()}
-						<h:selectBooleanCheckbox value= "#{aa.reussi}" id="yolo">
-							<!--  <a4j:support event="onclick" reRender="#{aa.setReussi(!aa.reussi)}"/> -->
-						</h:selectBooleanCheckbox>
-						
-						</p>
-		       		</li>
-		       	</ul>
-		       </ui:repeat>
-		       
-		   </ul>
-		</ui:repeat>
-	
-</div>
-<script>
-function check() {
-    document.getElementById("yolo").checked = true;
-}
-</script>
-<script>
-function uncheck() {
-    document.getElementById("yolo").checked = false;
-}
-</script>
+
+<h:form>
+	<div class="left-half">
+		<nav>
+			<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+				<ul>
+				  <li class="deroulant">
+				    
+				   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits <span style="float:right;">#{ue.getPoints()}</span> </b>
+						 <h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
+						 </h:selectBooleanCheckbox>
+					 </p>
+					 <ui:repeat value="#{ue.getAA()}" var="aa">
+					 	<ul class="sous">
+				      	 	<li>  	
+								<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) <span style="float:right;">#{aa.getPoints()}</span>
+									<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
+									</h:selectBooleanCheckbox>
+								</p>
+				       		</li>
+				       	</ul>
+			       </ui:repeat>
+				  </li>
+			   </ul>
+			</ui:repeat>
+		</nav>
+	</div>
+	<h:commandButton action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+</h:form>
+
 <h:form>
 <h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
 </h:form>

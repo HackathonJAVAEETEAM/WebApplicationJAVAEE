@@ -58,6 +58,11 @@ public class Etudiant implements Serializable{
 		}
 	}
 	
+	
+	public void setUE(ArrayList<AssociationUE> uE) {
+		UE = uE;
+	}
+
 	public Integer getId() {
 		return id;
 	}

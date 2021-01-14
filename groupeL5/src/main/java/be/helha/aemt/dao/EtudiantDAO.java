@@ -1,15 +1,16 @@
 package be.helha.aemt.dao;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import org.apache.poi.ss.usermodel.Row;
-
+import be.helha.aemt.entities.AssociationAA;
+import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
 
 @Stateless
@@ -32,15 +33,14 @@ public class EtudiantDAO {
 		em.persist(etudiant);
 		return etudiant;
 	}
-//	public static Etudiant rowToEtudiant(Row row) {
-//		String nom;
-//		String matricule;
-//		String classe;
-//		nom = row.getCell(1).getStringCellValue();
-//		matricule = row.getCell(2).getStringCellValue();
-//		classe = row.getCell(3).getStringCellValue();
-//
-//		return new Etudiant(nom,matricule,classe,0,0,"0");
-//		
-//	}
+	
+	public void updateUeEtudiant(Etudiant etudiant) {
+		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
+		varEtudiant.setUE((ArrayList<AssociationUE>) etudiant.getUE());
+		System.out.println(etudiant);
+		System.out.println(varEtudiant);
+		em.merge(varEtudiant);
+		//em.persist(etudiant);
+	}
+
 }
