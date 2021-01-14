@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
 
@@ -130,8 +132,13 @@ public class Etudiant implements Serializable{
 	}
 
 	public String getMoyenne() {
+		if(NumberUtils.isCreatable(moyenne)) {
+			return Math.round((NumberUtils.createDouble(moyenne)*100.0)*100.0)/100.0+"%";
+		}
 		return moyenne;
 	}
+		
+	
 
 	public void setMoyenne(String moyenne) {
 		this.moyenne = moyenne;
