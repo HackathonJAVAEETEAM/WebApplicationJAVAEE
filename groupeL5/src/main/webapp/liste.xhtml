@@ -9,7 +9,7 @@ xmlns:t="http://myfaces.apache.org/tomahawk"
 xmlns:o="http://omnifaces.org/ui"
 xmlns:of="http://omnifaces.org/functions">     
 
-<head>
+<h:head>
   <title>Liste</title>
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -68,7 +68,7 @@ td {
 }
 </style>
 	
-</head>
+</h:head>
 <h:body>
 	
 		
@@ -209,9 +209,10 @@ td {
 			</h:form>-->
 			
 	        <h:form enctype="multipart/form-data">
-			    <h:inputFile value="#{fileControl.file}">
-			    </h:inputFile>
-			    <h:commandButton value = "Upload" action = "#{fileControl.save()}"> </h:commandButton>
+			    <h:inputFile value="#{fileControl.file}"/>
+			    	<!--<f:ajax listener="#{fileControl.save}" />-->
+			    
+			   <h:commandButton value = "Upload" action = "#{fileControl.save}"/>
 			</h:form>
 
 	        </div>

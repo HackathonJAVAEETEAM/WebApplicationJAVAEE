@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import be.helha.aemt.ejb.GestionSectionEJB;
@@ -14,7 +15,7 @@ import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.Section;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class SectionControl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
