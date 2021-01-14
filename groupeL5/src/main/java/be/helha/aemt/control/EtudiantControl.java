@@ -32,6 +32,7 @@ public class EtudiantControl implements Serializable {
 		return gestionEtudiant.findAll();
 		
 	}
+	
 	public String doGetDetails(Etudiant u) {
 		etudiant = u;
 		return "details.xhtml";
@@ -55,8 +56,19 @@ public class EtudiantControl implements Serializable {
     }
     
     public void persist() {
-    	System.out.println("CHECK PERSIST AA EE AA EE AA EE AA EE");
     	gestionEtudiant.updateUeEtudiant(etudiant);
+    }
+    
+    public String getTypeOfDeliberation() {
+    	if(etudiant.isDelibere())
+    		return "doneDelib";
+    	else
+    		return "toDelib";
+    }
+    
+    public void changeStatus() {
+    	etudiant.switchDelib();
+    	gestionEtudiant.updateDelibEtudiant(etudiant);
     }
     
 	

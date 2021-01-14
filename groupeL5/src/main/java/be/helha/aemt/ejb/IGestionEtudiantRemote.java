@@ -18,4 +18,6 @@ public interface IGestionEtudiantRemote {
 	public List<Etudiant> findWithParam(String classe);
 
 	void updateUeEtudiant(Etudiant etudiant);
+
+	void updateDelibEtudiant(Etudiant etudiant);
 }

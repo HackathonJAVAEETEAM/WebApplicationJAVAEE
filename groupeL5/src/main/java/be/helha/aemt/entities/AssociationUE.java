@@ -19,7 +19,7 @@ import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 
 @Entity
-public class AssociationUE implements Serializable {
+public class AssociationUE implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -92,11 +92,17 @@ public class AssociationUE implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "AssociationUE [id=" + id + ", UE=" + UE + ", points=" + points + ", reussi=" + reussi + ", AA=" + AA
 				+ "]";
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return this.getUE().getNom().compareTo(((AssociationUE)o).getUE().getNom());
 	}
 	
 	

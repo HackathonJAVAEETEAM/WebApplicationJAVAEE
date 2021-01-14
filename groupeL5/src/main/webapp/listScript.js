@@ -3,32 +3,26 @@
  */
 
  $(document).ready(function(){
-	$("#igInput").on("keyup", function() {
+	$("#input0").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();
-	    $("#igTable tbody tr").filter(function() {
+	    $("#table0 table tbody tr").filter(function() {
 	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 	   });
 	 });
-	$("#adInput").on("keyup", function() {
+	$("#input1").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();
-	    $("#adTable tbody tr").filter(function() {
+	    $("#table1 table tbody tr").filter(function() {
 	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 	   });
 	 });
-	$("#ctInput").on("keyup", function() {
+	$("#input2").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();
-	    $("#ctTable tbody tr").filter(function() {
+	    $("#table2 table tbody tr").filter(function() {
 	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     	});
   	});
   	
   	$(function() {
-	  $("#igTable").tablesorter();
-	});
-	$(function() {
-	  $("#adTable").tablesorter();
-	});
-	$(function() {
-	  $("#ctTable").tablesorter();
+	  $(".tablesorter").tablesorter();
 	});
 });

@@ -2,6 +2,8 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,6 +53,7 @@ public class Etudiant implements Serializable{
 		this.setMoyenne(moyenne);
 		this.setDelibere(false);
 		this.UE = new ArrayList<AssociationUE>();
+		this.delibere = false;
 	}
 	
 	public Etudiant(ParsedEtudiant etud, List<UniteEnseignement> ue) {
@@ -116,6 +119,7 @@ public class Etudiant implements Serializable{
 	}	
 
 	public List<AssociationUE> getUE() {
+		Collections.sort(UE);
 		return UE;
 	}
 
@@ -132,6 +136,13 @@ public class Etudiant implements Serializable{
 	public boolean isDelibere() {
 		return delibere;
 	}
+	
+	public String isDelibereStringFormat() {
+		if(isDelibere())
+			return "Fait";
+		else
+			return "A faire";
+	}
 
 	public void setDelibere(boolean delibere) {
 		this.delibere = delibere;
@@ -144,6 +155,9 @@ public class Etudiant implements Serializable{
 		return moyenne;
 	}
 		
+	public void switchDelib() {
+		this.delibere = !delibere;
+	}
 	
 
 	public void setMoyenne(String moyenne) {
