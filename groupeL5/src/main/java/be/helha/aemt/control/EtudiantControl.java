@@ -52,6 +52,11 @@ public class EtudiantControl implements Serializable {
     	etudiant = v;
     }
     
+    public void persist() {
+    	if(etudiant != null && etudiant.getId() != null)
+    		gestionEtudiant.add(etudiant);
+    }
+    
 	/*public String doAdd() {
 		System.out.println(etudiant);
 		gestionEtudiant.add(etudiant);
