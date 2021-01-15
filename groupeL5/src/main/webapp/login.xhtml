@@ -71,7 +71,9 @@
 	    </div>
 	  </div>
 <div style="position: fixed; bottom: 0;width: 100%">  
-<a href ="#" jsf:action ="aboutus.xhtml?faces-redirect = true" style="color: white; align-items: center;font-size: smaller;margin-right: auto;margin-left: auto">À propos de nous</a>
+<h:form>
+	<h:commandLink action ="#{navigationController.goToAboutUs()}" style="color: white; align-items: center;font-size: medium;margin-right: auto;margin-left: auto">À propos de nous</h:commandLink>
+</h:form>
 </div>	
 </body>
       

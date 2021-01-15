@@ -127,12 +127,6 @@ public class Etudiant implements Serializable{
 		return this.UE.add(ue);
 	}
 
-	@Override
-	public String toString() {
-		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
-				+ creditsValides + ", creditTot=" + creditTot + "]";
-	}
-
 	public boolean isDelibere() {
 		return delibere;
 	}
@@ -159,9 +153,15 @@ public class Etudiant implements Serializable{
 		this.delibere = !delibere;
 	}
 	
-
 	public void setMoyenne(String moyenne) {
 		this.moyenne = moyenne;
 	}
+	
+	@Override
+	public String toString() {
+		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
+				+ creditsValides + ", creditTot=" + creditTot + "]";
+	}
+
 	
 }

@@ -18,20 +18,14 @@ public class NavigationController implements Serializable {
 	public NavigationController() {
 		
 	}
-	/*public String etudiantPrecedent() {
-		int etudpre = getIdEtudiantPrecedent();
-		
-		return"details.xhtml" +"?faces-redirect=true";
-	}
-	public int getIdEtudiantPrecedent() {
-		return etudiantC.getEtudiant().getId() > 0 ? etudiantC.getEtudiant().getId() - 1: 0;
-	}
-	public String etudiantSuivant() {
-		return"details.xhtml" +"?faces-redirect=true";
-	}*/
+	
 		
 	public String goToHome() {
 		return "liste.xhtml" + "?faces-redirect=true";
+	}
+	
+	public String goToAboutUs() {
+		return "aboutus.xhtml" + "?faces-redirect=true";
 	}
 	
 	

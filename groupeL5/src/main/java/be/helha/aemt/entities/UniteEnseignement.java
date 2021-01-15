@@ -19,7 +19,7 @@ import be.helha.aemt.util.xlsparser.ParsedAA;
 import be.helha.aemt.util.xlsparser.ParsedUE;
 
 @Entity
-public class UniteEnseignement implements Serializable {
+public class UniteEnseignement implements Serializable, Comparable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -87,5 +87,10 @@ public class UniteEnseignement implements Serializable {
 	public String toString() {
 		return "UniteEnseignement [nom=" + nom + ", annee=" + annee + ", totalCredit=" + totalCredit + ", AAList="
 				+ AAList + "]";
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return this.getNom().compareTo(((UniteEnseignement)o).getNom());
 	}
 }

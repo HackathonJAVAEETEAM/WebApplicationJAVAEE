@@ -33,30 +33,6 @@ public class SectionControl implements Serializable {
 			return "active";
 		else
 			return "";
-	}
-	
-	public ArrayList<Etudiant> getIgList()
-	{
-		if(!doSelectAll().isEmpty())
-			return (ArrayList<Etudiant>) doSelectAll().get(0).getListeEtudiant();
-		else
-			return null;
-	}
-	
-	public ArrayList<Etudiant> getAdList()
-	{
-		if(!doSelectAll().isEmpty())
-			return (ArrayList<Etudiant>) doSelectAll().get(1).getListeEtudiant();
-		else
-			return null;
-	}
-	
-	public ArrayList<Etudiant> getCtList()
-	{
-		if(!doSelectAll().isEmpty())
-			return (ArrayList<Etudiant>) doSelectAll().get(2).getListeEtudiant();
-		else
-			return null;
-	}	
+	}			
 
 }

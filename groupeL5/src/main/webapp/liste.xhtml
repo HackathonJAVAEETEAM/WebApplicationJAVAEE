@@ -20,40 +20,31 @@ xmlns:of="http://omnifaces.org/functions">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
   
 <style>
-	.stafalse{
-		background-color:rgba(255, 45, 25, 0.34);
-	}
-	
-	.statrue{
-		background-color:rgba(189, 238, 159, 0.87);
-	}
+	.stafalse{background-color:rgba(255, 45, 25, 0.34);}
+	.statrue{background-color:rgba(189, 238, 159, 0.87);}
 </style>
 	
 </h:head>
 <h:body>
-
 	<div class="container">
 	  <h2>Liste des étudiants</h2>
 	  	<h:form>
 		  <ul class="nav nav-tabs" style="overflow-y: hidden;">
 		  	<ui:repeat value="#{sectionControl.doSelectAll()}" var="section" varStatus="myVarStatus">
-			    <li class="#{sectionControl.getActive(myVarStatus.index)}"><a data-toggle="tab" href="#menu#{myVarStatus.index}">#{section.getNom()}</a></li>
-			    <!--  <li><a data-toggle="tab" href="#menu1">Assistant(e) de direction</a></li>
-			    <li><a data-toggle="tab" href="#menu2">Comptabilité</a></li>-->
+			    <li class="#{sectionControl.getActive(myVarStatus.index)}"><a data-toggle="tab" href="#menu#{myVarStatus.index}">#{section.pickRightName()}</a></li>
 			</ui:repeat>
 		    <li style="float:right;"><h:commandLink value = "Déconnexion" action = "#{sessionControl.logOut()}"></h:commandLink></li>
 		    <li style="float:right;"><a href="#" data-toggle="modal" data-target="#myModal">Importer</a></li>  
 		  </ul>
 		 </h:form>
-	
-	  <div class="tab-content">
-	    
+	  <div class="tab-content">  
 	  <ui:repeat id="generate" value="#{sectionControl.doSelectAll()}" var="section" varStatus="myVarStatus">
 	    <div id="menu#{myVarStatus.index}" class="tab-pane fade in #{sectionControl.getActive(myVarStatus.index)}">
 	    	<br></br>
 					<div class="form-group">
 						<input id="input#{myVarStatus.index}" class="form-control" type="text" placeholder="Rechercher.."/>
 					</div>
+				<button class="btn btn-primary btn-block" style="margin-bottom:15px;">Générer PDF de la section</button>
 				<div id="table#{myVarStatus.index}">
 		      <h:dataTable  border="1" value = "#{section.getListeEtudiant()}" var = "etudiant"
 				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
@@ -72,7 +63,7 @@ xmlns:of="http://omnifaces.org/functions">
 			    <h:column >
 			    <f:facet name = "header">Nom des eleves ⇅</f:facet>
 			    	<h:form>
-					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(etudiant)}">#{etudiant.getNom()}</a>
+					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(section,etudiant)}">#{etudiant.getNom()}</a>
 				    </h:form>
 			     </h:column>
 			     <h:column>
@@ -93,7 +84,6 @@ xmlns:of="http://omnifaces.org/functions">
 	<!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
-	    
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -106,13 +96,10 @@ xmlns:of="http://omnifaces.org/functions">
 				  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"> CHARGEMENT..
 			  </div>
 			</div>
-			
-			
 	        <h:form enctype="multipart/form-data">
 			    <h:inputFile class="btn btn-primary" value="#{fileControl.file}"/>		    
 			   <h:commandButton class="btn btn-primary" data-toggle="progress" value = "Upload" action = "#{fileControl.save}"/>
 			</h:form>
-
 	        </div>
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
