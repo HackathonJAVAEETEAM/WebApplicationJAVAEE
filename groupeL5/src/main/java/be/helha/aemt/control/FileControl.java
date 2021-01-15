@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Iterator;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -21,7 +20,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import be.helha.aemt.ejb.GestionFileEJB;
-import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.Section;
 import be.helha.aemt.util.xlsparser.XlsParser;
 
