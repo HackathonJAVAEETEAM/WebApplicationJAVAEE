@@ -38,6 +38,22 @@ public class PropositionUE {
 		this.dispense = dispense;
 		this.listeAA = new ArrayList<PropositionAA>();
 	}
+	
+	public PropositionUE(UniteEnseignement ue) {
+		this(ue.getNom(),ue.getAnnee(),ue.getTotalCredit(), false);
+		ArrayList<PropositionAA> aas = new ArrayList<PropositionAA>();
+		for (ActiviteApprentissage aa: ue.getAAList()) {
+			aas.add(new PropositionAA(aa.getNom(),aa.getCreditAA(),false));
+		}
+	}
+	
+	public PropositionUE(AssociationUE ue) {
+		this(ue.getUE().getNom(),ue.getUE().getAnnee(),ue.getUE().getTotalCredit(), ue.isReussi());
+		ArrayList<PropositionAA> aas = new ArrayList<PropositionAA>();
+		for (AssociationAA aa: ue.getAA()) {
+			aas.add(new PropositionAA(aa.getAA().getNom(),aa.getAA().getCreditAA(),aa.isReussi()));
+		}
+	}
 
 	public String getNom() {
 		return nom;
