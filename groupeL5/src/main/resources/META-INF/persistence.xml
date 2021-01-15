@@ -15,6 +15,10 @@
 		<class>be.helha.aemt.entities.Section</class>
 		<class>be.helha.aemt.entities.AssociationUE</class>
 		<class>be.helha.aemt.entities.AssociationAA</class>
+		<class>be.helha.aemt.entities.Utilisateur</class>
+		<class>be.helha.aemt.entities.PropositionPAE</class>
+		<class>be.helha.aemt.entities.PropositionUE</class>
+		<class>be.helha.aemt.entities.PropositionAA</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 			
@@ -31,6 +35,9 @@
 		<class>be.helha.aemt.entities.AssociationUE</class>
 		<class>be.helha.aemt.entities.AssociationAA</class>
 		<class>be.helha.aemt.entities.Utilisateur</class>
+		<class>be.helha.aemt.entities.PropositionPAE</class>
+		<class>be.helha.aemt.entities.PropositionUE</class>
+		<class>be.helha.aemt.entities.PropositionAA</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	

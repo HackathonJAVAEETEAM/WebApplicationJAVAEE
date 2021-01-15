@@ -3,13 +3,32 @@ package be.helha.aemt.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class PropositionUE {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String nom;
 	private String bloc;
 	private int totalCredit;
 	private boolean dispense;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<PropositionAA> listeAA;
+	
+	public PropositionUE() {
+		super();
+	}
 
 	public PropositionUE(String nom, String bloc, int totalCredit, boolean dispense) {
 		super();

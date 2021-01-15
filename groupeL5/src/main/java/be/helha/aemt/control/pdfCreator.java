@@ -5,14 +5,19 @@ import java.io.FileNotFoundException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.stream.Stream;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -28,6 +33,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import be.helha.aemt.entities.Etudiant;
+import be.helha.aemt.entities.Section;
 
 import com.itextpdf.text.*;
 
@@ -35,36 +42,27 @@ import com.itextpdf.text.*;
 @SessionScoped
 public class pdfCreator implements Serializable{
 	
-	Document document = new Document();
-	public void createDoc() throws FileNotFoundException, DocumentException {
+	
+	public void createDoc(Section s) throws DocumentException, IOException, URISyntaxException, BadElementException  {
 		
-		PdfWriter.getInstance(document, new FileOutputStream("Section.pdf"));
+		Document document = new Document();
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.setResponseHeader("Content-Type", "application/pdf");
+		ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "sectiontest" + ".pdf" + "\"");
+		
+	    PdfWriter.getInstance(document, ec.getResponseOutputStream());
 	
 		document.open();
 		Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-		Chunk chunk = new Chunk("Hello World", font);
+		
 	
-		document.add(chunk);
-		PdfPTable table = new PdfPTable(3);
-		addTableHeader(table);
-		addRows(table);
-		try {
-			addCustomRows(table);
-		} catch (BadElementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		document.add(table);
+		document.add(new Chunk(s.getListeEtudiant().get(0).getMatricule() + "\n"));
+		
 		document.close();
 		
+		FacesContext.getCurrentInstance().responseComplete();	
 	}
+	
 	private void addTableHeader(PdfPTable table) {
 	    Stream.of("column header 1", "column header 2", "column header 3")
 	      .forEach(columnTitle -> {
