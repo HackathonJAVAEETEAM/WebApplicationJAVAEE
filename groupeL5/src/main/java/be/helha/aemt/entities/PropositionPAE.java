@@ -47,7 +47,8 @@ public class PropositionPAE {
 		PropositionPAE res = new PropositionPAE(etu.getNom(), etu.getMatricule(), etu.getClasse(), section.getNom());
 		for(AssociationUE ue: etu.getUE()) {
 			if(!ue.isReussi()) {
-				res.addUE(new PropositionUE(ue));
+				PropositionUE newUe = new PropositionUE(ue);
+				res.addUE(newUe);
 			}
 		}
 		

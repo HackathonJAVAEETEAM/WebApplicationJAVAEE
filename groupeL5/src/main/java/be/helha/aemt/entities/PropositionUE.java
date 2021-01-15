@@ -49,9 +49,8 @@ public class PropositionUE {
 	
 	public PropositionUE(AssociationUE ue) {
 		this(ue.getUE().getNom(),ue.getUE().getAnnee(),ue.getUE().getTotalCredit(), ue.isReussi());
-		ArrayList<PropositionAA> aas = new ArrayList<PropositionAA>();
 		for (AssociationAA aa: ue.getAA()) {
-			aas.add(new PropositionAA(aa.getAA().getNom(),aa.getAA().getCreditAA(),aa.isReussi()));
+			this.listeAA.add(new PropositionAA(aa.getAA().getNom(),aa.getAA().getCreditAA(),aa.isReussi()));
 		}
 	}
 
