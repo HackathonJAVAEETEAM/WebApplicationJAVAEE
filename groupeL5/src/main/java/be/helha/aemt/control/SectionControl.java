@@ -19,15 +19,20 @@ import be.helha.aemt.entities.Section;
 public class SectionControl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
 	
 	@Inject
 	private GestionSectionEJB gestionSection;
 	
-
 	
 	public List<Section> doSelectAll(){
 		return gestionSection.findAll();
+	}
+	
+	public String getActive(int index) {
+		if(index==0)
+			return "active";
+		else
+			return "";
 	}
 	
 	public ArrayList<Etudiant> getIgList()

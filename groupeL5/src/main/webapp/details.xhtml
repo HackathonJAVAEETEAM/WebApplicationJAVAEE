@@ -10,23 +10,20 @@
   <title>Details</title>
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></link>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="ressources/css/style.css"></link>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>
   <style>
 
 nav ul{
     list-style-type: none;
 }
 
-nav ul li{
-    width: 40%;
+nav .btn{
+	margin: 20px;
 }
 
 nav ul::after{
@@ -35,18 +32,16 @@ nav ul::after{
     clear: both;
 }
 
+nav .deroulant{
+	background-color: rgb(30,45,68,0.2);
+}
+
 nav a{
     display: block;
     text-decoration: none;
     color: black;
     border-top: 1px solid transparent;
     border-bottom: 2px solid transparent;
-    padding: 20px 0px;
-}
-
-nav a:hover{
-    color: orange;
-    border-bottom: 2px solid gold;
 }
 
 .sous{
@@ -61,7 +56,6 @@ nav > ul li:hover .sous{
     width: 100%;
 }
 .sous a{
-    padding: 10px;
     border-bottom: none;
 }
 .sous a:hover{
@@ -72,78 +66,165 @@ nav > ul li:hover .sous{
     content:" ▼";
     font-size: 12px;
 }
-  </style>
+
+.menuBtn{
+	width:10vw;
+}
+
+body{
+	margin-right:35px;
+}
+
+.row{
+	margin-bottom: 40px;
+}
+
+.stafalse{
+	background-color:rgba(255, 45, 25, 0.34);
+}
+
+.statrue{
+	background-color:rgba(189, 238, 159, 0.87);
+}
+
+</style>
   
 </head>
 <body>
-	<center><u><h1 style="color:#069">Details de l'étudiant </h1></u></center>
-	
-	 <h:dataTable style="width:80%" value = "#{etudiantControl.etudiant}" var = "etudiant"
-		styleClass = "etudiantTable2"
-		headerClass = "etudiantTableHeader2"
-		rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"> 
-		
-		<h:column>                    
-	    	<f:facet name = "header">Id</f:facet>                    
-	    	#{etudiantControl.getEtudiant().getId()}
-	    </h:column>
-	    <h:column>
-	    	<f:facet name = "header">Nom des eleves</f:facet>
-	    	#{etudiantControl.getEtudiant().getNom()}
-		 </h:column>
-	       <h:column>
-		    <f:facet name="header">Matricule</f:facet>
-		    #{etudiantControl.getEtudiant().getMatricule()}
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Classe</f:facet>
-	    	#{etudiantControl.getEtudiant().getClasse()}
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Credits valides</f:facet>
-	    	#{etudiantControl.getEtudiant().getCreditsValides()}
-	     </h:column>
-	     <h:column>
-	     	<f:facet name="header">Credits totaux</f:facet>
-	    	#{etudiantControl.getEtudiant().getCreditTot()}
-	     </h:column>
- </h:dataTable> 
-<br/>
-<br/>
-<br/>
-<br/>
 
-<h:form>
-	<div class="left-half">
-		<nav>
-			<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-				<ul>
-				  <li class="deroulant">
-				    
-				   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits <span style="float:right;">#{ue.getPoints()}</span> </b>
-						 <h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
-						 </h:selectBooleanCheckbox>
-					 </p>
-					 <ui:repeat value="#{ue.getAA()}" var="aa">
-					 	<ul class="sous">
-				      	 	<li>  	
-								<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) <span style="float:right;">#{aa.getPoints()}</span>
-									<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
-									</h:selectBooleanCheckbox>
-								</p>
-				       		</li>
-				       	</ul>
-			       </ui:repeat>
-				  </li>
-			   </ul>
-			</ui:repeat>
-		</nav>
+
+<div class="container-fluid">
+	<div class="row d-flex justify-content-center">
+		<div class="col-6">
+			<u><h1 style="color:#069; text-align:center;">Details de l'étudiant </h1></u>
 	</div>
-	<h:commandButton action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
-</h:form>
+	</div>
+	<div class="row ">
+		<div class="col-3 d-flex justify-content-center">
+			<h:form>
+					<h:commandLink class="btn btn-primary menuBtn" action = "#{navigationController.goToHome()}" value = ""><i class="fa fa-chevron-left" aria-hidden="true"> Retour</i></h:commandLink>
+			</h:form>
+		</div>
+		<div class="col-6 d-flex justify-content-center">
+			 <h:dataTable value = "#{etudiantControl.etudiant}" var = "etudiant"
+				styleClass = "etudiantTable2 w-100"
+				headerClass = "etudiantTableHeader2"
+				rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"> 
+		
+			    <h:column>
+			    	<f:facet name = "header">Nom et prénom</f:facet>
+			    	#{etudiantControl.getEtudiant().getNom()}
+				 </h:column>
+			       <h:column>
+				    <f:facet name="header">Matricule</f:facet>
+				    #{etudiantControl.getEtudiant().getMatricule()}
+			     </h:column>
+			     <h:column>
+			     	<f:facet name="header">Classe</f:facet>
+			    	#{etudiantControl.getEtudiant().getClasse()}
+			     </h:column>
+			     <h:column>
+			     	<f:facet name="header">Crédits valides</f:facet>
+			    	#{etudiantControl.getEtudiant().getCreditsValides()}
+			     </h:column>
+			     <h:column>
+			     	<f:facet name="header">Crédits totaux</f:facet>
+			    	#{etudiantControl.getEtudiant().getCreditTot()}
+			     </h:column>
+			     <h:column styleClass ="sta#{etudiant.delibere}">
+			     	<f:facet name="header">Delibération</f:facet>
+			    	#{etudiant.isDelibereStringFormat()}
+			     </h:column>
+		 </h:dataTable> 
+	 	</div>
+	 	<div class="col-3 d-flex justify-content-center">
+			<h:form>
+					<h:commandLink class="btn btn-primary menuBtn" action = "#{etudiantControl.changeStatus()}" value = "">Changer Statut</h:commandLink>
+			</h:form>
+		</div>
+	 </div>
+</div>
 
-<h:form>
-<h:commandButton action = "#{navigationController.goToHome()}" value = "Retour" />
-</h:form>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-6">
+			<nav>
+			<h:form>
+				<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+					<ul>
+					  <li class="deroulant">
+					    
+					   	<p><b>#{ue.getUE().getNom()} #{ue.getUE().getTotalCredit()} Crédits </b>
+							 <span style="float:right;padding-right:10px;">
+							 	<h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
+							 	</h:selectBooleanCheckbox>
+							 </span>
+							 <b><span style="float:right;padding-right:15px;">#{ue.getPoints()}</span></b>
+						 </p>
+						 <ui:repeat value="#{ue.getAA()}" var="aa">
+						 	<ul class="sous">
+					      	 	<li>  	
+									<p>#{aa.getAA().getNom()} #{aa.getAA().getCreditAA()} Crédit(s) 
+										<span style="float:right;padding-right:10px;">
+											<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
+											</h:selectBooleanCheckbox>
+										</span>
+										<span style="float:right;padding-right:15px;">#{aa.getPoints()}</span>
+									</p>
+					       		</li>
+					       	</ul>
+				       </ui:repeat>
+					  </li>
+				   </ul>
+				</ui:repeat>
+				<center>
+					<h:commandButton class="btn btn-primary btn-block w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+				</center>
+				</h:form>
+			</nav>
+		</div>
+		<div class="col-6">
+			<nav>
+				<h:form>
+					<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
+						
+						<ul>
+						  <li class="deroulant">
+						    
+						   	<p><b>#{ue.getUE().getNom()}  
+						   	
+						   		<span style="float:right;padding-right:10px;">
+								 <h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
+								 </h:selectBooleanCheckbox>
+								</span>
+								<span style="float:right;padding-right:15px;">#{ue.getUE().getTotalCredit()} Crédits</span> </b>
+							 </p>
+							 <ui:repeat value="#{ue.getAA()}" var="aa">
+							 	<ul class="sous">
+						      	 	<li>  	
+										<p>#{aa.getAA().getNom()} 
+										<span style="float:right;padding-right:10px;">
+											<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
+											</h:selectBooleanCheckbox>
+										</span>
+										<span style="float:right;padding-right:15px;">#{aa.getAA().getCreditAA()} Crédit(s)</span>
+										</p>
+						       		</li>
+						       	</ul>
+					       </ui:repeat>
+						  </li>
+					   </ul>
+					</ui:repeat>
+					<center>
+						<h:commandButton class="btn btn-primary btn-block w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+					</center>
+				</h:form>
+			</nav>
+		</div>
+	</div>
+</div>
+
+
 </body>
 </html>

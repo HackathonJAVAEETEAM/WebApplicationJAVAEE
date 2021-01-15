@@ -36,5 +36,11 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 	public void updateUeEtudiant(Etudiant etudiant) {
 		etudiantDao.updateUeEtudiant(etudiant);
 	}
+	
+	@Override
+	public void updateDelibEtudiant(Etudiant etudiant)
+	{
+		etudiantDao.updateDelibEtudiant(etudiant);
+	}
 
 }
