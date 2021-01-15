@@ -26,6 +26,7 @@ xmlns:of="http://omnifaces.org/functions">
 	
 </h:head>
 <h:body>
+
 	<div class="container">
 	  <h2>Liste des étudiants</h2>
 	  	<h:form>
@@ -44,7 +45,9 @@ xmlns:of="http://omnifaces.org/functions">
 					<div class="form-group">
 						<input id="input#{myVarStatus.index}" class="form-control" type="text" placeholder="Rechercher.."/>
 					</div>
-				<button class="btn btn-primary btn-block" style="margin-bottom:15px;">Générer PDF de la section</button>
+				<h:form>
+					<h:commandLink class="btn btn-primary btn-block" style="margin-bottom:15px;" value=" Générer le pdf de la séction " action ="#{pdfCreator.createDoc}" ></h:commandLink>
+				</h:form>
 				<div id="table#{myVarStatus.index}">
 		      <h:dataTable  border="1" value = "#{section.getListeEtudiant()}" var = "etudiant"
 				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
@@ -61,7 +64,7 @@ xmlns:of="http://omnifaces.org/functions">
 			    	#{etudiant.getMatricule()}
 			    </h:column>
 			    <h:column >
-			    <f:facet name = "header">Nom des eleves ⇅</f:facet>
+			    <f:facet name = "header">Nom des élèves ⇅</f:facet>
 			    	<h:form>
 					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(section,etudiant)}">#{etudiant.getNom()}</a>
 				    </h:form>
