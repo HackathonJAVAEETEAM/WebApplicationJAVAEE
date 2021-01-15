@@ -45,6 +45,11 @@ public class PropositionPAE {
 	
 	public static PropositionPAE generatePAE(Etudiant etu, Section section) {
 		PropositionPAE res = new PropositionPAE(etu.getNom(), etu.getMatricule(), etu.getClasse(), section.getNom());
+		for(AssociationUE ue: etu.getUE()) {
+			if(!ue.isReussi()) {
+				res.addUE(new PropositionUE(ue));
+			}
+		}
 		
 
 		//TODO faire l'énorme condition de création d'un pae 
@@ -54,6 +59,10 @@ public class PropositionPAE {
 	}
 	
 	
+	public boolean addUE(PropositionUE propositionUE) {		
+		return this.listeUE.add(propositionUE);
+	}
+
 	public String getNomEtudiant() {
 		return nomEtudiant;
 	}
