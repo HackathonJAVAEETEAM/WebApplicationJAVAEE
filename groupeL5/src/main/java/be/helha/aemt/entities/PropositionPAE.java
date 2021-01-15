@@ -8,11 +8,15 @@ public class PropositionPAE {
 	private String matriculeEtudiant;
 	private String blocEtudiant;
 	private String sectionEtudiant;
+	private int minCredits;
+	private int maxCredits;
 	private List<PropositionUE> listeUE;
 	
 	public PropositionPAE(String nomEtudiant, String matriculeEtudiant, String blocEtudiant, String sectionEtudiant) {
 		super();
 		this.nomEtudiant = nomEtudiant;
+		this.minCredits = 30;
+		this.maxCredits = 120;
 		this.matriculeEtudiant = matriculeEtudiant;
 		this.blocEtudiant = blocEtudiant;
 		this.sectionEtudiant = sectionEtudiant;
@@ -59,6 +63,22 @@ public class PropositionPAE {
 	}
 	public void setListeUE(List<PropositionUE> listeUE) {
 		this.listeUE = listeUE;
+	}
+
+	public int getMinCredits() {
+		return minCredits;
+	}
+
+	public void setMinCredits(int minCredits) {
+		this.minCredits = minCredits;
+	}
+
+	public int getMaxCredits() {
+		return maxCredits;
+	}
+
+	public void setMaxCredits(int maxCredits) {
+		this.maxCredits = maxCredits;
 	}
 	
 
