@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -39,6 +40,9 @@ public class Etudiant implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<AssociationUE> UE;
 	
+	@OneToOne
+	private PropositionPAE propPae;
+	
 	public Etudiant() {
 		
 	}
@@ -54,6 +58,7 @@ public class Etudiant implements Serializable{
 		this.setDelibere(false);
 		this.UE = new ArrayList<AssociationUE>();
 		this.delibere = false;
+		this.propPae = null;
 	}
 	
 	public Etudiant(ParsedEtudiant etud, List<UniteEnseignement> ue) {
@@ -63,7 +68,18 @@ public class Etudiant implements Serializable{
 		}
 	}
 	
+	public void generateEtudiantPae(Section section) {
+		this.propPae = PropositionPAE.generatePAE(this, section);
+	}
 	
+	public PropositionPAE getPropPae() {
+		return propPae;
+	}
+
+	public void setPropPae(PropositionPAE propPae) {
+		this.propPae = propPae;
+	}
+
 	public void setUE(ArrayList<AssociationUE> uE) {
 		UE = uE;
 	}

@@ -20,4 +20,6 @@ public interface IGestionEtudiantRemote {
 	void updateUeEtudiant(Etudiant etudiant);
 
 	void updateDelibEtudiant(Etudiant etudiant);
+
+	void updatePropPae(Etudiant etudiant);
 }

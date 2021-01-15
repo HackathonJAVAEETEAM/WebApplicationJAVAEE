@@ -67,5 +67,14 @@ public class EtudiantControl implements Serializable {
     	gestionEtudiant.updateDelibEtudiant(etudiant);
     }
     
+    public boolean isPaeNotEmpty() {
+    	return etudiant.getPropPae() != null;
+    }
+    
+    public void generateAutoPae() {
+    	etudiant.generateEtudiantPae(section);
+    	gestionEtudiant.updatePropPae(etudiant);
+    }
+    
 	
 }

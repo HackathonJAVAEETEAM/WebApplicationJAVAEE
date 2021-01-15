@@ -26,9 +26,11 @@ xmlns:of="http://omnifaces.org/functions">
 </style>
 	
 </h:head>
+
 <h:body style="margin-top: 2%">
 <!--  Le fond d'écran présent sur cette page est tirée du site Pixabay.com, site de contenu libre de droit. Cette image a été créée par David Schwarzenberg -->
 	<div class="container" style="background: white;opacity: 0.9; margin-top: 2%; padding-top: 2%; border-radius: 15px;">
+
 	  <h2>Liste des étudiants</h2>
 	  	<h:form>
 		  <ul class="nav nav-tabs" style="overflow-y: hidden;font-weight: bold;">
@@ -46,7 +48,9 @@ xmlns:of="http://omnifaces.org/functions">
 					<div class="form-group">
 						<input id="input#{myVarStatus.index}" class="form-control" type="text" placeholder="Rechercher.."/>
 					</div>
-				<button class="btn btn-primary btn-block" style="margin-bottom:15px;">Générer PDF de la section</button>
+				<h:form>
+					<h:commandLink class="btn btn-primary btn-block" style="margin-bottom:15px;" value=" Générer le pdf de la section " action ="#{pdfCreator.createDoc(section)}" ></h:commandLink>
+				</h:form>
 				<div id="table#{myVarStatus.index}">
 		      <h:dataTable  border="2" value = "#{section.getListeEtudiant()}" var = "etudiant"
 				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
@@ -63,7 +67,7 @@ xmlns:of="http://omnifaces.org/functions">
 			    	#{etudiant.getMatricule()}
 			    </h:column>
 			    <h:column >
-			    <f:facet name = "header">Nom des eleves ⇅</f:facet>
+			    <f:facet name = "header">Nom des élèves ⇅</f:facet>
 			    	<h:form>
 					    <a href ="#" jsf:action ="#{etudiantControl.doGetDetails(section,etudiant)}">#{etudiant.getNom()}</a>
 				    </h:form>

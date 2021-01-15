@@ -46,4 +46,10 @@ public class EtudiantDAO {
 		em.merge(varEtudiant);
 	}
 
+	public void updatePropPae(Etudiant etudiant) {
+		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
+		varEtudiant.setPropPae(etudiant.getPropPae());
+		em.merge(varEtudiant);
+	}
+
 }
