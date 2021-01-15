@@ -149,6 +149,7 @@ body{
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-6">
+			<h2>Bulletin en cours</h2>
 			<nav>
 			<h:form>
 				<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
@@ -185,30 +186,29 @@ body{
 			</nav>
 		</div>
 		<div class="col-6">
+			<h2>PAE à composer</h2>
 			<nav>
 				<h:form>
-					<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
-						
+					<ui:repeat value= "#{etudiantControl.getSection().getListeUE()}" var="ue">
 						<ul>
 						  <li class="deroulant">
 						    
-						   	<p><b>#{ue.getUE().getNom()}  
-						   	
-						   		<span style="float:right;padding-right:10px;">
-								 <h:selectBooleanCheckbox  value= "#{ue.reussi}" class="ueCheckbox">
-								 </h:selectBooleanCheckbox>
-								</span>
-								<span style="float:right;padding-right:15px;">#{ue.getUE().getTotalCredit()} Crédits</span> </b>
+						   	<p><b>#{ue.getNom()}  </b>
+								 <span style="float:right;padding-right:10px;">
+								 	<h:selectBooleanCheckbox  value= "" class="ueCheckboxPae">
+								 	</h:selectBooleanCheckbox>
+								 </span>
+								 <b><span style="float:right;padding-right:15px;">#{ue.getTotalCredit()} Crédits</span></b>
 							 </p>
-							 <ui:repeat value="#{ue.getAA()}" var="aa">
+							 <ui:repeat value="#{ue.getAAList()}" var="aa">
 							 	<ul class="sous">
 						      	 	<li>  	
-										<p>#{aa.getAA().getNom()} 
-										<span style="float:right;padding-right:10px;">
-											<h:selectBooleanCheckbox value= "#{aa.reussi}" class="aaCheckbox">
-											</h:selectBooleanCheckbox>
-										</span>
-										<span style="float:right;padding-right:15px;">#{aa.getAA().getCreditAA()} Crédit(s)</span>
+										<p>#{aa.getNom()} 
+											<span style="float:right;padding-right:10px;">
+												<h:selectBooleanCheckbox value= "" class="aaCheckboxPae">
+												</h:selectBooleanCheckbox>
+											</span>
+											<span style="float:right;padding-right:15px;">#{aa.getCreditAA()} Crédit(s) </span>
 										</p>
 						       		</li>
 						       	</ul>
@@ -217,7 +217,7 @@ body{
 					   </ul>
 					</ui:repeat>
 					<center>
-						<h:commandButton class="btn btn-primary btn-block w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+						<h:commandButton class="btn btn-primary btn-block w-75" value = "Sauvegarder PAE" />
 					</center>
 				</h:form>
 			</nav>

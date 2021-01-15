@@ -2,6 +2,7 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -79,11 +80,25 @@ public class Section implements Serializable {
 	}
 
 	public List<UniteEnseignement> getListeUE() {
+		Collections.sort(listeUE);
 		return listeUE;
 	}
 	
 	public boolean addUE(UniteEnseignement ue) {
 		return listeUE.add(ue);
+	}
+	
+	public String pickRightName() {
+		switch(this.getNom()) {
+			case "IG":
+				return "Informatique de gestion";
+			case "AD":
+				return "Assistant(e) de direction";
+			case "CT":
+				return "Comptabilité";
+			default:
+				return this.getNom();
+		}
 	}
 
 	@Override

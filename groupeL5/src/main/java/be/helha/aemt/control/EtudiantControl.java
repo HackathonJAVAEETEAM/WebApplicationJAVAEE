@@ -12,6 +12,7 @@ import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
+import be.helha.aemt.entities.Section;
 
 @Named
 @SessionScoped
@@ -20,12 +21,14 @@ public class EtudiantControl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Etudiant etudiant;
+	private Section section;
 	
 	@Inject
 	private GestionEtudiantEJB gestionEtudiant;
 	
 	public EtudiantControl() {
 		etudiant = new Etudiant();
+		section = new Section();
 	}
 	
 	public List<Etudiant> doSelectAll(){
@@ -33,37 +36,30 @@ public class EtudiantControl implements Serializable {
 		
 	}
 	
-	public String doGetDetails(Etudiant u) {
-		etudiant = u;
+	public String doGetDetails(Section s,Etudiant e) {
+		section = s;
+		etudiant = e;
 		return "details.xhtml";
-	}
-	
-	
-	public List<Etudiant> doSelectWithParam(String classe){
-		if(classe.isEmpty())
-			return doSelectAll();
-		else
-			return gestionEtudiant.findWithParam(classe);
 	}
 	
 	 public Etudiant getEtudiant() {
 	        return etudiant;
 	}
-	
 	    
     public void setEtudiant(Etudiant v) {
     	etudiant = v;
     }
     
-    public void persist() {
+    public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
+
+	public void persist() {
     	gestionEtudiant.updateUeEtudiant(etudiant);
-    }
-    
-    public String getTypeOfDeliberation() {
-    	if(etudiant.isDelibere())
-    		return "doneDelib";
-    	else
-    		return "toDelib";
     }
     
     public void changeStatus() {
