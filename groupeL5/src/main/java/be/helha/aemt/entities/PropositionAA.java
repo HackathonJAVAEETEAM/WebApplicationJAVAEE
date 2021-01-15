@@ -1,11 +1,26 @@
 package be.helha.aemt.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class PropositionAA {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String nom;
 	private int credits;
 	private boolean dispense;
 	
 	
+	public PropositionAA() {
+		super();
+	}
+
 	public PropositionAA(String nom, int credits, boolean dispense) {
 		super();
 		this.nom = nom;

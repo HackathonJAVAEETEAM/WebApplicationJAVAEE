@@ -3,14 +3,34 @@ package be.helha.aemt.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class PropositionPAE {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
 	private String nomEtudiant;
 	private String matriculeEtudiant;
 	private String blocEtudiant;
 	private String sectionEtudiant;
 	private int minCredits;
 	private int maxCredits;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<PropositionUE> listeUE;
+	
+	public PropositionPAE() {
+		super();
+	}
 	
 	public PropositionPAE(String nomEtudiant, String matriculeEtudiant, String blocEtudiant, String sectionEtudiant) {
 		super();
@@ -25,8 +45,8 @@ public class PropositionPAE {
 	
 	public static PropositionPAE generatePAE(Etudiant etu, Section section) {
 		PropositionPAE res = new PropositionPAE(etu.getNom(), etu.getMatricule(), etu.getClasse(), section.getNom());
-		//ICI GENERER TOUT L'OBJET PAE EN FONCTION DES RESULTATS
-		//Là ça devient la barbamerde
+		
+
 		//TODO faire l'énorme condition de création d'un pae 
 		
 		//
