@@ -52,12 +52,8 @@ public class EtudiantDAO {
 	public Integer generatePropPae(Etudiant etudiant) {
 		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
 		varEtudiant.setPropPae(etudiant.getPropPae());
-		em.merge(varEtudiant);
-		
-		
-		
-		varEtudiant = em.find(Etudiant.class, etudiant.getId());
-		System.out.println("GENERATE DAO PROP PAE "+varEtudiant.getPropPae());
+		em.persist(varEtudiant.getPropPae());
+		em.flush();		
 		return varEtudiant.getPropPae().getId();
 	}
 

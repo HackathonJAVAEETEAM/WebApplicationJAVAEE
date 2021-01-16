@@ -259,7 +259,7 @@ margin-right: auto;
 												<p>#{propAa.getNom()} 
 													<span style="float:right;padding-right:10px;">
 													Dispenser étudiant?
-														<h:selectBooleanCheckbox value= "#{propAa.dispense}"  class="aaCheckboxPae">
+														<h:selectBooleanCheckbox value= "#{propAa.dispense}" valueChangeListener="#{etudiantControl.updatePropPaeDispense()}"  class="aaCheckboxPae">
 														</h:selectBooleanCheckbox>
 													</span>
 													<span style="float:right;padding-right:15px;">#{propAa.getCredits()} Crédit(s) </span>
@@ -282,6 +282,7 @@ margin-right: auto;
 					</c:otherwise>
 			</c:choose>
 			<button class="btn btn-primary btn-block w-75" data-toggle="modal" data-target="#ajouterUe"> Ajouter UE</button>
+			<button class="btn btn-primary btn-block w-75" data-toggle="modal" data-target="#creerUePerso"> Creer UE</button>
 		</div>
 	</div>
 </div>
@@ -342,5 +343,38 @@ margin-right: auto;
 	      </div>
 	    </div>
 	  </div>
-
+	  
+	  <!-- Modal -->
+	  <div class="modal fade" id="creerUePerso" role="dialog">
+	    <div class="modal-dialog modal-xl">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal"></button>
+	          <h4 class="modal-title">Creer une UE et l'ajouter au PAE</h4>
+	        </div>
+	        
+	        <div class="modal-body">
+	        	<nav>
+					<h:form class="form-group">
+							<h:inputText class="form-control" type="text" placeholder="Nom de l'unité d'enseignement" style="margin-bottom:20px"></h:inputText>
+							
+							<div id="inputContainer">
+								<h:inputText class="form-control" type="text" placeholder="Nom de l'activité d'apprentissage"></h:inputText>
+								<h:inputText class="form-control" type="number" placeholder="Nombre de crédits"></h:inputText>
+							</div>
+							<center>
+								<h:commandButton class="btn btn-info w-75" value = "Sauvegarder la nouvelle UE" />
+							</center>
+					</h:form>
+				</nav>
+	        </div>
+	        
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
 </html>

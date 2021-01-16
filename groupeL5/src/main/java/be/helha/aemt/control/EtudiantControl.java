@@ -142,10 +142,18 @@ public class EtudiantControl implements Serializable {
     	gestionEtudiant.addPropPae(etudiant);
     }
     
+    public void updatePropPaeDispense() {
+    	gestionEtudiant.addPropPae(etudiant);
+    }
+    
     public void removePropUe(PropositionUE propUe)
     {
     	etudiant.getPropPae().getListeUE().remove(propUe);
     	gestionEtudiant.removePropUe(etudiant);
+    }
+    
+    public void addUePerso(String nom, String bloc, int totalCredit, boolean dispense) {
+    	PropositionUE propUe = new PropositionUE(nom, bloc, totalCredit, false);
     }
     
 	
