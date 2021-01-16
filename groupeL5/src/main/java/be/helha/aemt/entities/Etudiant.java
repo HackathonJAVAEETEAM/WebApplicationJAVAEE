@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -44,7 +45,6 @@ public class Etudiant implements Serializable{
 	
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@PrimaryKeyJoinColumn
 	private PropositionPAE propPae;
 	
 	public Etudiant() {

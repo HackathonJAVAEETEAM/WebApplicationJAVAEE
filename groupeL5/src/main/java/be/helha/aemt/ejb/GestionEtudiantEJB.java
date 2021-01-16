@@ -44,9 +44,9 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 	}
 	
 	@Override
-	public void updatePropPae(Etudiant etudiant)
+	public Integer generatePropPae(Etudiant etudiant)
 	{
-		etudiantDao.updatePropPae(etudiant);
+		return etudiantDao.generatePropPae(etudiant);
 	}
 
 	@Override
@@ -57,6 +57,7 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 
 	@Override
 	public void addPropPae(Etudiant etudiant) {
+		System.out.println("MONID EJB "+etudiant.getId());
 		etudiantDao.addPropPae(etudiant);
 	}
 }

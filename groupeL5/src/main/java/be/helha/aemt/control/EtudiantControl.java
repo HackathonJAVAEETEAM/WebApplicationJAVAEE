@@ -3,17 +3,12 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.helha.aemt.ejb.GestionEtudiantEJB;
-import be.helha.aemt.entities.AssociationAA;
-import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
-import be.helha.aemt.entities.PropositionPAE;
 import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
 import be.helha.aemt.entities.UniteEnseignement;
@@ -78,7 +73,8 @@ public class EtudiantControl implements Serializable {
     
     public void generateAutoPae() {
     	etudiant.generateEtudiantPae(section);
-    	gestionEtudiant.updatePropPae(etudiant);
+    	etudiant.getPropPae().setId(gestionEtudiant.generatePropPae(etudiant));
+    	System.out.println("GENERATE ID PROPPAE "+etudiant.getPropPae().getId());
     }
     
     public List<SelectablePropUe> getListUeToPick() {  
@@ -143,7 +139,6 @@ public class EtudiantControl implements Serializable {
     		if(selectPropUe.isSelected())
     			etudiant.getPropPae().addUE(selectPropUe.getPropUe());
     	}
-    	
     	gestionEtudiant.addPropPae(etudiant);
     }
     

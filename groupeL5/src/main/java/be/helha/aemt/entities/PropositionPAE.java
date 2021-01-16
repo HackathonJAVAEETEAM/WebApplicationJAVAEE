@@ -29,7 +29,7 @@ public class PropositionPAE {
 	private List<PropositionUE> listeUE;
 	
 	public PropositionPAE() {
-		super();
+		
 	}
 	
 	public PropositionPAE(String nomEtudiant, String matriculeEtudiant, String blocEtudiant, String sectionEtudiant) {
@@ -125,5 +125,19 @@ public class PropositionPAE {
 	public Integer getId() {
 		return id;
 	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "PropositionPAE [id=" + id + ", nomEtudiant=" + nomEtudiant + ", matriculeEtudiant=" + matriculeEtudiant
+				+ ", blocEtudiant=" + blocEtudiant + ", sectionEtudiant=" + sectionEtudiant + ", minCredits="
+				+ minCredits + ", maxCredits=" + maxCredits + ", listeUE=" + listeUE + "]";
+	}
+	
+	
+	
 
 }

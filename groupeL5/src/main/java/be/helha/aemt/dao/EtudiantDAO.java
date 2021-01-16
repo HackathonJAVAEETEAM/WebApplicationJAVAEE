@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
@@ -47,10 +49,16 @@ public class EtudiantDAO {
 		em.merge(varEtudiant);
 	}
 
-	public void updatePropPae(Etudiant etudiant) {
+	public Integer generatePropPae(Etudiant etudiant) {
 		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
 		varEtudiant.setPropPae(etudiant.getPropPae());
 		em.merge(varEtudiant);
+		
+		
+		
+		varEtudiant = em.find(Etudiant.class, etudiant.getId());
+		System.out.println("GENERATE DAO PROP PAE "+varEtudiant.getPropPae());
+		return varEtudiant.getPropPae().getId();
 	}
 
 	public void removePropUe(Etudiant etudiant) {
@@ -60,7 +68,7 @@ public class EtudiantDAO {
 	}
 
 	public void addPropPae(Etudiant etudiant) {
-		PropositionPAE varProp = em.find(PropositionPAE.class, etudiant.getId());
+		PropositionPAE varProp = em.find(PropositionPAE.class, etudiant.getPropPae().getId());
 		varProp.setListeUE(etudiant.getPropPae().getListeUE());
 		em.merge(varProp);
 	}
