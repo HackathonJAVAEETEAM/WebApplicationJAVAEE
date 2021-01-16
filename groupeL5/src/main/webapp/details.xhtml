@@ -195,13 +195,17 @@ body{
 							<ui:repeat value= "#{etudiantControl.getEtudiant().getPropPae().getListeUE()}" var="propUe">
 								<ul>
 								  <li class="deroulant">
-								  	<p><b>#{propUe.getNom()} #{propUe.getTotalCredit()} Crédits </b></p>
+								  	<p><b>#{propUe.getNom()} #{propUe.getTotalCredit()} Crédits </b>
+									  	<button type="button" class="close" aria-label="Close">
+										  <span aria-hidden="true">&#215;</span>
+										</button>
+								  	</p>
 									 <ui:repeat value="#{propUe.getListeAA()}" var="propAa">
 									 	<ul class="sous">
 								      	 	<li>  	
 												<p>#{propAa.getNom()} 
 													<span style="float:right;padding-right:10px;">
-													Dispensé?
+													Dispenser étudiant?
 														<h:selectBooleanCheckbox value= "#{propAa.dispense}"  class="aaCheckboxPae">
 														</h:selectBooleanCheckbox>
 													</span>
