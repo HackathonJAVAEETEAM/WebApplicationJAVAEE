@@ -1,6 +1,7 @@
 package be.helha.aemt.control;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
@@ -12,7 +13,10 @@ import be.helha.aemt.ejb.GestionEtudiantEJB;
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
+import be.helha.aemt.entities.PropositionPAE;
+import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
+import be.helha.aemt.entities.UniteEnseignement;
 
 @Named
 @SessionScoped
@@ -22,6 +26,7 @@ public class EtudiantControl implements Serializable {
 
 	private Etudiant etudiant;
 	private Section section;
+	List<SelectablePropUe> listSelect = new ArrayList<SelectablePropUe>();
 	
 	@Inject
 	private GestionEtudiantEJB gestionEtudiant;
@@ -74,6 +79,78 @@ public class EtudiantControl implements Serializable {
     public void generateAutoPae() {
     	etudiant.generateEtudiantPae(section);
     	gestionEtudiant.updatePropPae(etudiant);
+    }
+    
+    public List<SelectablePropUe> getListUeToPick() {  
+    	
+    	ArrayList<PropositionUE> arrPropUe = new ArrayList<PropositionUE>();
+    	listSelect.clear();
+    	
+    	for(UniteEnseignement ue : section.getListeUE())
+    	{
+    		arrPropUe.add(new PropositionUE(ue));
+    	}
+    	
+    	if(etudiant.getPropPae()!=null)
+    	{
+	    	for(PropositionUE pUe : etudiant.getPropPae().getListeUE())
+	    	{
+	    		arrPropUe.remove(pUe);
+	    	}
+
+	    	for(PropositionUE ppue : arrPropUe)
+	    	{
+	    		listSelect.add(new SelectablePropUe(ppue));
+	    	}
+    	}
+    	
+    	return listSelect; 
+    }
+    
+    public class SelectablePropUe{
+    	private PropositionUE propUe;
+    	private boolean selected;
+    	
+    	public SelectablePropUe(PropositionUE propUe){
+    		this.propUe = propUe;
+    		this.selected = false;
+    	}
+
+		public PropositionUE getPropUe() {
+			return propUe;
+		}
+
+		public void setPropUe(PropositionUE propUe) {
+			this.propUe = propUe;
+		}
+		
+		public boolean isSelected() {
+			return selected;
+		}
+
+		public void setSelected(boolean selected) {
+			this.selected = selected;
+		}
+
+		public String toString() {
+			return propUe.getNom() +" "+ selected;
+		}
+    }
+    
+    public void addPropPae() {
+    	for(SelectablePropUe selectPropUe : listSelect)
+    	{
+    		if(selectPropUe.isSelected())
+    			etudiant.getPropPae().addUE(selectPropUe.getPropUe());
+    	}
+    	
+    	gestionEtudiant.addPropPae(etudiant);
+    }
+    
+    public void removePropUe(PropositionUE propUe)
+    {
+    	etudiant.getPropPae().getListeUE().remove(propUe);
+    	gestionEtudiant.removePropUe(etudiant);
     }
     
 	

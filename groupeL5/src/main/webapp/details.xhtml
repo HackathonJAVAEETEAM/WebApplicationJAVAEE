@@ -236,7 +236,7 @@ margin-right: auto;
 		</div>
 
 		<div class="col-6 pae" id="divPae">
-			<h2 >PAE à composer</h2>
+			<h2 >PAE à composer - Credits en cours: #{etudiantControl.getEtudiant().getPropPae().getCreditTotPropPae()}</h2>
 			<c:choose>
 				<c:when test="#{etudiantControl.isPaeNotEmpty()}">
 					<nav>
@@ -244,10 +244,14 @@ margin-right: auto;
 							<ui:repeat value= "#{etudiantControl.getEtudiant().getPropPae().getListeUE()}" var="propUe">
 								<ul>
 								  <li class="deroulant">
-								  	<p><b>#{propUe.getNom()} #{propUe.getTotalCredit()} Crédits </b>
-									  	<button type="button" class="close" aria-label="Close">
-										  <span aria-hidden="true">&#215;</span>
-										</button>
+								  	<p>
+									  	<b>
+									  		#{propUe.getNom()} 
+									  		<h:commandLink type="button" class="close" style="float:right;" aria-label="Close" action="#{etudiantControl.removePropUe(propUe)}">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</h:commandLink> 
+									  		<span style="float:right;padding-right:15px;">#{propUe.getTotalCredit()} Crédits </span>	
+									  	</b>
 								  	</p>
 									 <ui:repeat value="#{propUe.getListeAA()}" var="propAa">
 									 	<ul class="sous">
@@ -266,21 +270,18 @@ margin-right: auto;
 								  </li>
 							   </ul>
 							</ui:repeat>
-							<center>
-								<h:commandButton class="btn btn-primary btn-block w-75" value = "Sauvegarder PAE" />
-							</center>
 						</h:form>
 					  </nav>
 					</c:when>
 					<c:otherwise>
 						<h:form>
-							<h:commandButton class="btn btn-primary btn-block w-75" action="#{etudiantControl.generateAutoPae()}" value = "Auto generer un PAE" />
+							<center>
+								<h:commandButton class="btn btn-primary btn-block w-75" action="#{etudiantControl.generateAutoPae()}" value = "Auto generer un PAE" />
+							</center>
 						</h:form>
 					</c:otherwise>
 			</c:choose>
-			<center>
-				<button class="btn btn-primary btn-block w-75" href="#" data-toggle="modal" data-target="#ajouterUe"> Ajouter UE</button>
-			</center>
+			<button class="btn btn-primary btn-block w-75" data-toggle="modal" data-target="#ajouterUe"> Ajouter UE</button>
 		</div>
 	</div>
 </div>
@@ -289,16 +290,14 @@ margin-right: auto;
 		$("#testBtn").click(function(){
 		  $("#bulletinToToggle").toggle(function(){
 			  $("#divPae").toggleClass("col-12");
-		  });
-		  
-		  
+		  }); 
 		});
 	});
 	</script>
 </body>
 <!-- Modal -->
 	  <div class="modal fade" id="ajouterUe" role="dialog">
-	    <div class="modal-dialog">
+	    <div class="modal-dialog modal-xl">
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        
@@ -311,12 +310,16 @@ margin-right: auto;
 	        	<nav>
 				<h:form>
 
-					<ui:repeat value= "#{etudiantControl.getSection().getListeUE()}" var="ue">
+					<ui:repeat value= "#{etudiantControl.getListUeToPick()}" var="ue">
 						<ul>
-						  <li class="deroulant">
-						    
-						   	<p><b>#{ue.getNom()}</b></p>
-							 <ui:repeat value="#{ue.getAAList()}" var="aa">
+						  <li class="deroulant">  
+						   	<p>
+							   	<b>#{ue.getPropUe().getNom()}</b>
+							   	<span style="float:right;padding-right:10px;">
+									<h:selectBooleanCheckbox value= "#{ue.selected}" class="ueToSuggestCheckbox"></h:selectBooleanCheckbox>
+								</span>
+							</p>
+							 <ui:repeat value="#{ue.getPropUe().getListeAA()}" var="aa">
 							 	<ul class="sous">
 						      	 	<li>  	
 										<p>#{aa.getNom()}</p>
@@ -327,16 +330,8 @@ margin-right: auto;
 					   </ul>
 					</ui:repeat>
 					<center>
-
-						<h:commandButton class="btn btn-info w-75" value = "Sauvegarder" />
-
+						<h:commandButton class="btn btn-info w-75" value = "Sauvegarder" action="#{etudiantControl.addPropPae()}" />
 					</center>
-
-
-
-
-
-
 					</h:form>
 				</nav>
 	        </div>
@@ -344,7 +339,6 @@ margin-right: auto;
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
-	        
 	      </div>
 	    </div>
 	  </div>

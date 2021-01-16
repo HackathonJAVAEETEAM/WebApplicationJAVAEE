@@ -111,6 +111,19 @@ public class PropositionPAE {
 		this.maxCredits = maxCredits;
 	}
 	
+	public int getCreditTotPropPae() {
+		int tot = 0;
+		
+		for(PropositionUE propUe : listeUE)
+		{
+			tot+= propUe.getTotalCredit();
+		}
+		
+		return tot;
+	}
 
-	
+	public Integer getId() {
+		return id;
+	}
+
 }

@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
+import be.helha.aemt.entities.PropositionPAE;
 
 @Stateless
 public class EtudiantDAO {
@@ -51,5 +52,19 @@ public class EtudiantDAO {
 		varEtudiant.setPropPae(etudiant.getPropPae());
 		em.merge(varEtudiant);
 	}
+
+	public void removePropUe(Etudiant etudiant) {
+		Etudiant varEtudiant = em.find(Etudiant.class, etudiant.getId());
+		varEtudiant.setPropPae(etudiant.getPropPae());
+		em.merge(varEtudiant);
+	}
+
+	public void addPropPae(Etudiant etudiant) {
+		PropositionPAE varProp = em.find(PropositionPAE.class, etudiant.getId());
+		varProp.setListeUE(etudiant.getPropPae().getListeUE());
+		em.merge(varProp);
+	}
+	
+	
 
 }

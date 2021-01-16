@@ -45,6 +45,7 @@ public class PropositionUE {
 		for (ActiviteApprentissage aa: ue.getAAList()) {
 			aas.add(new PropositionAA(aa.getNom(),aa.getCreditAA(),false));
 		}
+		this.listeAA = aas;
 	}
 	
 	public PropositionUE(AssociationUE ue) {
@@ -93,6 +94,19 @@ public class PropositionUE {
 	public void setListeAA(List<PropositionAA> listeAA) {
 		this.listeAA = listeAA;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj instanceof PropositionUE)
+		{
+			return this.getNom().equals(((PropositionUE) obj).getNom());
+		}
+		return false;
+	}
+	
+	
 	
 	
 }

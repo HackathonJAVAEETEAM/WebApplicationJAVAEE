@@ -13,8 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -40,7 +42,9 @@ public class Etudiant implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<AssociationUE> UE;
 	
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@PrimaryKeyJoinColumn
 	private PropositionPAE propPae;
 	
 	public Etudiant() {
