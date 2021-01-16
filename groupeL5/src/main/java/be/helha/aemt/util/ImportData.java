@@ -41,8 +41,6 @@ public class ImportData {
 				sheet = sit.next();
 				XlsParser pars = new XlsParser(sheet);	
 				Section s = new Section(pars);
-				s.setListeEtudiant(new ArrayList<Etudiant>(s.getListeEtudiant().subList(0,5)));
-				
 				tx.begin();
 				em.persist(s);
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  

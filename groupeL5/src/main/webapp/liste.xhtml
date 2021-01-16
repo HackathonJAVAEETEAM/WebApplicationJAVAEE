@@ -20,18 +20,21 @@ xmlns:of="http://omnifaces.org/functions">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
   
 <style>
+	body{background:url("resources/images/desk2.jpg") no-repeat center center fixed; }
 	.stafalse{background-color:rgba(255, 45, 25, 0.34);}
 	.statrue{background-color:rgba(189, 238, 159, 0.87);}
 </style>
 	
 </h:head>
-<h:body>
 
-	<div class="container">
+<h:body style="margin-top: 2%">
+<!--  Le fond d'écran présent sur cette page est tirée du site Pixabay.com, site de contenu libre de droit. Cette image a été créée par David Schwarzenberg -->
+	<div class="container" style="background: white;opacity: 0.9; margin-top: 2%; padding-top: 2%; border-radius: 15px;">
+
 	  <h2>Liste des étudiants</h2>
 	  	<h:form>
-		  <ul class="nav nav-tabs" style="overflow-y: hidden;">
-		  	<ui:repeat value="#{sectionControl.doSelectAll()}" var="section" varStatus="myVarStatus">
+		  <ul class="nav nav-tabs" style="overflow-y: hidden;font-weight: bold;">
+		  	<ui:repeat value="#{sectionControl.doSelectAll()}" var="section" varStatus="myVarStatus" >
 			    <li class="#{sectionControl.getActive(myVarStatus.index)}"><a data-toggle="tab" href="#menu#{myVarStatus.index}">#{section.pickRightName()}</a></li>
 			</ui:repeat>
 		    <li style="float:right;"><h:commandLink value = "Déconnexion" action = "#{sessionControl.logOut()}"></h:commandLink></li>
@@ -46,14 +49,14 @@ xmlns:of="http://omnifaces.org/functions">
 						<input id="input#{myVarStatus.index}" class="form-control" type="text" placeholder="Rechercher.."/>
 					</div>
 				<h:form>
-					<h:commandLink class="btn btn-primary btn-block" style="margin-bottom:15px;" value=" Générer le pdf de la séction " action ="#{pdfCreator.createDoc(section)}" ></h:commandLink>
+					<h:commandLink class="btn btn-primary btn-block" style="margin-bottom:15px;" value=" Générer le pdf de la section " action ="#{pdfCreator.createDoc(section)}" ></h:commandLink>
 				</h:form>
 				<div id="table#{myVarStatus.index}">
-		      <h:dataTable  border="1" value = "#{section.getListeEtudiant()}" var = "etudiant"
+		      <h:dataTable  border="2" value = "#{section.getListeEtudiant()}" var = "etudiant"
 				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
 				tableStyle="table-layout: auto;"
 				headerClass = "etudiantTableHeader"
-				rowClasses = "etudiantTableOddRow,etudiantTableEvenRow">
+				rowClasses = "etudiantTableOddRow,etudiantTableEvenRow" style="background-color: white; opacity:0.9; border-radius: 15px;">
 				
 				<h:column styleClass ="sta#{etudiant.delibere}">
 				    	<f:facet name = "header">Statut ⇅</f:facet>
@@ -110,5 +113,6 @@ xmlns:of="http://omnifaces.org/functions">
 	      </div>
 	    </div>
 	  </div>
+	
 </h:body>
 </html>

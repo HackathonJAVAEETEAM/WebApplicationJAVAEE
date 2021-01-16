@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>
   <style>
 
+body{background:url("resources/images/desk2.jpg") no-repeat center center fixed; }
+
 nav ul{
     list-style-type: none;
 }
@@ -33,7 +35,7 @@ nav ul::after{
 }
 
 nav .deroulant{
-	background-color: rgb(30,45,68,0.2);
+	background-color: rgb(250,213,101,0.5);
 }
 
 nav a{
@@ -87,29 +89,71 @@ body{
 	background-color:rgba(189, 238, 159, 0.87);
 }
 
+h2{
+	text-align: center;
+	width: 80%;
+	margin:auto;
+	padding-left:5%;
+	padding-bottom:5%;
+	text-decoration: underline;
+	
+}
+
+.bulletin{
+
+width:45%; 
+background-color:rgba(255, 255, 255, 0.85);
+color:#069;
+float:left;
+border-radius: 10px;
+padding-right: 3%
+
+}
+
+.pae{
+
+width:45%;
+background-color:rgba(255, 255, 255, 0.85);
+color:#069;
+float:right;
+border-radius:10px;
+padding-right: 3%;
+
+}
+
+.feuille{
+width: 95%;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+
+
 </style>
   
 </head>
-<body>
-
+<body style="margin-top: 2%;margin-left:4%; margin-right:4%">
+<!--  Le fond d'écran présent sur cette page est tirée du site Pixabay.com, site de contenu libre de droit. Cette image a été créée par David Schwarzenberg -->
 
 <div class="container-fluid">
 	<div class="row d-flex justify-content-center">
 		<div class="col-6">
-			<u><h1 style="color:#069; text-align:center;">Details de l'étudiant </h1></u>
+			<u><h1 style="background-color:rgba(255, 255, 255, 0.65);color:#069; text-align:center; ">Détails de l'étudiant </h1></u>
 	</div>
 	</div>
-	<div class="row ">
+	<div class="row" >
 		<div class="col-3 d-flex justify-content-center">
 			<h:form>
-					<h:commandLink class="btn btn-primary menuBtn" action = "#{navigationController.goToHome()}" value = ""><i class="fa fa-chevron-left" aria-hidden="true"> Retour</i></h:commandLink>
+					<h:commandLink class="btn btn-info " action = "#{navigationController.goToHome()}" value = "" style="width: 200px"><i class="fa fa-chevron-left" aria-hidden="true">  </i>  Retour</h:commandLink>
 			</h:form>
 		</div>
-		<div class="col-6 d-flex justify-content-center">
+		<div  style="background-color:rgba(255, 255, 255, 0.65);color:#069;text-align:center; width: 50%">
 			 <h:dataTable value = "#{etudiantControl.etudiant}" var = "etudiant"
 				styleClass = "etudiantTable2 w-100"
 				headerClass = "etudiantTableHeader2"
-				rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"> 
+				rowClasses = "etudiantTableOddRow2,etudiantTableEvenRow2"
+				> 
 		
 			    <h:column>
 			    	<f:facet name = "header">Nom et prénom</f:facet>
@@ -131,28 +175,32 @@ body{
 			     	<f:facet name="header">Crédits totaux</f:facet>
 			    	#{etudiantControl.getEtudiant().getCreditTot()}
 			     </h:column>
-			     <h:column styleClass ="sta#{etudiant.delibere}">
-			     	<f:facet name="header">Delibération</f:facet>
+			     <h:column styleClass ="sta#{etudiant.delibere}" >
+			     	<f:facet name="header"  >Delibération</f:facet>
 			    	#{etudiant.isDelibereStringFormat()}
 			     </h:column>
 		 </h:dataTable> 
 	 	</div>
-	 	<div class="col-3 d-flex justify-content-center">
+	 	<div class="col-3 d-flex justify-content-center" style="padding-top:0.1%">
 			<h:form>
-					<h:commandLink class="btn btn-primary menuBtn" action = "#{etudiantControl.changeStatus()}" value = "">Changer Statut</h:commandLink>
+					<h:commandLink class="btn btn-info" action = "#{etudiantControl.changeStatus()}" value = ""  style="width: 200px">Changer Statut</h:commandLink>
 			</h:form>
 		</div>
 	 </div>
 </div>
 
 
+
+	
+
 <button class="btn btn-primary" id="testBtn">Afficher/Masquer le bulletin</button>
-<div class="container-fluid">
+<div class="container-fluid" style="width: 95%; padding-top: 3%">
 	<div class="row">
-		<div class="col-6" id="bulletinToToggle">
+		<div class="col-6 bulletin" id="bulletinToToggle">
+
 			<h2>Bulletin en cours</h2>
 			<nav>
-			<h:form>
+			<h:form class="feuille">
 				<ui:repeat value= "#{etudiantControl.getEtudiant().getUE()}" var="ue">
 					<ul>
 					  <li class="deroulant">
@@ -181,17 +229,18 @@ body{
 				   </ul>
 				</ui:repeat>
 				<center>
-					<h:commandButton class="btn btn-primary btn-block w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+					<h:commandButton class="btn btn-info w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
 				</center>
 				</h:form>
 			</nav>
 		</div>
-		<div class="col-6" id="divPae">
-			<h2 style="">PAE à composer</h2>
+
+		<div class="col-6 pae" id="divPae">
+			<h2 >PAE à composer</h2>
 			<c:choose>
 				<c:when test="#{etudiantControl.isPaeNotEmpty()}">
 					<nav>
-						<h:form>
+						<h:form class="feuille">
 							<ui:repeat value= "#{etudiantControl.getEtudiant().getPropPae().getListeUE()}" var="propUe">
 								<ul>
 								  <li class="deroulant">
@@ -229,6 +278,9 @@ body{
 						</h:form>
 					</c:otherwise>
 			</c:choose>
+			<center>
+				<button class="btn btn-primary btn-block w-75" href="#" data-toggle="modal" data-target="#ajouterUe"> Ajouter UE</button>
+			</center>
 		</div>
 	</div>
 </div>
@@ -244,4 +296,57 @@ body{
 	});
 	</script>
 </body>
+<!-- Modal -->
+	  <div class="modal fade" id="ajouterUe" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal"></button>
+	          <h4 class="modal-title">Choisir UE et AA à ajouter.</h4>
+	        </div>
+	        
+	        <div class="modal-body">
+	        	<nav>
+				<h:form>
+
+					<ui:repeat value= "#{etudiantControl.getSection().getListeUE()}" var="ue">
+						<ul>
+						  <li class="deroulant">
+						    
+						   	<p><b>#{ue.getNom()}</b></p>
+							 <ui:repeat value="#{ue.getAAList()}" var="aa">
+							 	<ul class="sous">
+						      	 	<li>  	
+										<p>#{aa.getNom()}</p>
+						       		</li>
+						       	</ul>
+					       </ui:repeat>
+						  </li>
+					   </ul>
+					</ui:repeat>
+					<center>
+
+						<h:commandButton class="btn btn-info w-75" value = "Sauvegarder" />
+
+					</center>
+
+
+
+
+
+
+					</h:form>
+				</nav>
+	        </div>
+	        
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	        
+	      </div>
+	    </div>
+	  </div>
+
 </html>
