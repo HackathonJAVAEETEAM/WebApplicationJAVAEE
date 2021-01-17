@@ -50,9 +50,11 @@ xmlns:of="http://omnifaces.org/functions">
 					</div>
 				<h:form>
 					<h:commandLink class="btn btn-primary btn-block" style="margin-bottom:15px;" value=" Générer le pdf de la section " action ="#{pdfCreator.createDoc(section)}" ></h:commandLink>
+
+				
 				</h:form>
 				<div id="table#{myVarStatus.index}">
-		      <h:dataTable  border="2" value = "#{section.getListeEtudiant()}" var = "etudiant"
+		      <h:dataTable  id="employeeTable" border="2" value = "#{section.getListeEtudiant()}" var = "etudiant"
 				styleClass = "tablesorter table table-responsive w-100 d-block d-md-table"
 				tableStyle="table-layout: auto;"
 				headerClass = "etudiantTableHeader"
@@ -113,6 +115,5 @@ xmlns:of="http://omnifaces.org/functions">
 	      </div>
 	    </div>
 	  </div>
-	
 </h:body>
 </html>

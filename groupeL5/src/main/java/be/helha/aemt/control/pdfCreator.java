@@ -1,3 +1,4 @@
+
 package be.helha.aemt.control;
 
 import java.io.File;
@@ -24,6 +25,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 
 import com.itextpdf.text.Phrase;
@@ -32,10 +34,17 @@ import com.itextpdf.text.pdf.PdfPTable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.VerticalPositionMark;
+import com.sun.enterprise.util.zip.ZipWriter;
 
 import be.helha.aemt.entities.Etudiant;
+import be.helha.aemt.entities.PropositionAA;
+import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
 
+import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.text.*;
 
 @Named
@@ -47,46 +56,72 @@ public class pdfCreator implements Serializable{
 		
 		Document document = new Document();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		/*ExternalContext zp = FacesContext.getCurrentInstance().getExternalContext();
+		zp.setResponseHeader("Content-Type", "application/x-zip");
+		zp.setResponseHeader("Content-Disposition", "attachment; filename=\"" +"section "+ s.pickRightName()+ ".zip" + "\"");*/
 		ec.setResponseHeader("Content-Type", "application/pdf");
-		ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "sectiontest" + ".pdf" + "\"");
-		
-	    PdfWriter.getInstance(document, ec.getResponseOutputStream());
-	
+		ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "section "+s.pickRightName()+ ".pdf" + "\"");
+		PdfWriter.getInstance(document, ec.getResponseOutputStream());
 		document.open();
-		Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
 		
-	
-		document.add(new Chunk(s.getListeEtudiant().get(0).getMatricule() + "\n"));
+	   
+	    Font ueF = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+	    Font credTot = new Font(FontFamily.UNDEFINED, 14, Font.BOLD);
+	    Font aaF = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
 		
+		for(Etudiant etudiant : s.getListeEtudiant())
+		{
+			/*ec.setResponseHeader("Content-Type", "application/pdf");
+			ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "section "+s.pickRightName()+ ".pdf" + "\"");
+			PdfWriter.getInstance(document, ec.getResponseOutputStream());
+			document.open();*/
+			Chunk glue = new Chunk(new VerticalPositionMark());
+			PdfPTable table = new PdfPTable(1);
+			Phrase p = new Phrase();
+			if(etudiant.isDelibere())
+			{
+				if(etudiant.getPropPae()!=null)
+				{
+					p.add(new Chunk("Nom de l'étudiant: "+etudiant.getNom() + "\n"));
+					p.add(new Chunk("Matricule: "+etudiant.getMatricule() + "\n\n"));
+					p.add(new Chunk("Bachelier en "+s.pickRightName()+ "\n\n"));
+					
+					for(PropositionUE propUe : etudiant.getPropPae().getListeUE())
+					{
+						p.add(new Chunk("\nUE: "+propUe.getNom(),ueF));
+						p.add(glue);
+						p.add(new Chunk(propUe.getTotalCredit()+" crédits\n\n",ueF));
+						
+						for(PropositionAA propAa : propUe.getListeAA())
+						{
+							p.add(new Chunk("    AA: "+propAa.getNom(),aaF));
+							p.add(glue);
+							
+							if(!propAa.isDispense())
+							{
+								p.add(new Chunk(propAa.getCredits()+" crédits\n\n",aaF));
+							}
+							else
+							{
+								p.add(new Chunk("dispensé\n\n\n",aaF));
+							}
+						}
+					}
+					
+					p.add(glue);
+					p.add(new Chunk("Crédits totaux: "+etudiant.getPropPae().getCreditTotPropPae() + "\n\n",credTot));
+					table.addCell(p);
+				    document.add(table);
+					document.newPage();
+				}
+				else
+				{
+					p.add("PAS DE PAE");
+				}
+			}
+		
+		}
 		document.close();
-		
-		FacesContext.getCurrentInstance().responseComplete();	
-	}
-	
-	private void addTableHeader(PdfPTable table) {
-	    Stream.of("column header 1", "column header 2", "column header 3")
-	      .forEach(columnTitle -> {
-	        PdfPCell header = new PdfPCell();
-	        header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-	        header.setBorderWidth(2);
-	        header.setPhrase(new Phrase(columnTitle));
-	        table.addCell(header);
-	    });
-	}
-	private void addRows(PdfPTable table) {
-	    table.addCell("row 1, col 1");
-	    table.addCell("row 1, col 2");
-	    table.addCell("row 1, col 3");
-	}
-	private void addCustomRows(PdfPTable table) throws URISyntaxException, BadElementException, IOException {
-			   
-
-	    PdfPCell horizontalAlignCell = new PdfPCell(new Phrase("row 2, col 2"));
-	    horizontalAlignCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	    table.addCell(horizontalAlignCell);
-
-	    PdfPCell verticalAlignCell = new PdfPCell(new Phrase("row 2, col 3"));
-	    verticalAlignCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
-	    table.addCell(verticalAlignCell);
+		FacesContext.getCurrentInstance().responseComplete();
 	}
 }
