@@ -1,5 +1,7 @@
 package be.helha.aemt.entities;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +22,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.poi.ss.usermodel.Font;
 
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
+import be.helha.aemt.dao.FileDAO;
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
 
@@ -186,6 +199,63 @@ public class Etudiant implements Serializable{
 			default:
 				return null;
 		}
+	}
+	
+	public Document etudiantToPdf(Section s) throws IOException
+	{
+		File file = File.createTempFile(this.getMatricule(), ".pdf");
+		//Initialize PDF writer
+        PdfWriter writer = new PdfWriter(file);
+
+        //Initialize PDF document
+        PdfDocument pdf = new PdfDocument(writer);
+
+
+        try (final Document document = new Document(pdf)) {
+           
+	    
+	        PdfFont ueF = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+	        PdfFont credTot = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+	        PdfFont aaF = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+	
+			Table table = new Table(1);
+			Paragraph p = new Paragraph();
+			
+			if(this.getPropPae()!=null)
+			{
+				p.add("Nom de l'étudiant: "+this.getNom() + "\n");
+				p.add("Matricule: "+this.getMatricule() + "\n\n");
+				p.add("Bachelier en "+s.pickRightName()+ "\n\n");
+				
+				for(PropositionUE propUe : this.getPropPae().getListeUE())
+				{
+					p.add("\nUE: "+propUe.getNom());
+					p.add(propUe.getTotalCredit()+" crédits\n\n");
+					
+					for(PropositionAA propAa : propUe.getListeAA())
+					{
+						p.add("    AA: "+propAa.getNom());
+						
+						if(!propAa.isDispense())
+						{
+							p.add(propAa.getCredits()+" crédits\n\n");
+						}
+						else
+						{
+							p.add("dispensé\n\n\n");
+						}
+					}
+				}
+				
+				p.add("Crédits totaux: "+this.getPropPae().getCreditTotPropPae() + "\n\n");
+				table.addCell(p);
+			}
+        
+		document.add(table);
+		document.close();
+
+		return document;
+        }
 	}
 	
 	@Override

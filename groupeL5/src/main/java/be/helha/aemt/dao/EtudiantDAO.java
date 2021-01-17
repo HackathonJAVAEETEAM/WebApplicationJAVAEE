@@ -9,8 +9,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import com.itextpdf.text.log.SysoCounter;
-
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
