@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.ZipOutputStream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -201,17 +202,14 @@ public class Etudiant implements Serializable{
 		}
 	}
 	
-	public Document etudiantToPdf(Section s) throws IOException
+	public void etudiantToPdf(Section s, PdfWriter writer) throws IOException
 	{
-		File file = File.createTempFile(this.getMatricule(), ".pdf");
-		//Initialize PDF writer
-        PdfWriter writer = new PdfWriter(file);
-
-        //Initialize PDF document
+        
+		//Initialize PDF document
         PdfDocument pdf = new PdfDocument(writer);
 
 
-        try (final Document document = new Document(pdf)) {
+        Document document = new Document(pdf);
            
 	    
 	        PdfFont ueF = PdfFontFactory.createFont(StandardFonts.HELVETICA);
@@ -220,42 +218,38 @@ public class Etudiant implements Serializable{
 	
 			Table table = new Table(1);
 			Paragraph p = new Paragraph();
+
+			p.add("Nom de l'étudiant: "+this.getNom() + "\n");
+			p.add("Matricule: "+this.getMatricule() + "\n\n");
+			p.add("Bachelier en "+s.pickRightName()+ "\n\n");
 			
-			if(this.getPropPae()!=null)
+			for(PropositionUE propUe : this.getPropPae().getListeUE())
 			{
-				p.add("Nom de l'étudiant: "+this.getNom() + "\n");
-				p.add("Matricule: "+this.getMatricule() + "\n\n");
-				p.add("Bachelier en "+s.pickRightName()+ "\n\n");
+				p.add("\nUE: "+propUe.getNom());
+				p.add(propUe.getTotalCredit()+" crédits\n\n");
 				
-				for(PropositionUE propUe : this.getPropPae().getListeUE())
+				for(PropositionAA propAa : propUe.getListeAA())
 				{
-					p.add("\nUE: "+propUe.getNom());
-					p.add(propUe.getTotalCredit()+" crédits\n\n");
+					p.add("    AA: "+propAa.getNom());
 					
-					for(PropositionAA propAa : propUe.getListeAA())
+					if(!propAa.isDispense())
 					{
-						p.add("    AA: "+propAa.getNom());
-						
-						if(!propAa.isDispense())
-						{
-							p.add(propAa.getCredits()+" crédits\n\n");
-						}
-						else
-						{
-							p.add("dispensé\n\n\n");
-						}
+						p.add(propAa.getCredits()+" crédits\n\n");
+					}
+					else
+					{
+						p.add("dispensé\n\n\n");
 					}
 				}
-				
-				p.add("Crédits totaux: "+this.getPropPae().getCreditTotPropPae() + "\n\n");
-				table.addCell(p);
 			}
+			
+			p.add("Crédits totaux: "+this.getPropPae().getCreditTotPropPae() + "\n\n");
+			table.addCell(p);
+			
         
 		document.add(table);
 		document.close();
 
-		return document;
-        }
 	}
 	
 	@Override
