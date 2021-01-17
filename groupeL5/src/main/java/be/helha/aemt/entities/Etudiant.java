@@ -180,9 +180,9 @@ public class Etudiant implements Serializable{
 	public String getBlocSuivant() {
 		switch(this.getClasse()) {
 			case "1B":
-				return "1B";
-			case "2B":
 				return "2B";
+			case "2B":
+				return "3B";
 			default:
 				return null;
 		}

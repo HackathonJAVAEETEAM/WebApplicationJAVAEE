@@ -74,7 +74,6 @@ public class EtudiantControl implements Serializable {
     public void generateAutoPae() {
     	etudiant.generateEtudiantPae(section);
     	etudiant.getPropPae().setId(gestionEtudiant.generatePropPae(etudiant));
-    	System.out.println("GENERATE ID PROPPAE "+etudiant.getPropPae().getId());
     }
     
     public List<SelectablePropUe> getListUeToPick() {  
@@ -154,6 +153,12 @@ public class EtudiantControl implements Serializable {
     
     public void addUePerso(String nom, String bloc, int totalCredit, boolean dispense) {
     	PropositionUE propUe = new PropositionUE(nom, bloc, totalCredit, false);
+    }
+    
+    public void addPreviousBloc() {
+    }
+    
+    public void addNextBloc() {
     }
     
 	

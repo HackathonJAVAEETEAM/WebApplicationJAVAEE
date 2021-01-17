@@ -193,7 +193,7 @@ margin-right: auto;
 
 	
 
-<button class="btn btn-primary" id="testBtn">Afficher/Masquer le bulletin</button>
+<button class="btn btn-info" id="testBtn">Afficher/Masquer le bulletin</button>
 <div class="container-fluid" style="width: 95%; padding-top: 3%">
 	<div class="row">
 		<div class="col-6 bulletin" id="bulletinToToggle">
@@ -229,18 +229,29 @@ margin-right: auto;
 				   </ul>
 				</ui:repeat>
 				<center>
-					<h:commandButton class="btn btn-info w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder" />
+					<h:commandButton class="btn btn-info w-75" action = "#{etudiantControl.persist()}" value = "Sauvegarder le bulletin" />
 				</center>
 				</h:form>
 			</nav>
 		</div>
 
-		<div class="col-6 pae" id="divPae">
-			<h2 >PAE à composer - Credits en cours: #{etudiantControl.getEtudiant().getPropPae().getCreditTotPropPae()}</h2>
+		<div class="col-6 pae" id="divPae" style="padding-right:15px;">
+			<h2 style="padding-bottom:20px;">PAE-Credits en cours: #{etudiantControl.getEtudiant().getPropPae().getCreditTotPropPae()}</h2>
 			<c:choose>
 				<c:when test="#{etudiantControl.isPaeNotEmpty()}">
+				<center>
+					<div style="display:in-line;">
+					<center>
+							<button class="btn btn-info" data-toggle="modal" data-target="#ajouterUe" style="width:45%"> Ajouter UE</button>
+							<button class="btn btn-info" data-toggle="modal" data-target="#creerUePerso" style="width:45%"> Creer UE</button>
+					</center>
+					</div>
+				</center>
 					<nav>
 						<h:form class="feuille">
+							<center>
+								<h:commandButton class="btn btn-info btn-block w-75" action="#{etudiantControl.generateAutoPae()}" value = "Regénérer un PAE" />
+							</center>
 							<ui:repeat value= "#{etudiantControl.getEtudiant().getPropPae().getListeUE()}" var="propUe">
 								<ul>
 								  <li class="deroulant">
@@ -259,7 +270,7 @@ margin-right: auto;
 												<p>#{propAa.getNom()} 
 													<span style="float:right;padding-right:10px;">
 													Dispenser étudiant?
-														<h:selectBooleanCheckbox value= "#{propAa.dispense}" valueChangeListener="#{etudiantControl.updatePropPaeDispense()}"  class="aaCheckboxPae">
+														<h:selectBooleanCheckbox value= "#{propAa.dispense}"  class="aaCheckboxPae">
 														</h:selectBooleanCheckbox>
 													</span>
 													<span style="float:right;padding-right:15px;">#{propAa.getCredits()} Crédit(s) </span>
@@ -270,19 +281,20 @@ margin-right: auto;
 								  </li>
 							   </ul>
 							</ui:repeat>
+							<center>
+								<h:commandButton id="saveBtn" class="btn btn-info btn-block w-75" action="#{etudiantControl.updatePropPaeDispense()}" value = "Sauvegarder le PAE" />
+							</center>
 						</h:form>
 					  </nav>
 					</c:when>
 					<c:otherwise>
 						<h:form>
 							<center>
-								<h:commandButton class="btn btn-primary btn-block w-75" action="#{etudiantControl.generateAutoPae()}" value = "Auto generer un PAE" />
+								<h:commandButton class="btn btn-info btn-block w-75" action="#{etudiantControl.generateAutoPae()}" value = "Auto generer un PAE" />
 							</center>
 						</h:form>
 					</c:otherwise>
 			</c:choose>
-			<button class="btn btn-primary btn-block w-75" data-toggle="modal" data-target="#ajouterUe"> Ajouter UE</button>
-			<button class="btn btn-primary btn-block w-75" data-toggle="modal" data-target="#creerUePerso"> Creer UE</button>
 		</div>
 	</div>
 </div>
@@ -293,6 +305,10 @@ margin-right: auto;
 			  $("#divPae").toggleClass("col-12");
 		  }); 
 		});
+		$("#saveBtn").click(function(){
+			  alert("Le PAE a bien été enregistré.");
+		});
+		
 	});
 	</script>
 </body>
@@ -306,40 +322,42 @@ margin-right: auto;
 	          <button type="button" class="close" data-dismiss="modal"></button>
 	          <h4 class="modal-title">Choisir UE et AA à ajouter.</h4>
 	        </div>
-	        
-	        <div class="modal-body">
-	        	<nav>
-				<h:form>
-
-					<ui:repeat value= "#{etudiantControl.getListUeToPick()}" var="ue">
-						<ul>
-						  <li class="deroulant">  
-						   	<p>
-							   	<b>#{ue.getPropUe().getNom()}</b>
-							   	<span style="float:right;padding-right:10px;">
-									<h:selectBooleanCheckbox value= "#{ue.selected}" class="ueToSuggestCheckbox"></h:selectBooleanCheckbox>
-								</span>
-							</p>
-							 <ui:repeat value="#{ue.getPropUe().getListeAA()}" var="aa">
-							 	<ul class="sous">
-						      	 	<li>  	
-										<p>#{aa.getNom()}</p>
-						       		</li>
-						       	</ul>
-					       </ui:repeat>
-						  </li>
-					   </ul>
-					</ui:repeat>
-					<center>
-						<h:commandButton class="btn btn-info w-75" value = "Sauvegarder" action="#{etudiantControl.addPropPae()}" />
-					</center>
-					</h:form>
-				</nav>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        </div>
+	        <h:form>
+		        <div class="modal-body" style="overflow-y: scroll; max-height:72.5vh;">
+		        	<nav>
+					
+	
+						<ui:repeat value= "#{etudiantControl.getListUeToPick()}" var="ue">
+							<ul>
+							  <li class="deroulant">  
+							   	<p>
+								   	<b>#{ue.getPropUe().getNom()}</b>
+								   	<span style="float:right;padding-right:10px;">
+										<h:selectBooleanCheckbox value= "#{ue.selected}" class="ueToSuggestCheckbox"></h:selectBooleanCheckbox>
+									</span>
+								</p>
+								 <ui:repeat value="#{ue.getPropUe().getListeAA()}" var="aa">
+								 	<ul class="sous">
+							      	 	<li>  	
+											<p>#{aa.getNom()}</p>
+							       		</li>
+							       	</ul>
+						       </ui:repeat>
+							  </li>
+						   </ul>
+						</ui:repeat>
+						
+						
+					</nav>
+		        </div>
+		     
+		    	 <div class="modal-footer">
+		    	 	<h:commandButton class="btn btn-info w-100" value = "Sauvegarder" action="#{etudiantControl.addPropPae()}" />
+					<h:commandButton class="btn btn-info" value="Ajouter le bloc précédent" action="#{etudiantControl.addPreviousBloc()}"/>
+					<h:commandButton class="btn btn-info" value="Ajouter le bloc suivant" action="#{etudiantControl.addNextBloc()}"/>
+		          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		        </h:form>
 	      </div>
 	    </div>
 	  </div>
