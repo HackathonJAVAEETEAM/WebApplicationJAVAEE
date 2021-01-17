@@ -1,29 +1,22 @@
 package be.helha.aemt.entities;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.zip.ZipOutputStream;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.poi.ss.usermodel.Font;
 
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFont;
@@ -32,9 +25,12 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Tab;
+import com.itextpdf.layout.element.TabStop;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.TabAlignment;
 
-import be.helha.aemt.dao.FileDAO;
 import be.helha.aemt.util.xlsparser.ParsedAssociationUE;
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
 
@@ -204,56 +200,66 @@ public class Etudiant implements Serializable{
 	
 	public void etudiantToPdf(Section s, PdfWriter writer) throws IOException
 	{
-        
-		//Initialize PDF document
+        		
         PdfDocument pdf = new PdfDocument(writer);
-
-
         Document document = new Document(pdf);
-           
-	    
-	        PdfFont ueF = PdfFontFactory.createFont(StandardFonts.HELVETICA);
-	        PdfFont credTot = PdfFontFactory.createFont(StandardFonts.HELVETICA);
-	        PdfFont aaF = PdfFontFactory.createFont(StandardFonts.HELVETICA);
-	
-			Table table = new Table(1);
-			Paragraph p = new Paragraph();
-
-			p.add("Nom de l'étudiant: "+this.getNom() + "\n");
-			p.add("Matricule: "+this.getMatricule() + "\n\n");
-			p.add("Bachelier en "+s.pickRightName()+ "\n\n");
+        
+        PdfFont ueF = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+        PdfFont credTot = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD);
+        PdfFont aaF = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
+        
+		Table table = new Table(1);
+		Paragraph p = new Paragraph();
+		
+		p.add("Nom de l'étudiant: "+this.getNom() +"\n");
+		p.add("Matricule: "+this.getMatricule() + "\n\n");
+		p.add("Bachelier en "+s.pickRightName()+ "\n\n");
+		
+		for(PropositionUE propUe : this.getPropPae().getListeUE())
+		{
 			
-			for(PropositionUE propUe : this.getPropPae().getListeUE())
+			Text UeName = new Text("\nUE: "+propUe.getNom()).setFont(ueF);
+			p.add(UeName);
+			p.addTabStops(new TabStop(1000, TabAlignment.RIGHT));
+			p.add(new Tab());
+			Text creditUe = new Text(propUe.getTotalCredit()+" crédits\n\n").setFont(ueF);
+			p.add(creditUe);
+			
+			for(PropositionAA propAa : propUe.getListeAA())
 			{
-				p.add("\nUE: "+propUe.getNom());
-				p.add(propUe.getTotalCredit()+" crédits\n\n");
+				Text AaName = new Text("    AA: "+propAa.getNom()).setFont(aaF);
+				p.add(AaName);
 				
-				for(PropositionAA propAa : propUe.getListeAA())
+				if(!propAa.isDispense())
 				{
-					p.add("    AA: "+propAa.getNom());
-					
-					if(!propAa.isDispense())
-					{
-						p.add(propAa.getCredits()+" crédits\n\n");
-					}
-					else
-					{
-						p.add("dispensé\n\n\n");
-					}
+					p.addTabStops(new TabStop(1000, TabAlignment.RIGHT));
+					p.add(new Tab());
+					Text creditAa = new Text(propAa.getCredits()+"crédits\n\n").setFont(aaF);
+					p.add(creditAa);
+				}
+				else
+				{
+					p.addTabStops(new TabStop(1000, TabAlignment.RIGHT));
+					p.add(new Tab());
+					Text dispense = new Text("dispensé\n\n").setFont(aaF);
+					p.add(dispense);
 				}
 			}
-			
-			p.add("Crédits totaux: "+this.getPropPae().getCreditTotPropPae() + "\n\n");
-			table.addCell(p);
-			
-        
+		}
+		
+		p.addTabStops(new TabStop(1000, TabAlignment.RIGHT));
+		p.add(new Tab());
+		Text totCredit = new Text("Crédits totaux: "+this.getPropPae().getCreditTotPropPae() + "\n\n").setFont(credTot);
+		p.add(totCredit);
+		table.addCell(p);
 		document.add(table);
 		document.close();
 
 	}
 	
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
 				+ creditsValides + ", creditTot=" + creditTot + "]";
 	}
