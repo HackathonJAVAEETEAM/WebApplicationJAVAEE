@@ -2,6 +2,7 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -104,6 +105,17 @@ public class Section implements Serializable {
 	@Override
 	public String toString() {
 		return "Section [nom=" + nom_section + ", listeEtudiant=" + listeEtudiant + ", listeUE=" + listeUE + "]";
+	}
+
+	public List<PropositionUE> getBlocUE(String bloc) {
+		ArrayList<PropositionUE> res = new ArrayList<PropositionUE>();
+		
+		for(UniteEnseignement ue: this.getListeUE()) {
+			if(ue.getAnnee().equals(bloc))
+				res.add(new PropositionUE(ue));
+		}
+		
+		return res;
 	}	
 
 }

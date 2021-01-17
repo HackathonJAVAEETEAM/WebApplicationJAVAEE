@@ -36,7 +36,7 @@ public class PropositionPAE {
 		super();
 		this.nomEtudiant = nomEtudiant;
 		this.minCredits = 30;
-		this.maxCredits = 120;
+		this.maxCredits = 75;
 		this.matriculeEtudiant = matriculeEtudiant;
 		this.blocEtudiant = blocEtudiant;
 		this.sectionEtudiant = sectionEtudiant;
@@ -45,15 +45,68 @@ public class PropositionPAE {
 	
 	public static PropositionPAE generatePAE(Etudiant etu, Section section) {
 		PropositionPAE res = new PropositionPAE(etu.getNom(), etu.getMatricule(), etu.getClasse(), section.getNom());
+		int credB1 = 0, credB2 = 0, credB3 = 0;
+		int credAcquisB1 = 0, credAcquisB2 = 0, credAcquisB3 = 0;
+		/*
+		 * par défaut on add toutes les ue ratées au prochain pae, on en profite pour calculer son nombre de crédits réussi par bloc pour la suite
+		 */
 		for(AssociationUE ue: etu.getUE()) {
 			if(!ue.isReussi()) {
 				PropositionUE newUe = new PropositionUE(ue);
 				res.addUE(newUe);
+			} else {
+				if(ue.getUE().getAnnee().equals("1B")) {
+					credAcquisB1+=ue.getUE().getTotalCredit();
+				} else if(ue.getUE().getAnnee().equals("2B")) {
+					credAcquisB2+=ue.getUE().getTotalCredit();
+				} else if(ue.getUE().getAnnee().equals("3B")) {
+					credAcquisB3+=ue.getUE().getTotalCredit();
+				} //un else if pour terminer, on ne sait jamais que les années soient mal encodées, du coup autant ajouter à la main si erreur que générer un mauvais pae
+			}
+			if(ue.getUE().getAnnee().equals("1B")) {
+				credB1+=ue.getUE().getTotalCredit();
+			} else if(ue.getUE().getAnnee().equals("2B")) {
+				credB2+=ue.getUE().getTotalCredit();
+			} else if(ue.getUE().getAnnee().equals("3B")) {
+				credB3+=ue.getUE().getTotalCredit();
 			}
 		}
-		
+		/*
+		 * Premiers cas, etudiants de bloc 1 avec 60 crédits de bloc 1 dans le pae
+		 */
+		if(credB1==60) {
+			if(credAcquisB1<30) {
+				//On ne fait rien, cours déjà ajoutés, l'étudiant est réinscrit en B1
+				res.blocEtudiant = "1B";
+			} else if(credAcquisB1>=30 && credAcquisB1<45) {
+				//On ne fait rien, cours déjà ajoutés, l'étudiant est réinscrit en B1 et ne peut avoir que 60 cred max
+				res.blocEtudiant = "1B";
+				res.maxCredits = 60;
+			} else if(credAcquisB1==60) {
+				//L'etudiant a accès à tous les cours du B2 et est ajouté en B2
+				res.blocEtudiant = "2B";
+				res.listeUE.addAll(section.getBlocUE("2B"));
+			} else {// cas des 45>59
+				res.blocEtudiant = "2B";
+				res.listeUE.addAll(section.getBlocUE("2B"));
+				res.minCredits = 55;
+			}
+		}
+		/*
+		 * Deuxième cas, étudiant de bloc 2 avec 60 crédits de bloc 2 dans le pae et 60 crédits réussis de bloc 2
+		 */
+		else if(credB2==60) {
+			if(credAcquisB2==60) {
+				res.blocEtudiant = "3B";
+				res.listeUE.addAll(section.getBlocUE("3B"));
+			}
+		}
+		/*
+		 * Trop d'info sont manquantes pour pouvoir supposer la suite de la génération pour les blocs 2 et 3.
+		 * Nous ne pouvons pas savoir si les étudiants seront diplomables étant donné que nous n'avons pas d'historique des pae pour les années précédentes. 
+		 */
 
-		//TODO faire l'énorme condition de création d'un pae 
+		//TODO
 		
 		//
 		return res;

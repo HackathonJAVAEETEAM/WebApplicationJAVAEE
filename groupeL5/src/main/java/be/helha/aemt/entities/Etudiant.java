@@ -177,6 +177,17 @@ public class Etudiant implements Serializable{
 		this.moyenne = moyenne;
 	}
 	
+	public String getBlocSuivant() {
+		switch(this.getClasse()) {
+			case "1B":
+				return "1B";
+			case "2B":
+				return "2B";
+			default:
+				return null;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Etudiant [nom=" + nom_etudiant + ", matricule=" + matricule + ", classe=" + classe + ", creditsValides="
