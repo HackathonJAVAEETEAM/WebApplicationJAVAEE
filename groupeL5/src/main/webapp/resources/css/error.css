@@ -1,0 +1,15 @@
+#body{
+	background:url("../images/school.jpg") no-repeat center center fixed;
+	 -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+ 	 background-size: cover;
+ 	 font-family: "Poppins", sans-serif;
+ 	 height: 100vh;
+}
+
+#loginerror{
+	margin: 0 auto;
+	width: 60%;
+	
+}

@@ -42,9 +42,7 @@ import be.helha.aemt.entities.PropositionAA;
 import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
 
-import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
+
 import com.itextpdf.text.*;
 
 @Named

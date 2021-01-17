@@ -5,11 +5,22 @@
     xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
     <title>Login Error</title>
+    <link type = "text/css" rel="stylesheet" href="resources/css/error.css" > </link>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </h:head>
-<h:body>
-    <p:panel header="Login Error">
-            Sorry, you made an Error. Please try again: <a
-            href="#{facesContext.externalContext.requestContextPath}/">Login</a>
-    </p:panel>
+
+<h:body id="body">
+
+<div id="loginerror" class="panel panel-danger" >
+    <div class="panel-heading">Erreur de connection </div>
+    <div class="panel-body"><p:panel header="Login Error" id="area" >
+	            Vos informations de connection sont incorrects, veuillez réessayer : <a
+	            href="#{facesContext.externalContext.requestContextPath}/"> Se connecter </a>
+	    </p:panel></div>
+  </div>
+	
 </h:body>
 </html>
