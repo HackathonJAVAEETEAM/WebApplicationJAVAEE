@@ -56,6 +56,7 @@ public class XlsParser {
 		}
 		return i;
 	}
+	
 	private List<ParsedEtudiant> FetchEtudiants() {
 		Row row;
 		int index = STUDENT_FIRST_INDEX;
@@ -70,6 +71,7 @@ public class XlsParser {
 		}
 		return l;
 	}
+	
 	private List<ParsedUE> FetchUE() {
 		List<ParsedUE> list = new ArrayList<ParsedUE>();
 		int startIndex = 4;

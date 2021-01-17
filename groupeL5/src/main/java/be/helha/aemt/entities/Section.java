@@ -17,21 +17,31 @@ import javax.persistence.OneToMany;
 import be.helha.aemt.util.xlsparser.ParsedEtudiant;
 import be.helha.aemt.util.xlsparser.ParsedUE;
 import be.helha.aemt.util.xlsparser.XlsParser;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class Section implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nom_section;
-	
+	/*
+	 * Association OneToMany car une seule section
+	 * pour plusieurs Etudiant
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<Etudiant> listeEtudiant;
-	
+	/*
+	 * Association OneToMany car une seule section
+	 * pour plusieurs UNITE ENSIEGNEMENT
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<UniteEnseignement> listeUE;
 	
@@ -45,6 +55,9 @@ public class Section implements Serializable {
 		this.listeEtudiant = new ArrayList<Etudiant>();
 		this.listeUE = new ArrayList<UniteEnseignement>();
 	}
+	/*
+	 * Constructeur de section via le parser
+	 */
 	public Section(XlsParser parser) {
 		super();
 		this.nom_section = parser.getSectionName();
@@ -80,6 +93,9 @@ public class Section implements Serializable {
 		return listeEtudiant.add(e);
 	}
 
+	/*
+	 * je trie ma liste en fonction du nom pour qu'elle soit affichée triée dès le premier affichage
+	 */
 	public List<UniteEnseignement> getListeUE() {
 		Collections.sort(listeUE);
 		return listeUE;
@@ -89,6 +105,9 @@ public class Section implements Serializable {
 		return listeUE.add(ue);
 	}
 	
+	/*
+	 * Méthode pour afficher le nom complet d'une section car pas disponible dans le excel
+	 */
 	public String pickRightName() {
 		switch(this.getNom()) {
 			case "IG":

@@ -10,12 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import be.helha.aemt.util.xlsparser.ParsedAA;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class ActiviteApprentissage implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

@@ -17,16 +17,26 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import be.helha.aemt.util.xlsparser.ParsedAssociationAA;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class AssociationAA implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/*
+	 * Association ManyToOne car j'ai plusieurs assocations AA qui 
+	 * possèdent une seule activité d'apprentissage existante
+	 * Nous avons passer le fetch en EAGER afin de pouvoir récuperer un objet par persitence 
+	 * ainsi que la liste d'objet qu'il contient car de base le fetch est en LAZY
+	 */
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ActiviteApprentissage AA;
 	private String points;
@@ -41,6 +51,7 @@ public class AssociationAA implements Serializable {
 		this.points = points;
 	}
 
+	//Constructeur pour créer une AssocationAA depuis le fichier Excel
 	public AssociationAA(ParsedAssociationAA pars, List<ActiviteApprentissage> aa) {
 		this.AA= aa.stream().filter(aca -> pars.getAa().getNom().equals(aca.getNom())).findAny().orElse(null);
 		this.points = pars.getPoints();

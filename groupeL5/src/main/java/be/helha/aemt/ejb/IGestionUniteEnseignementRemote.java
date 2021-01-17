@@ -4,7 +4,9 @@ import java.util.List;
 import javax.ejb.Remote;
 import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.UniteEnseignement;
-
+/*
+ * Remote pour l'EJB
+ */
 @Remote
 public interface IGestionUniteEnseignementRemote {
 	

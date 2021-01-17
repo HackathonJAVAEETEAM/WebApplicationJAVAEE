@@ -30,67 +30,47 @@ import be.helha.aemt.entities.PropositionAA;
 import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
 
-
+/*
+ * Cette classe va nous permettre de récupérer un fichier zip
+ * contenant les pdf des PAE des étudiants qui ont obtenu le statut délibéré
+ * Une méthode export depuis la classe étudiant a spécialement été conçue dans cette optique
+ */
 
 @Named
 @SessionScoped
 public class pdfCreator implements Serializable{
 	
-	
-	/*public void createDoc(Section s) throws  IOException, URISyntaxException  {
-		
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		ec.setResponseHeader("Content-Type", "application/zip");
-		ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "section "+s.pickRightName()+".zip" + "\"");
-		
-		ZipOutputStream zout = new ZipOutputStream(ec.getResponseOutputStream());
-		
-		
-		for(Etudiant etudiant : s.getListeEtudiant())
-		{
-			if(etudiant.isDelibere())
-			{
-		        ZipEntry zip = new ZipEntry(etudiant.getNom()+".pdf");  
-		        zout.putNextEntry(zip);
-		        
-		        try {
-		        	etudiant.etudiantToPdf(s);
-		        }catch(IOException e) {
-		        	e.printStackTrace();
-		        }
-		        
-		        zout.closeEntry();
-
-			}
-		}
-
-		
-		FacesContext.getCurrentInstance().responseComplete();
-		
-			
-	}*/
-	
 	public void createDoc(Section s) throws  IOException, URISyntaxException  {
 		
+		//Je prépare l'interaction entre le côté client et le côté via les requetes http
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.responseReset();
 		ec.setResponseHeader("Content-Type", "application/zip");
 		ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "Section_"+s.pickRightName()+".zip" + "\"");
 		
+		//Je crée un OutputStream "ZIP" pour y stocker mes pdf
 		ZipOutputStream zout = new ZipOutputStream(ec.getResponseOutputStream());
 		
 		//Initialize PDF writer
         PdfWriter writer = new PdfWriter(zout);
         
+        //Je boucle sur les étdiants de la section
 		for(Etudiant etudiant : s.getListeEtudiant())
 		{
+			//Je vérifie si l'étudiant remplit les conditions pour crée son PAE
 			if(etudiant.isDelibere() && etudiant.getPropPae()!=null)
 			{	           
 		        try {
+		        	//Dans le zip je crée une entrée contenant un pdf
 		        	ZipEntry zip = new ZipEntry(etudiant.getMatricule()+"_"+etudiant.getNom()+".pdf");  
+		        	//Je préviens l'output stream que je vais remplir son zip
 			        zout.putNextEntry(zip);
+			        
+			        //Ici je demande à l'objet Writer de ne pas se fermer pour pouvoir boucler sur tous mes pdfs pour chaque étudiant
 			        writer.setCloseStream(false);
+			        //Je crée les documents des étudiants
 		        	etudiant.etudiantToPdf(s, writer);
+		        	//Je ferme la création d'un fichier pdf dans le zip pour passer au  suivant
 		        	zout.closeEntry();
 		        }catch(IOException e) {
 		        	e.printStackTrace();
@@ -98,7 +78,10 @@ public class pdfCreator implements Serializable{
 			}
 		}
 		
+		//Je ferme l'output stream
 		zout.close();
+		
+		//Je préviens le serveur que le côté client ets ok et qu'il reprend la main
 	    FacesContext.getCurrentInstance().responseComplete();
 	}
 	

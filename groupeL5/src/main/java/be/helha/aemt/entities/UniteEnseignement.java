@@ -17,19 +17,26 @@ import javax.persistence.OneToMany;
 
 import be.helha.aemt.util.xlsparser.ParsedAA;
 import be.helha.aemt.util.xlsparser.ParsedUE;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class UniteEnseignement implements Serializable, Comparable {
 	
 	private static final long serialVersionUID = 1L;
-	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom;
 	private String annee;
 	private int totalCredit;
-	
+	/*
+	 * Association OneToMany car une seule UniteEnsiegnement
+	 * pour plusieurs Activité d'apprentissage
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private ArrayList<ActiviteApprentissage> AAList;
 	
@@ -44,6 +51,9 @@ public class UniteEnseignement implements Serializable, Comparable {
 		AAList = new ArrayList<ActiviteApprentissage>();
 	}
 
+	/*
+	 * Constructeur d'une unité d'enseignement depuis le parser
+	 */
 	public UniteEnseignement(ParsedUE ue) {
 		this(ue.getNom(),ue.getAnnee(),ue.getCredits());
 		for(ParsedAA p : ue.getListAA()) {
@@ -51,6 +61,9 @@ public class UniteEnseignement implements Serializable, Comparable {
 		}
 	}
 
+	/*
+	 * Getters & Setters
+	 */
 	public String getNom() {
 		return nom;
 	}
@@ -89,6 +102,10 @@ public class UniteEnseignement implements Serializable, Comparable {
 				+ AAList + "]";
 	}
 
+	/*
+	 * Compare To afin de pouvoir tirer mes listes d'objet
+	 * Utilisée essentiellement dans l'affichage des listes de Unité enseignement 
+	 */
 	@Override
 	public int compareTo(Object o) {
 		return this.getNom().compareTo(((UniteEnseignement)o).getNom());

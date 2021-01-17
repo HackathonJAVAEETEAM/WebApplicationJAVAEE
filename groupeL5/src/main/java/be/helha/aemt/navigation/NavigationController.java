@@ -8,12 +8,12 @@ import javax.inject.Named;
 import be.helha.aemt.control.EtudiantControl;
 import be.helha.aemt.entities.Etudiant;
 
+/*
+ * SessionScoped permet d'obteni des données partagées par une seule session côté client
+ */
 @Named
 @SessionScoped
 public class NavigationController implements Serializable {
-	
-	//public EtudiantControl etudiantC;
-	
 
 	public NavigationController() {
 		

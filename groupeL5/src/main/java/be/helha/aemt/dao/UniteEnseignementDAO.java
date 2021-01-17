@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 
 import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.UniteEnseignement;
-
+/*
+ * Je rends ma classe stateless pour communiquer avec les clients
+ */
 @Stateless
 public class UniteEnseignementDAO {
 	

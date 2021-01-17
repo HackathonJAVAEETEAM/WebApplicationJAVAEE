@@ -15,6 +15,7 @@ public class SessionControl implements Serializable {
 
 	}
 
+	//
 	public String doLogin()
 	{
 		return "liste.xhtml" + "?faces-redirect=true";

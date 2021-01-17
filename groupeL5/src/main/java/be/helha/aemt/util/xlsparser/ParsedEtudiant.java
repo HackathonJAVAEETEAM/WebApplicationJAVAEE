@@ -17,8 +17,11 @@ public class ParsedEtudiant {
 	private int creditsReussi;
 	private int creditsTotaux;
 	private String moyenne;
+	
+	/*
+	 * Constructeur d'un PARSED etudiant depuis une ligne de l'excel
+	 */
 	public ParsedEtudiant(Row row, List<ParsedUE> ue, int rowLastIndex) {
-
 		nom = row.getCell(1).getStringCellValue();
 		matricule = row.getCell(2).getStringCellValue();
 		classe = row.getCell(3).getStringCellValue();
@@ -35,11 +38,10 @@ public class ParsedEtudiant {
 		} else {
 			moyenne="";
 		}
-		
 		listeUE = FetchAssociationUE(ue, row);
-
 	}
 	
+
 	private static List<ParsedAssociationUE> FetchAssociationUE(List<ParsedUE> ue, Row row) {
 		List<ParsedAssociationUE> list = new ArrayList<ParsedAssociationUE>();
 		for(ParsedUE p : ue) {

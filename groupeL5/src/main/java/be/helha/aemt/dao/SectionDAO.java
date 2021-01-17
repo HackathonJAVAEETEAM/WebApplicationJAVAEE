@@ -13,7 +13,9 @@ import javax.persistence.Query;
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 
 import be.helha.aemt.entities.Section;
-
+/*
+ * Je rends ma classe stateless pour communiquer avec les clients
+ */
 @Stateless
 public class SectionDAO {
 	

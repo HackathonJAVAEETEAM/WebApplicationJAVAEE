@@ -12,6 +12,11 @@ import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.PropositionUE;
 import be.helha.aemt.entities.Section;
 import be.helha.aemt.entities.UniteEnseignement;
+ 
+/*
+  * La classe EtudiantControl est utilisée dans le cadre de la gestion
+  * des échanges entre la page xhtml et des objets Etudiant java
+  */
 
 @Named
 @SessionScoped
@@ -32,8 +37,7 @@ public class EtudiantControl implements Serializable {
 	}
 	
 	public List<Etudiant> doSelectAll(){
-		return gestionEtudiant.findAll();
-		
+		return gestionEtudiant.findAll();	
 	}
 	
 	public String doGetDetails(Section s,Etudiant e) {
@@ -76,6 +80,7 @@ public class EtudiantControl implements Serializable {
     	etudiant.getPropPae().setId(gestionEtudiant.generatePropPae(etudiant));
     }
     
+    //Je récupère la liste des propositions de Unite d'enseignement que l'utilisateur peut séléctionner.
     public List<SelectablePropUe> getListUeToPick() {  
     	
     	ArrayList<PropositionUE> arrPropUe = new ArrayList<PropositionUE>();
@@ -102,6 +107,8 @@ public class EtudiantControl implements Serializable {
     	return listSelect; 
     }
     
+    //Création d'une classe SelectablePropUe pour 
+    //gérer la liste des UE selectionnable pour la création d'un PAE
     public class SelectablePropUe{
     	private PropositionUE propUe;
     	private boolean selected;
@@ -132,6 +139,9 @@ public class EtudiantControl implements Serializable {
 		}
     }
     
+    /*
+     * Ci dessous je contacte les EJB pour effectuer des persistancesde l'objet Etudiant
+     */
     public void addPropPae() {
     	for(SelectablePropUe selectPropUe : listSelect)
     	{

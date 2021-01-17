@@ -11,6 +11,10 @@ public class ParsedAssociationUE {
 	private String points;
 	private boolean reussi;
 	private List<ParsedAssociationAA> aa;
+	
+	/*
+	 * Constructeur d'une ParsedAssociationUE depuis une ligne excel
+	 */
 	public ParsedAssociationUE(Row row, ParsedUE ue) {
 		int index = ue.getColStartIndex();
 		this.ue = ue;
@@ -20,15 +24,6 @@ public class ParsedAssociationUE {
 			this.points = row.getCell(index).getStringCellValue();
 		this.reussi = row.getCell(index+1).getStringCellValue().equals("O");
 		this.aa = FetchAA(row, ue);
-	}
-	
-	@Override
-	public String toString() {
-		String str = this.ue.getNom()+"("+this.points+"/20):\n";
-		for(ParsedAssociationAA p:this.aa) {
-			str = str+"\t\t" + p + "\n";
-		}
-		return str;
 	}
 
 	public ParsedUE getUe() {
@@ -71,5 +66,14 @@ public class ParsedAssociationUE {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public String toString() {
+		String str = this.ue.getNom()+"("+this.points+"/20):\n";
+		for(ParsedAssociationAA p:this.aa) {
+			str = str+"\t\t" + p + "\n";
+		}
+		return str;
 	}
 }

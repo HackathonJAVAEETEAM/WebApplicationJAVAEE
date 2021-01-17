@@ -10,10 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class PropositionUE {
-	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -22,7 +26,10 @@ public class PropositionUE {
 	private String bloc;
 	private int totalCredit;
 	private boolean dispense;
-	
+	/*
+	 * Association OneToMany car une seule propositionUE
+	 * pour plusieurs propositions de AA
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<PropositionAA> listeAA;
 	
@@ -38,7 +45,9 @@ public class PropositionUE {
 		this.dispense = dispense;
 		this.listeAA = new ArrayList<PropositionAA>();
 	}
-	
+	/*
+	 * Constructeur pour adapter une UniteEnsignement en une propositionUE
+	 */
 	public PropositionUE(UniteEnseignement ue) {
 		this(ue.getNom(),ue.getAnnee(),ue.getTotalCredit(), false);
 		ArrayList<PropositionAA> aas = new ArrayList<PropositionAA>();
@@ -48,6 +57,9 @@ public class PropositionUE {
 		this.listeAA = aas;
 	}
 	
+	/*
+	 * Constructeur pour adapter une assocationUE en une propositionUE
+	 */
 	public PropositionUE(AssociationUE ue) {
 		this(ue.getUE().getNom(),ue.getUE().getAnnee(),ue.getUE().getTotalCredit(), ue.isReussi());
 		for (AssociationAA aa: ue.getAA()) {
@@ -95,7 +107,9 @@ public class PropositionUE {
 		this.listeAA = listeAA;
 	}
 
-
+	/*
+	 * Méthode equals pour utiliser le contains et remove des ARRAYLIST
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		

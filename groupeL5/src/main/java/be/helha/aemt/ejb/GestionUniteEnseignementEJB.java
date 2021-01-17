@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 
 import be.helha.aemt.dao.UniteEnseignementDAO;
 import be.helha.aemt.entities.UniteEnseignement;
-
+/*
+ * Je rends la classe stateless et localbean 
+ */
 @Stateless
 @LocalBean
 public class GestionUniteEnseignementEJB implements IGestionUniteEnseignementRemote {

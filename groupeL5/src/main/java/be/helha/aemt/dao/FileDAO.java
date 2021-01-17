@@ -3,7 +3,9 @@ package be.helha.aemt.dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+/*
+ * Je rends ma classe stateless pour communiquer avec les clients
+ */
 @Stateless
 public class FileDAO {
 	

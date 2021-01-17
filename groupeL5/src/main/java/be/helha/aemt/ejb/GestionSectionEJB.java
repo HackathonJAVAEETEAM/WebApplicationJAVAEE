@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 
 import be.helha.aemt.dao.SectionDAO;
 import be.helha.aemt.entities.Section;
-
+/*
+ * Je rends la classe stateless et localbean 
+ */
 @Stateless
 @LocalBean
 public class GestionSectionEJB implements IGestionSectionRemote {

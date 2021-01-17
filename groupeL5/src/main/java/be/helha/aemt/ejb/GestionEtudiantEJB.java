@@ -9,7 +9,9 @@ import be.helha.aemt.dao.EtudiantDAO;
 import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
-
+/*
+ * Je rends la classe stateless et localbean 
+ */
 @Stateless
 @LocalBean
 public class GestionEtudiantEJB implements IGestionEtudiantRemote {
@@ -38,21 +40,18 @@ public class GestionEtudiantEJB implements IGestionEtudiantRemote {
 	}
 	
 	@Override
-	public void updateDelibEtudiant(Etudiant etudiant)
-	{
+	public void updateDelibEtudiant(Etudiant etudiant){
 		etudiantDao.updateDelibEtudiant(etudiant);
 	}
 	
 	@Override
-	public Integer generatePropPae(Etudiant etudiant)
-	{
+	public Integer generatePropPae(Etudiant etudiant){
 		return etudiantDao.generatePropPae(etudiant);
 	}
 
 	@Override
 	public void removePropUe(Etudiant etudiant) {
 		etudiantDao.removePropUe(etudiant);
-		
 	}
 
 	@Override

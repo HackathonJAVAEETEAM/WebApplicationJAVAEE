@@ -13,10 +13,15 @@ import be.helha.aemt.entities.AssociationAA;
 import be.helha.aemt.entities.AssociationUE;
 import be.helha.aemt.entities.Etudiant;
 import be.helha.aemt.entities.PropositionPAE;
-
+/*
+ * Je rends ma classe stateless pour communiquer avec les clients
+ */
 @Stateless
 public class EtudiantDAO {
 	
+	/*
+	 * Je crée la persistance
+	 */
 	@PersistenceContext(unitName = "groupeA5JTA")
 	private EntityManager em;
 	

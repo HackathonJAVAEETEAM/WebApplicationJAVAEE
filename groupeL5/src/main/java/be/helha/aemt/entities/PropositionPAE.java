@@ -10,10 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+/*
+ * Je crée une entité pour mon model afin de pouvoir le persister
+ */
 @Entity
 public class PropositionPAE {
-	
+	/*
+	 * Je génère un Id pour mon entité
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -25,6 +29,10 @@ public class PropositionPAE {
 	private int minCredits;
 	private int maxCredits;
 	
+	/*
+	 * Association OneToMany car une seule propositionPAE par etudiant 
+	 * pour plusieurs propositions de UE
+	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<PropositionUE> listeUE;
 	
@@ -42,7 +50,9 @@ public class PropositionPAE {
 		this.sectionEtudiant = sectionEtudiant;
 		this.listeUE = new ArrayList<PropositionUE>();
 	}
-	
+	/*
+	 * Constructeur AssociationUE pour construire un objet qui a été récupérer depuis le parser
+	 */
 	public static PropositionPAE generatePAE(Etudiant etu, Section section) {
 		PropositionPAE res = new PropositionPAE(etu.getNom(), etu.getMatricule(), etu.getClasse(), section.getNom());
 		int credB1 = 0, credB2 = 0, credB3 = 0;

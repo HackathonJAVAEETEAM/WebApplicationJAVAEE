@@ -6,6 +6,10 @@ public class ParsedAA {
 	private String nom;
 	private int credits;
 	private int index;
+	
+	/*
+	 * Constructeur pour crée un objet ParsedAA
+	 */
 	public ParsedAA(Sheet sheet, int index) {
 		this.nom = sheet.getRow(0).getCell(index).getStringCellValue();
 		this.credits = -1;
@@ -13,6 +17,10 @@ public class ParsedAA {
 			this.credits = (int) sheet.getRow(2).getCell(index).getNumericCellValue(); //On a modifié l'EpIn en AD pour faire fonctionner ?
 		this.index = index;
 	}
+	
+	/*
+	 * Getters & Setters
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
@@ -31,6 +39,10 @@ public class ParsedAA {
 	public int getIndex() {
 		return index;
 	}
+	
+	/*
+	 * Affichage écrit de l'objet
+	 */
 	@Override
 	public String toString() {
 		return "ParsedAA [nom=" + nom + ", credits=" + credits + "]";
